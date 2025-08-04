@@ -1,0 +1,39 @@
+services:
+
+  web:
+    build:
+      context: ./src/web
+    container_name: scu_app
+    ports:
+      - 8080:80
+    networks:
+      app_net:
+        ipv4_address: 192.28.1.12
+
+ # api:
+
+  db:
+    build:
+      context: ./src/db
+    container_name: scu_db
+    #for testing:
+    ports:
+      - 3307:3306
+    #-----
+    networks:
+      app_net:
+        ipv4_address: 192.28.1.16
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+volumes:
+  db_data:
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.28.0.0/16

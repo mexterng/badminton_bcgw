@@ -1,0 +1,5 @@
+.vscode/*
+#Angular build output:
+/dist
+/tmp
+/out-tsc
