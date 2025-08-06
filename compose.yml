@@ -10,7 +10,17 @@ services:
       app_net:
         ipv4_address: 192.28.1.12
 
- # api:
+  api:
+    build:
+      context: ./src/api
+    container_name: scu_api
+    networks:
+      app_net:
+        ipv4_address: 192.28.1.14
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      DB_PORT: ${DB_PORT}
 
   db:
     build:
@@ -27,6 +37,7 @@ services:
       - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
 volumes:
   db_data:
