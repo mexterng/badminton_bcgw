@@ -1,3 +1,4 @@
+-- game logic
 CREATE TABLE age_division (
     age_division_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255)
@@ -62,4 +63,26 @@ CREATE TABLE games_double (
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_three) REFERENCES game_sets(set_id),
     FOREIGN KEY (winner_id) REFERENCES doubles(doubles_id)
+);
+
+-- user management
+CREATE TABLE roles (
+    role_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE users (
+    user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    username VARCHAR(255) UNIQUE NOT NULL,
+    role_id INTEGER NOT NULL,
+    tag VARCHAR(255),
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
+
+CREATE TABLE user_credentials (
+    user_id INTEGER PRIMARY KEY,
+    credential VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
