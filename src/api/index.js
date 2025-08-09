@@ -3,7 +3,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const memberRouter = require("routes/memberRoutes");
+const memberRouter = require("./routes/memberRoutes");
 
 app.use(express.json());
 app.use(
