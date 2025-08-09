@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS game_sets (
 );
 
 CREATE TABLE IF NOT EXISTS games_single (
-    game_id_singles INT NOT NULL PRIMARY KEY,
+    game_id_singles INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS games_single (
 );
 
 CREATE TABLE IF NOT EXISTS games_double (
-    game_id_double INT NOT NULL PRIMARY KEY,
+    game_id_double INT AUTO_INCREMENT PRIMARY KEY,
     doubles_id_a INT NOT NULL,
     doubles_id_b INT NOT NULL,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
