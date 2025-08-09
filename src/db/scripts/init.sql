@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS scu_db;
 USE scu_db;
 
+
+-- game logic
 CREATE TABLE IF NOT EXISTS age_division (
     age_division_id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(50) NOT NULL UNIQUE
@@ -11,7 +13,7 @@ CREATE TABLE IF NOT EXISTS member (
     display_name VARCHAR(50) NOT NULL UNIQUE,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    gender VARCHAR(50) NOT NULL,
+    gender ENUM('m', 'w', 'd'),
     age_division_id INT NOT NULL,
     overall_active BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id)
@@ -65,4 +67,26 @@ CREATE TABLE IF NOT EXISTS games_double (
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_three) REFERENCES game_sets(set_id)
+);
+
+-- user management
+CREATE TABLE IF NOT EXISTS roles (
+    role_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS users (
+    user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    username VARCHAR(50) UNIQUE NOT NULL,
+    role_id INTEGER NOT NULL,
+    tag VARCHAR(50),
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
+
+CREATE TABLE IF NOT EXISTS user_credentials (
+    user_id INTEGER PRIMARY KEY,
+    credential VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
