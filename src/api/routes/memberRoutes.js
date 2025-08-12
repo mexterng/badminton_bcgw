@@ -4,9 +4,11 @@ const router = express.Router();
 const member = require('../services/member');
 
 /* GET members. */
+// GET http://localhost:3000/member?page=xy
 router.get('/', async function(req, res, next) {
   try {
-    res.json(await member.getMultiple(req.query.page));
+    const page = parseInt(req.query.page, 10) || 1;
+    res.json(await member.getMultiple(page));
   } catch (err) {
     console.error(`Error while getting members `, err.message);
     next(err);
@@ -23,14 +25,25 @@ router.post('/', async function(req, res, next) {
   }
 });
 
-/* PATCH programming language */
+/* PATCH member */
 router.patch('/:id', async function(req, res, next) {
   try {
     res.json(await member.update(req.params.id, req.body));
   } catch (err) {
-    console.error(`Error while updatingmember`, err.message);
+    console.error(`Error while updating member`, err.message);
     next(err);
   }
 });
+
+/*GET member by id */
+router.get('/:id', async function(req, res, next) {
+  try {
+    res.json(await member.getSingle(req.params.id));
+  } catch (err) {
+    console.error(`Error while getting member`, err.message);
+    next(err);
+  }
+});
+
 module.exports = router;
 

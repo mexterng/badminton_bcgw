@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const memberRouter = require("./routes/memberRoutes");
+const ageDivisionRouter = require("./routes/age_divisionRoutes");
 
 app.use(express.json());
 app.use(
@@ -17,6 +18,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/member", memberRouter);
+app.use("/age_division", ageDivisionRouter);
+
 /* Error handler middleware */
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

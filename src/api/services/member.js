@@ -35,7 +35,7 @@ async function create(member){
 
 async function update(id, member){
   const result = await db.query(
-    `UPDATE programming_languages 
+    `UPDATE member 
     SET display_name="${member.display_name}", first_name=${member.first_name}, last_name=${member.last_name}, 
     gender=${member.gender}, age_division_id=${member.age_division_id} 
     WHERE id=${id}` 
@@ -50,8 +50,17 @@ async function update(id, member){
   return {message};
 }
 
+async function getSingle(id) {
+  const rows = await db.query(
+    `SELECT * FROM member WHERE member_id = ? LIMIT 1`, [id]
+  );
+  const data = helper.emptyOrRows(rows);
+  return data[0] || null;
+}
+
 module.exports = {
   getMultiple,
+  getSingle,
   create,
   update
 }
