@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS doubles (
 CREATE TABLE IF NOT EXISTS game_sets (
     set_id INT AUTO_INCREMENT PRIMARY KEY,
     points_a INT NOT NULL,
-    points_b INT NOT NULL
+    points_b INT NOT NULL,
+    CHECK (points_a <= 30 points_b <= 30)
 );
 
 CREATE TABLE IF NOT EXISTS games_single (
@@ -48,7 +49,8 @@ CREATE TABLE IF NOT EXISTS games_single (
     FOREIGN KEY (winner_id) REFERENCES member(member_id),
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
-    FOREIGN KEY (set_three) REFERENCES game_sets(set_id)
+    FOREIGN KEY (set_three) REFERENCES game_sets(set_id),
+    CHECK (player_a != player_b)
 );
 
 CREATE TABLE IF NOT EXISTS games_double (
@@ -66,7 +68,8 @@ CREATE TABLE IF NOT EXISTS games_double (
     FOREIGN KEY (winner_id) REFERENCES doubles(doubles_id),
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
-    FOREIGN KEY (set_three) REFERENCES game_sets(set_id)
+    FOREIGN KEY (set_three) REFERENCES game_sets(set_id),
+    CHECK (player_a != player_b)
 );
 
 -- user management
