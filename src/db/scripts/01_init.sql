@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS doubles (
     doubles_id INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
+    overall_active BOOLEAN DEFAULT FALSE, -- before insertion, check if both players are active
     FOREIGN KEY (player_a) REFERENCES member(member_id),
     FOREIGN KEY (player_b) REFERENCES member(member_id)
 );
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS game_sets (
     set_id INT AUTO_INCREMENT PRIMARY KEY,
     points_a INT NOT NULL,
     points_b INT NOT NULL,
-    CHECK (points_a <= 30 points_b <= 30)
+    CHECK (points_a <= 30 AND points_b <= 30)
 );
 
 CREATE TABLE IF NOT EXISTS games_single (
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS games_double (
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_three) REFERENCES game_sets(set_id),
-    CHECK (player_a != player_b)
+    CHECK (doubles_id_a != doubles_id_b)
 );
 
 -- user management
