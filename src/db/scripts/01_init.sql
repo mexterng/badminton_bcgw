@@ -73,6 +73,16 @@ CREATE TABLE IF NOT EXISTS games_double (
     CHECK (doubles_id_a != doubles_id_b)
 );
 
+CREATE TABLE IF NOT EXISTS pyramid (
+    member_id INT NOT NULL,
+    placement INT NOT NULL,
+    timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    age_division_id INT NOT NULL,
+    PRIMARY KEY (member_id, timestamp, age_division_id),
+    FOREIGN KEY (member_id) REFERENCES member(member_id),
+    FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id) 
+);
+
 -- user management
 CREATE TABLE IF NOT EXISTS roles (
     role_id INTEGER AUTO_INCREMENT PRIMARY KEY,
