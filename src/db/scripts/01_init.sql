@@ -73,13 +73,23 @@ CREATE TABLE IF NOT EXISTS games_double (
     CHECK (doubles_id_a != doubles_id_b)
 );
 
-CREATE TABLE IF NOT EXISTS pyramid (
+CREATE TABLE IF NOT EXISTS pyramid_single (
     member_id INT NOT NULL,
     placement INT NOT NULL,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     age_division_id INT NOT NULL,
     PRIMARY KEY (member_id, timestamp, age_division_id),
     FOREIGN KEY (member_id) REFERENCES member(member_id),
+    FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id) 
+);
+
+CREATE TABLE IF NOT EXISTS pyramid_double (
+    doubles_id INT NOT NULL,
+    placement INT NOT NULL,
+    timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    age_division_id INT NOT NULL,
+    PRIMARY KEY (doubles_id, timestamp, age_division_id),
+    FOREIGN KEY (doubles_id) REFERENCES doubles(doubles_id),
     FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id) 
 );
 
