@@ -14,9 +14,8 @@ CREATE TABLE IF NOT EXISTS member (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     gender ENUM('m', 'w', 'd'),
-    age_division_id INT NOT NULL,
+    age_division_id JSON NOT NULL,
     overall_active BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id)
 );
 
 CREATE TABLE IF NOT EXISTS doubles (
