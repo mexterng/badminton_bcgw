@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS member (
     last_name VARCHAR(50),
     gender ENUM('m', 'w', 'd'),
     age_division_id JSON NOT NULL,
-    overall_active BOOLEAN DEFAULT FALSE,
+    overall_active BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS doubles (
