@@ -1,26 +1,26 @@
 -- DEMO ENTRIES game logic
 -- demo entries for member
 INSERT INTO member (display_name, first_name, last_name, gender, age_division_id, overall_active) VALUES
-('NetNinja', 'Alice', 'Smith', 'w', 2, TRUE),
-('SmashKing', 'Bob', 'Johnson', 'm', 2, TRUE),
-('CourtQueen', 'Carol', 'Williams', 'w', 2, TRUE),
-('AceMan', 'David', 'Brown', 'm', 2, TRUE),
-('DropShotDiva', 'Eve', 'Davis', 'w', 2, TRUE),
-('VolleyVic', 'Frank', 'Miller', 'm', 2, TRUE),
-('ServeStar', 'Grace', 'Wilson', 'w', 2, TRUE),
-('RacketRick', 'Henry', 'Moore', 'm', 2, TRUE),
-('ShuttleBelle', 'Ivy', 'Taylor', 'w', 2, TRUE),
-('LungeLeo', 'Jack', 'Anderson', 'm', 2, TRUE),
-('FeatherFighter', 'Karen', 'Thomas', 'w', 1, TRUE),
-('QuickQuinn', 'Liam', 'Jackson', 'm', 1, TRUE),
-('PowerPatty', 'Mia', 'White', 'w', 1, TRUE),
-('BounceBen', 'Noah', 'Harris', 'm', 1, TRUE),
-('SpinSophie', 'Olivia', 'Martin', 'w', 3, TRUE),
-('StrategySam', 'Paul', 'Garcia', 'm', 3, TRUE),
-('AgileAmy', 'Quinn', 'Martinez', 'w', 3, TRUE),
-('DynamicDan', 'Ryan', 'Robinson', 'm', 3, TRUE),
-('FleetFiona', 'Sara', 'Clark', 'w', 2, TRUE),
-('ZoneZack', 'Tom', 'Rodriguez', 'm', 2, TRUE);
+('NetNinja', 'Alice', 'Smith', 'w', '[2]', TRUE),
+('SmashKing', 'Bob', 'Johnson', 'm', '[2]', TRUE),
+('CourtQueen', 'Carol', 'Williams', 'w', '[2]', TRUE),
+('AceMan', 'David', 'Brown', 'm', '[2]', TRUE),
+('DropShotDiva', 'Eve', 'Davis', 'w', '[2]', TRUE),
+('VolleyVic', 'Frank', 'Miller', 'm', '[2]', TRUE),
+('ServeStar', 'Grace', 'Wilson', 'w', '[2]', TRUE),
+('RacketRick', 'Henry', 'Moore', 'm', '[2]', TRUE),
+('ShuttleBelle', 'Ivy', 'Taylor', 'w', '[2]', TRUE),
+('LungeLeo', 'Jack', 'Anderson', 'm', '[2]', TRUE),
+('FeatherFighter', 'Karen', 'Thomas', 'w', '[1]', TRUE),
+('QuickQuinn', 'Liam', 'Jackson', 'm', '[1]', TRUE),
+('PowerPatty', 'Mia', 'White', 'w', '[1]', TRUE),
+('BounceBen', 'Noah', 'Harris', 'm', '[1]', TRUE),
+('SpinSophie', 'Olivia', 'Martin', 'w', '[3]', TRUE),
+('StrategySam', 'Paul', 'Garcia', 'm', '[3]', TRUE),
+('AgileAmy', 'Quinn', 'Martinez', 'w', '[3]', TRUE),
+('DynamicDan', 'Ryan', 'Robinson', 'm', '[3]', TRUE),
+('FleetFiona', 'Sara', 'Clark', 'w', '[2]', TRUE),
+('ZoneZack', 'Tom', 'Rodriguez', 'm', '[2]', TRUE);
 
 -- demo entries for doubles
 INSERT INTO doubles (player_a, player_b) VALUES
