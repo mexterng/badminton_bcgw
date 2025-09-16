@@ -6,7 +6,8 @@ const port = 3000;
 const memberRouter = require("./routes/memberRoutes");
 const ageDivisionRouter = require("./routes/age_divisionRoutes");
 const doublesRouter = require("./routes/doubles");
-const singlGameRouter = require("./routes/games_single");
+const singleGameRouter = require("./routes/games_single");
+const doublesGameRouter = require("./routes/games_doubles");
 
 app.use(express.json());
 app.use(
@@ -22,7 +23,8 @@ app.get("/", (req, res) => {
 app.use("/member", memberRouter);
 app.use("/age_division", ageDivisionRouter);
 app.use("/doubles", doublesRouter);
-app.use("/single_games", singlGameRouter);
+app.use("/single_games", singleGameRouter);
+app.use("/double_games", doublesGameRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
