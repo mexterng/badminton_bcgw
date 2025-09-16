@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS pyramid_single (
     placement INT NOT NULL,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     age_division_id INT NOT NULL,
-    PRIMARY KEY (member_id, timestamp, age_division_id),
+    PRIMARY KEY (member_id, timestamp, age_division_id), -- timestamp needs to be set when pyramid is newly calculated and then we should agree on a hour / 10 / 5 / 1 minute group or simular
     FOREIGN KEY (member_id) REFERENCES member(member_id),
     FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id) 
 );
