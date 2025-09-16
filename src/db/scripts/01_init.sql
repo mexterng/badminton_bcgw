@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS doubles (
 );
 
 CREATE TABLE IF NOT EXISTS game_sets (
-    set_id INT AUTO_INCREMENT PRIMARY KEY,
+    set_id varchar(5) PRIMARY KEY,
     points_a INT NOT NULL,
     points_b INT NOT NULL,
     CHECK (points_a <= 30 AND points_b <= 30)
