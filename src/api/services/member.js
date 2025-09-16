@@ -37,7 +37,10 @@ async function create(member) {
     message = "Member created successfully";
   }
 
-  return { message };
+  let id = result.insertId.toString();
+  // return the id of the created record
+
+  return { id, message };
 }
 
 async function update(id, member) {
