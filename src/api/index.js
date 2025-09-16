@@ -8,6 +8,7 @@ const ageDivisionRouter = require("./routes/age_divisionRoutes");
 const doublesRouter = require("./routes/doubles");
 const singleGameRouter = require("./routes/games_single");
 const doublesGameRouter = require("./routes/games_doubles");
+const pyramideRouter = require("./routes/pyramides");
 
 app.use(express.json());
 app.use(
@@ -25,6 +26,7 @@ app.use("/age_division", ageDivisionRouter);
 app.use("/doubles", doublesRouter);
 app.use("/single_games", singleGameRouter);
 app.use("/double_games", doublesGameRouter);
+app.use("/pyramides", pyramideRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
