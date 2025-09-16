@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS games_single (
     game_id_singles INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
-    age_division INT NOT NULL,
+    age_division INT DEFAULT 2, -- default erstmal auf erwachseen gesetzt muss später mittels funktion oder set des users gestzt werden
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     set_one varchar(5) NOT NULL,
     set_two varchar(5) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS games_double (
     game_id_double INT AUTO_INCREMENT PRIMARY KEY,
     doubles_id_a INT NOT NULL,
     doubles_id_b INT NOT NULL,
-    age_division INT NOT NULL,
+    age_division INT NOT NULL DEFAULT 2,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     set_one varchar(5) NOT NULL,
     set_two varchar(5) NOT NULL,
