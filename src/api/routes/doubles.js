@@ -15,7 +15,7 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-/* POST member */
+/* POST doubles */
 router.post('/', async function(req, res, next) {
   try {
     res.json(await doubles.create(req.body));
@@ -25,7 +25,7 @@ router.post('/', async function(req, res, next) {
   }
 });
 
-/*GET member by id */
+/*GET doubles by id */
 router.get('/:id', async function(req, res, next) {
   try {
     res.json(await doubles.getSingle(req.params.id));

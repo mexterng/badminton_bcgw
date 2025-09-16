@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS games_single (
     set_two INT NOT NULL,
     set_three INT,
     winner_id INT NOT NULL,
-    valid BOOLEAN DEFAULT FALSE,
+    valid BOOLEAN DEFAULT FALSE, -- to be set true when both players are marked as active
     FOREIGN KEY (player_a) REFERENCES member(member_id),
     FOREIGN KEY (player_b) REFERENCES member(member_id),
     FOREIGN KEY (age_division) REFERENCES age_division(age_division_id),
