@@ -26,49 +26,72 @@ async function getSingle(id) {
   return data[0] || null;
 }
 
-// TODO: missing: what if timestamp is given ... ? => in database: default is current timestamp
 async function create(doubles_game) {
+  // Define allowed columns
+  const allowedColumns = [
+    "doubles_id_a",
+    "doubles_id_b",
+    "age_division",
+    "timestamp",
+    "set_one",
+    "set_two",
+    "set_three",
+    "winner_id"
+  ];
+
+  // Filter only present attributes
+  const columns = allowedColumns.filter(col => doubles_game[col] !== undefined);
+  const values = columns.map(col => doubles_game[col]);
+
+   // Build SQL dynamically
   const sql = `
-    INSERT INTO games_double 
-    (doubles_id_a, doubles_id_b, age_division, set_one, set_two, set_three, winner_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO games_double (${columns.join(", ")})
+    VALUES (${columns.map(() => "?").join(", ")})
   `;
-  const result = await db.query(sql, [
-    doubles_game.doubles_id_a,
-    doubles_game.doubles_id_b,
-    doubles_game.age_division,
-    doubles_game.set_one,
-    doubles_game.set_two,
-    doubles_game.set_three,
-    doubles_game.winner_id, // could also be calculated here or in backend
-  ]);
+
+  const result = await db.query(sql, values);
 
   let message = "Error in creating doubles game";
+  let id = null;
 
-  if (result.affectedRows) {
+  if (result.insertId) {
     message = "Doubles game created successfully";
+    id = result.insertId.toString();
   }
-  const id = result.insertId.toString();
-  // return the id of the created record
+
   return { id, message };
 }
 
 async function update(id, doubles_game) {
+  // Define allowed columns
+  const allowedColumns = [
+    "doubles_id_a",
+    "doubles_id_b",
+    "age_division",
+    "timestamp",
+    "set_one",
+    "set_two",
+    "set_three",
+    "winner_id"
+  ];
+
+  // Filter only present attributes
+  const columns = allowedColumns.filter(col => doubles_game[col] !== undefined);
+  const values = columns.map(col => doubles_game[col]);
+
+   // Build SQL dynamically
+  const setClause = columns.map(col => `${col} = ?`).join(", ");
+
+  // Add id for WHERE clause
+  values.push(id);
+
   const sql = `
-    UPDATE games_single 
-    SET doubles_id_a = ?, doubles_id_b = ?, age_division = ?, set_one = ?, set_two = ?, set_three = ?, winner_id = ? 
-    WHERE game_id_singles = ?
+    UPDATE games_double
+    SET ${setClause}
+    WHERE game_id_double = ?
   `;
-  const result = await db.query(sql, [
-    doubles_game.doubles_id_a,
-    doubles_game.doubles_id_b,
-    doubles_game.age_division,
-    doubles_game.set_one,
-    doubles_game.set_two,
-    doubles_game.set_three,
-    doubles_game.winner_id,
-    id,
-]);
+
+  const result = await db.query(sql, values);
 
   let message = "Error in updating game";
 
