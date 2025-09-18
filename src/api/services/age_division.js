@@ -18,7 +18,8 @@ async function getMultiple(page = 1){
 
 async function getSingle(id) {
   const rows = await db.query(
-    `SELECT * FROM age_division WHERE age_division_id = ? LIMIT 1`, [id]
+    `SELECT * FROM age_division WHERE age_division_id = ?`, 
+    [id]
   );
   const data = helper.emptyOrRows(rows);
   return data[0] || null;

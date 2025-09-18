@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS member (
     last_name VARCHAR(50),
     gender ENUM('m', 'w', 'd'),
     age_division_id JSON NOT NULL,
-    overall_active BOOLEAN DEFAULT FALSE,
+    overall_active BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS doubles (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS doubles (
 );
 
 CREATE TABLE IF NOT EXISTS game_sets (
-    set_id INT AUTO_INCREMENT PRIMARY KEY,
+    set_id varchar(5) PRIMARY KEY,
     points_a INT NOT NULL,
     points_b INT NOT NULL,
     CHECK (points_a <= 30 AND points_b <= 30)
@@ -38,13 +38,13 @@ CREATE TABLE IF NOT EXISTS games_single (
     game_id_singles INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
-    age_division INT NOT NULL,
+    age_division INT DEFAULT 2, -- default erstmal auf erwachseen gesetzt muss später mittels funktion oder set des users gestzt werden
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    set_one INT NOT NULL,
-    set_two INT NOT NULL,
-    set_three INT,
+    set_one varchar(5) NOT NULL,
+    set_two varchar(5) NOT NULL,
+    set_three varchar(5),
     winner_id INT NOT NULL,
-    valid BOOLEAN DEFAULT FALSE,
+    valid BOOLEAN DEFAULT FALSE, -- to be set true when both players are marked as active
     FOREIGN KEY (player_a) REFERENCES member(member_id),
     FOREIGN KEY (player_b) REFERENCES member(member_id),
     FOREIGN KEY (age_division) REFERENCES age_division(age_division_id),
@@ -59,11 +59,11 @@ CREATE TABLE IF NOT EXISTS games_double (
     game_id_double INT AUTO_INCREMENT PRIMARY KEY,
     doubles_id_a INT NOT NULL,
     doubles_id_b INT NOT NULL,
-    age_division INT NOT NULL,
+    age_division INT NOT NULL DEFAULT 2,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    set_one INT NOT NULL,
-    set_two INT NOT NULL,
-    set_three INT,
+    set_one varchar(5) NOT NULL,
+    set_two varchar(5) NOT NULL,
+    set_three varchar(5),
     winner_id INT NOT NULL,
     valid BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (doubles_id_a) REFERENCES doubles(doubles_id),
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS pyramid_single (
     placement INT NOT NULL,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     age_division_id INT NOT NULL,
-    PRIMARY KEY (member_id, timestamp, age_division_id),
+    PRIMARY KEY (member_id, timestamp, age_division_id), -- timestamp needs to be set when pyramid is newly calculated and then we should agree on a hour / 10 / 5 / 1 minute group or simular
     FOREIGN KEY (member_id) REFERENCES member(member_id),
     FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id) 
 );
