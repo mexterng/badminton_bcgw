@@ -46,7 +46,7 @@ router.delete('/:id', async function(req, res, next) {
 });
 
 /* PATCH game */
-router.patch('/', async function(req, res, next) {
+router.patch('/:id', async function(req, res, next) {
   try {
     res.json(await games_double.update(req.params.id, req.body));
   } catch (err) {
