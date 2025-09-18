@@ -9,6 +9,12 @@ async function query(sql, params) {
   return results;
 }
 
+async function getConnection() {
+  const connection = await mysql.createConnection(config.db);
+  return connection;
+}
+
 module.exports = {
-  query
+  query,
+  getConnection
 }
