@@ -110,6 +110,7 @@ async function remove(id) {
   let message = "Error in deleting game";
 
   if (result.affectedRows) {
+    // TODO: success even when id does not exist
     message = "Game deleted successfully";
   }
 
