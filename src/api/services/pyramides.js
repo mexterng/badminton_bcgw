@@ -136,13 +136,7 @@ async function getDoublePyramide(age_division, connection = null) {
         return {
             doubles_id: row.doubles_id,
             doubles_display_name: doublesDisplayName,
-            doubles_gender: doublesGender,
-            player_a_id: row.player_a_id,
-            player_a_display_name: row.player_a_display_name,
-            player_a_gender: row.player_a_gender,
-            player_b_id: row.player_b_id,
-            player_b_display_name: row.player_b_display_name,
-            player_b_gender: row.player_b_gender
+            doubles_gender: doublesGender
         };
     });
 }
