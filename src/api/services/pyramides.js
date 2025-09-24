@@ -30,7 +30,7 @@ async function getRanking(table, age_division, connection = null) {
         rows = db.query(sqlQuery, [age_division]);
     }
     const data = helper.emptyOrRows(rows);
-    return data[0];
+    return data.map(row => row[id_column_str]);
 }
 
 
