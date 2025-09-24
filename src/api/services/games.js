@@ -16,7 +16,7 @@ async function getPlacement(table, id, age_division, connection = null){
         [rows] = await connection.execute(sqlQuery, [id, age_division]);
     }
     else{
-        rows = db.query(sqlQuery, [id, age_division]);
+        rows = await db.query(sqlQuery, [id, age_division]);
     }
     const data = helper.emptyOrRows(rows);
     return data.length ? data[0].placement : Infinity;

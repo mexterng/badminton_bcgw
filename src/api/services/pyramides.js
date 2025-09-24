@@ -26,7 +26,7 @@ async function create(player_id, placement, timestamp, age_division_id, pyramidT
         age_division_id,
     ]);
     } else {
-        result = db.query(sql, [player_id, placement, timestamp, age_division_id]);
+        result = await db.query(sql, [player_id, placement, timestamp, age_division_id]);
     }
 
     let message = "Error in creating entry in pyramid";
@@ -54,7 +54,7 @@ async function getRanking(table, age_division, connection = null) {
         [rows] = await connection.execute(sqlQuery, [age_division]);
     }
     else{
-        rows = db.query(sqlQuery, [age_division]);
+        rows = await db.query(sqlQuery, [age_division]);
     }
     const data = helper.emptyOrRows(rows);
     return data.map(row => row['player_id']);
