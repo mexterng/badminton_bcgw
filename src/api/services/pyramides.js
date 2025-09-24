@@ -9,12 +9,11 @@ async function getLatestDoubles(age_division_id) {
 }
 
 async function getRanking(table, age_division, connection = null) {
-    const id_column_str = table === "pyramid_single"? "member_id" : "doubles_id";
     const sqlQuery = `
-        SELECT ${id_column_str}
+        SELECT player_id
         FROM (
             SELECT pyramid.*,
-                ROW_NUMBER() OVER (PARTITION BY ${id_column_str} ORDER BY timestamp DESC) AS rn
+                ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY timestamp DESC) AS rn
             FROM ${table} pyramid
             WHERE pyramid.age_division_id = ?
         ) sub
@@ -30,7 +29,7 @@ async function getRanking(table, age_division, connection = null) {
         rows = db.query(sqlQuery, [age_division]);
     }
     const data = helper.emptyOrRows(rows);
-    return data.map(row => row[id_column_str]);
+    return data.map(row => row['player_id']);
 }
 
 
