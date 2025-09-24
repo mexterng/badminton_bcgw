@@ -36,7 +36,7 @@ INSERT INTO doubles (player_a, player_b) VALUES
 (18, 20); -- Ryan (m) and Tom (m)
 
 -- demo entries for single ranking
-INSERT INTO pyramid_single (member_id, placement, timestamp, age_division_id) VALUES
+INSERT INTO pyramid_single (player_id, placement, timestamp, age_division_id) VALUES
 (1, 1, '2025-09-24 00:00:00', 2),
 (2, 2, '2025-09-24 00:00:00', 2),
 (3, 3, '2025-09-24 00:00:00', 2),

@@ -103,7 +103,7 @@ async function create(single_game) {
 
       const sqlPyramidSingle = `
       INSERT INTO pyramid_single (
-        member_id,
+        player_id,
         placement,
         timestamp,
         age_division_id

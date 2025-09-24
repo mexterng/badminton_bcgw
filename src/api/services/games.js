@@ -5,7 +5,7 @@ async function getPlacement(table, id, age_division, connection = null){
     const sqlQuery = `
         SELECT placement 
         FROM ${table} 
-        WHERE member_id = ? AND age_division_id = ? 
+        WHERE player_id = ? AND age_division_id = ? 
         ORDER BY timestamp DESC 
         LIMIT 1
     `;
