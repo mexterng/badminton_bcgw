@@ -83,7 +83,7 @@ async function getSinglePyramide(age_division, connection = null) {
     const data = helper.emptyOrRows(rows);
 
     return data.map(row => ({
-        player_id: row.player_id,
+        member_id: row.player_id,
         display_name: row.display_name,
         gender: row.gender
     }));
@@ -98,7 +98,8 @@ async function getDoublePyramide(age_division, connection = null) {
             ma.gender AS player_a_gender,
             d.player_b AS player_b_id,
             mb.display_name AS player_b_display_name,
-            mb.gender AS player_b_gender
+            mb.gender AS player_b_gender,
+            d.overall_active AS overall_active
         FROM (
             SELECT pyramid.*,
                 ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY timestamp DESC) AS rn
@@ -135,8 +136,11 @@ async function getDoublePyramide(age_division, connection = null) {
 
         return {
             doubles_id: row.doubles_id,
-            doubles_display_name: doublesDisplayName,
-            doubles_gender: doublesGender
+            player_a: row.player_a_id,
+            player_b: row.player_b_id,
+            overall_active: row.overall_active,
+            display_name: doublesDisplayName,
+            gender: doublesGender
         };
     });
 }
