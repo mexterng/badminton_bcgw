@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS game_sets (
 );
 
 CREATE TABLE IF NOT EXISTS games_single (
-    game_id_singles INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
     age_division INT DEFAULT 2, -- default erstmal auf erwachseen gesetzt muss später mittels funktion oder set des users gestzt werden
@@ -56,9 +56,9 @@ CREATE TABLE IF NOT EXISTS games_single (
 );
 
 CREATE TABLE IF NOT EXISTS games_double (
-    game_id_double INT AUTO_INCREMENT PRIMARY KEY,
-    doubles_id_a INT NOT NULL,
-    doubles_id_b INT NOT NULL,
+    game_id INT AUTO_INCREMENT PRIMARY KEY,
+    player_a INT NOT NULL,
+    player_b INT NOT NULL,
     age_division INT NOT NULL DEFAULT 2,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     set_one varchar(5) NOT NULL,
@@ -66,14 +66,14 @@ CREATE TABLE IF NOT EXISTS games_double (
     set_three varchar(5),
     winner_id INT NOT NULL,
     valid BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (doubles_id_a) REFERENCES doubles(doubles_id),
-    FOREIGN KEY (doubles_id_b) REFERENCES doubles(doubles_id),
+    FOREIGN KEY (player_a) REFERENCES doubles(doubles_id),
+    FOREIGN KEY (player_b) REFERENCES doubles(doubles_id),
     FOREIGN KEY (age_division) REFERENCES age_division(age_division_id),
     FOREIGN KEY (winner_id) REFERENCES doubles(doubles_id),
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_three) REFERENCES game_sets(set_id),
-    CHECK (doubles_id_a != doubles_id_b)
+    CHECK (player_a != player_b)
 );
 
 CREATE TABLE IF NOT EXISTS pyramid_single (

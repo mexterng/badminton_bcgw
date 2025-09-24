@@ -76,7 +76,7 @@ INSERT INTO games_single (player_a, player_b, set_one, set_two, set_three, winne
 (9, 11, '17-21', '21-16', '21-17', 9, TRUE);
 
 -- demo entries for games_double
-INSERT INTO games_double (doubles_id_a, doubles_id_b, set_one, set_two, set_three, winner_id, valid) VALUES
+INSERT INTO games_double (player_a, player_b, set_one, set_two, set_three, winner_id, valid) VALUES
 -- 2 sets
 (3, 4, '21-0', '21-1', NULL, 3, TRUE),
 (7, 8, '21-2', '21-3', NULL, 7, TRUE),

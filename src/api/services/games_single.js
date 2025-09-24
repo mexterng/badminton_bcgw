@@ -8,7 +8,7 @@ async function getMultiple(page = 1) {
   const offset = Number(helper.getOffset(page, config.listPerPage));
   const limit = Number(config.listPerPage);
   const rows = await db.query(
-    `SELECT game_id_singles, player_a, player_b, winner_id FROM games_single LIMIT ${offset},${limit}`
+    `SELECT game_id, player_a, player_b, winner_id FROM games_single LIMIT ${offset},${limit}`
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -21,7 +21,7 @@ async function getMultiple(page = 1) {
 
 async function getSingle(id) {
   const rows = await db.query(
-    `SELECT * FROM games_single WHERE game_id_singles = ? LIMIT 1`,
+    `SELECT * FROM games_single WHERE game_id = ? LIMIT 1`,
     [id]
   );
   const data = helper.emptyOrRows(rows);
@@ -91,12 +91,11 @@ async function create(single_game) {
       message = "Singles game created successfully.";
       gameIdStr = gameId.toString();
     }
-    console.log("valid: " + single_game.valid);
     // 2. Update pyramid
     if (single_game.valid && winnerOldPlacement > loserOldPlacement) {
       // Get timestamp
       const [rows] = await connection.execute(
-        `SELECT timestamp FROM games_single WHERE game_id_singles = ?`,
+        `SELECT timestamp FROM games_single WHERE game_id = ?`,
         [gameId]
       );
       const data = helper.emptyOrRows(rows)
@@ -114,9 +113,7 @@ async function create(single_game) {
       
       // Must be called before inserts into pyramid table in order to retrieve the old ranking.
       const oldRanking = await pyramides.getRanking("pyramid_single", single_game.age_division, connection);
-      console.log(oldRanking);
       // Shift loser AND all players in between +1
-      console.log(Math.min(winnerOldPlacement - 1, oldRanking.length));
       for (let idx = loserOldPlacement - 1; idx < Math.min(winnerOldPlacement - 1, oldRanking.length); idx++){
         await connection.execute(sqlPyramidSingle, [
           oldRanking[idx], // id
@@ -171,7 +168,7 @@ async function update(id, single_game) {
   const sql = `
     UPDATE games_single
     SET ${setClause}
-    WHERE game_id_singles = ?
+    WHERE game_id = ?
   `;
 
   const result = await db.query(sql, values);
@@ -187,7 +184,7 @@ async function update(id, single_game) {
 async function remove(id) {
   const sql = `
     DELETE FROM games_single
-    WHERE game_id_singles = ?
+    WHERE game_id = ?
   `;
   const result = await db.query(sql, [id]);
 

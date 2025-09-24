@@ -44,11 +44,11 @@ BEGIN
 	WITH stats as (
 		SELECT
 			d.doubles_id,
-            SUM(CASE	WHEN d.doubles_id = gd.doubles_id_a THEN s.points_a
-						WHEN d.doubles_id = gd.doubles_id_b THEN s.points_b
+            SUM(CASE	WHEN d.doubles_id = gd.player_a THEN s.points_a
+						WHEN d.doubles_id = gd.player_b THEN s.points_b
                         END) AS won_points,
-            SUM(CASE 	WHEN d.doubles_id = gd.doubles_id_a THEN s.points_b
-						WHEN d.doubles_id = gd.doubles_id_b THEN s.points_a
+            SUM(CASE 	WHEN d.doubles_id = gd.player_a THEN s.points_b
+						WHEN d.doubles_id = gd.player_b THEN s.points_a
                         END) AS lost_points,
             (
                 SELECT COUNT(*)
@@ -57,7 +57,7 @@ BEGIN
             ) AS won_games
 		FROM doubles d
         INNER JOIN games_double gd
-            ON d.doubles_id = gd.doubles_id_a OR d.doubles_id = gd.doubles_id_b
+            ON d.doubles_id = gd.player_a OR d.doubles_id = gd.player_b
         INNER JOIN game_sets s
             ON s.set_id IN (gd.set_one, gd.set_two, gd.set_three)
 		WHERE gd.valid = TRUE AND gd.overall_active = TRUE
