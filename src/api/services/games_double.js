@@ -104,7 +104,7 @@ async function update(id, doubles_game) {
 
 async function remove(id) {
   const sql = `
-    DELETE FROM games_single
+    DELETE FROM games_double
     WHERE game_id = ?
   `;
   const result = await db.query(sql, [id]);
