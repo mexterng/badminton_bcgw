@@ -8,6 +8,35 @@ async function getLatestSingle(age_division_id) {
 async function getLatestDoubles(age_division_id) {
 }
 
+async function create(player_id, placement, timestamp, age_division_id, pyramidTable, connection = null) {
+    const sql = `
+        INSERT INTO ${pyramidTable} (
+            player_id,
+            placement,
+            timestamp,
+            age_division_id
+            )
+            VALUES (?, ?, ?, ?)
+        `;
+    let result = null;
+    if (connection) {
+    [result] = await connection.execute(sql, [
+        player_id,
+        placement,
+        timestamp,
+        age_division_id,
+    ]);
+    } else {
+        result = db.query(sql, [player_id, placement, timestamp, age_division_id]);
+    }
+
+    let message = "Error in creating entry in pyramid";
+    if (result.affectedRows > 0) {
+        message = "Entry in pyramid created successfully";
+    }
+    return { message: message };
+}
+
 async function getRanking(table, age_division, connection = null) {
     const sqlQuery = `
         SELECT player_id
@@ -37,5 +66,6 @@ async function getRanking(table, age_division, connection = null) {
 // get calculationtimes to later get pyramides at a certain time
 
 module.exports = {
-  getRanking
+    getRanking,
+    create
 }
