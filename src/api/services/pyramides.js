@@ -1,6 +1,5 @@
 const db = require("./db");
 const helper = require("../helper");
-const config = require("../config");
 //TODO: implement
 async function getLatestSingle(age_division_id) {
 }
