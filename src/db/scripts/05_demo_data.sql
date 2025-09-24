@@ -35,6 +35,25 @@ INSERT INTO doubles (player_a, player_b) VALUES
 (17, 19), -- Quinn (w) and Sara (w)
 (18, 20); -- Ryan (m) and Tom (m)
 
+-- demo entries for single ranking
+INSERT INTO pyramid_single (member_id, placement, timestamp, age_division_id) VALUES
+(1, 1, '2025-09-24 00:00:00', 2),
+(2, 2, '2025-09-24 00:00:00', 2),
+(3, 3, '2025-09-24 00:00:00', 2),
+(4, 4, '2025-09-24 00:00:00', 2),
+(5, 5, '2025-09-24 00:00:00', 2),
+(6, 6, '2025-09-24 00:00:00', 2),
+(7, 7, '2025-09-24 00:00:00', 2),
+(8, 8, '2025-09-24 00:00:00', 2),
+(9, 9, '2025-09-24 00:00:00', 2),
+(10, 10, '2025-09-24 00:00:00', 2);
+(11, 1, '2025-09-24 00:00:00', 1);
+(12, 2, '2025-09-24 00:00:00', 1);
+(13, 3, '2025-09-24 00:00:00', 1);
+(15, 1, '2025-09-24 00:00:00', 3);
+(16, 2, '2025-09-24 00:00:00', 3);
+(17, 3, '2025-09-24 00:00:00', 3);
+-- 1: 14; 2: 19+20; 3: 18 are new players without placement
 
 -- demo entries for games_single
 INSERT INTO games_single (player_a, player_b, set_one, set_two, set_three, winner_id, valid) VALUES
