@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-member',
   imports: [HeaderComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './member.component.html',
+  styleUrl: './member.component.scss'
 })
-export class HomeComponent {
-  title = 'SCU - Pyramidranking';
+export class MemberComponent {
+  title = 'Mitglieder';
 }

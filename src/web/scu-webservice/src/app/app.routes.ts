@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { InternalRankingManagerComponent } from './internal-ranking-manager/internal-ranking-manager.component';
+import { PyramideComponent } from "./pyramide/pyramide.component";
+import { MemberComponent } from './member/member.component';
+import { CreateMatchComponent } from './create-match/create-match.component';
 
 //https://angular.dev/guide/routing/define-routes
 //!! first wins strategy, so order matters
@@ -15,8 +17,16 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'ranking-manager',
-        component: InternalRankingManagerComponent
+        path: 'pyramide',
+        component: PyramideComponent
+    },
+    {
+        path: 'member',
+        component: MemberComponent
+    },
+    {
+        path: 'create-match',
+        component: CreateMatchComponent
     },
     {
         path: '**',
