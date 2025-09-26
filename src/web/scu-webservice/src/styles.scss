@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+// Define color variables
+$color-primary: #fafafa;  
+$color-theme: #BD2525;
+$color-accent-positive: #FF5959;
+$color-accent-negative:  #601010;
+$color-text: #120303;
+
+// Export as CSS variables for runtime use
+:root {
+    --color-primary: #{$color-primary};
+    --color-accent-positive: #{$color-accent-positive};
+    --color-accent-negative: #{$color-accent-negative};
+    --color-theme: #{$color-theme};
+    --color-text: #{$color-text};
+}
+
+// Global styles (apply background + text colors)
+body {
+  background-color: var(--color-primary);
+  margin:0;
+  color: var(--color-text);
+  font-family: 'SUSE Mono', monospace;
+}

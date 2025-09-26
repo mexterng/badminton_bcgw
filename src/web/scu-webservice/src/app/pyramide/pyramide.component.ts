@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-pyramide',
   imports: [HeaderComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './pyramide.component.html',
+  styleUrl: './pyramide.component.scss'
 })
-export class HomeComponent {
-  title = 'SCU - Pyramidranking';
+export class PyramideComponent {
+  title = 'Pyramide';
 }

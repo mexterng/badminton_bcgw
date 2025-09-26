@@ -1,0 +1,5 @@
+.pyramide-side {
+    display: flex;
+    flex-direction: column;  /* Stapelt Kinder vertikal */
+    height: 100vh;           /* gesamte Browserhöhe */
+}
