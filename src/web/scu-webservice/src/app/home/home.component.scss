@@ -10,7 +10,30 @@ app-header{
 }
 
 .content {
+    // self positioning / styling
     flex: 1;                 /* nimmt den restlichen Platz (95%) */
     overflow: auto;          /* falls Inhalt größer ist → Scrollbar */
     background-color: var(--color-primary);
+    // relations 
+    margin-top: 4vh;
+    // content
+    display: flex;
+    flex-flow:column nowrap;
+    align-items: center;
 }
+
+.direction {
+    // self positioning / layout
+    background-color: var(--color-accent-positive);
+    border: 10px solid var(--color-accent-positive);
+    border-radius: 10px;
+    height: 13vh;           /* Breite abhängig von der Viewport-Breite */
+    aspect-ratio: 1 / 1;   /* Höhe automatisch = Breite */
+    // relations
+    margin-top: 7vh;
+    // content
+    display: flex;                
+    justify-content: center;      
+    align-items: center;          
+}
+

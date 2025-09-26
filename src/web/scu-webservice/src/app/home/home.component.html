@@ -1,6 +1,14 @@
 <div class="home-side">
     <app-header [heading]="title"/>
-    <div class="content">
-        <p>home works!</p>
+    <div class="content" (click)="onDirectionClick('member')">
+        <div class="direction">
+            <p>Mitglieder</p>
+        </div>
+        <div class="direction" (click)="onDirectionClick('create-match')">
+            <p>Neues<br>Spiel</p>
+        </div>
+        <div class="direction" (click)="onDirectionClick('pyramide')">
+            <p>Pyramide</p>
+        </div>
     </div>
 </div>

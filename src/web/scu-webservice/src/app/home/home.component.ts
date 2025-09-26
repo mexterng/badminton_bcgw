@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 
 @Component({
@@ -9,4 +10,10 @@ import { HeaderComponent } from '../subcomponents/header/header.component';
 })
 export class HomeComponent {
   title = 'SCU - Pyramidranking';
+
+  constructor(private router: Router) {}
+
+  onDirectionClick(direction: string) {
+    this.router.navigate([direction]);
+  }
 }
