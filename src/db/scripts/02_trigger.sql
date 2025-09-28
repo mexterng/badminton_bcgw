@@ -23,3 +23,54 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+-- check for already existing double
+DELIMITER $$
+
+CREATE TRIGGER check_duplicate_doubles
+BEFORE INSERT ON doubles
+FOR EACH ROW
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM doubles
+        WHERE 
+            (player_a = NEW.player_a AND player_b = NEW.player_b)
+            OR (player_a = NEW.player_b AND player_b = NEW.player_a)
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Duplicate doubles pair not allowed';
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- check for game not against oneself
+--doubles
+DELIMITER $$
+
+CREATE TRIGGER check_double_game_is_not_self_game
+BEFORE INSERT ON games_doubles
+FOR EACH ROW
+BEGIN
+    IF NEW.doubles_id_a = NEW.doubles_id_b THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Same playing pair not allowed';
+    END IF;
+END$$
+
+DELIMITER ;
+-- singles
+DELIMITER $$
+
+CREATE TRIGGER check_single_game_is_not_self_game
+BEFORE INSERT ON games_single
+FOR EACH ROW
+BEGIN
+    IF NEW.player_a = NEW.player_b THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Same playing player not allowed';
+    END IF;
+END$$
+
+DELIMITER ;

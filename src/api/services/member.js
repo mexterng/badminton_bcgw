@@ -18,47 +18,69 @@ async function getMultiple(page = 1) {
 }
 
 async function create(member) {
+
+  let allowedColumns = [
+    "display_name",
+    "first_name",
+    "last_name",
+    "gender",
+    "age_division_id"
+  ]
+
+  // Build SQL dynamically
+  const columns = allowedColumns.filter(col => member[col] !== undefined);
+  const values = columns.map(col => member[col]);
+
+  // Build SQL dynamically
   const sql = `
-    INSERT INTO member 
-    (display_name, first_name, last_name, gender, age_division_id)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO member (${columns.join(", ")})
+    VALUES (${columns.map(() => "?").join(", ")})
   `;
-  const result = await db.query(sql, [
-    member.display_name,
-    member.first_name,
-    member.last_name,
-    member.gender,
-    member.age_division_id,
-  ]);
+
+  const result = await db.query(sql, values);
 
   let message = "Error in creating member";
+  let id = null;
 
-  if (result.affectedRows) {
+  if (result.insertId) {
     message = "Member created successfully";
+    id = result.insertId.toString();
   }
 
-  return { message };
+  return { id, message };
 }
 
 async function update(id, member) {
+  let allowedColumns = [
+    "display_name",
+    "first_name",
+    "last_name",
+    "gender",
+    "age_division_id"
+  ]
+
+  // Build SQL dynamically
+  const columns = allowedColumns.filter(col => member[col] !== undefined);
+  const values = columns.map(col => member[col]);
+
+  // Build SQL dynamically
+  const setClause = columns.map(col => `${col} = ?`).join(", ");
+
+  // Add id for WHERE clause
+  values.push(id);
+
   const sql = `
-    UPDATE member 
-    SET display_name = ?, first_name = ?, last_name = ?, gender = ?, age_division_id = ? 
+    UPDATE member
+    SET ${setClause}
     WHERE member_id = ?
   `;
-  const result = await db.query(sql, [
-    member.display_name,
-    member.first_name,
-    member.last_name,
-    member.gender,
-    member.age_division_id,
-    id,
-  ]);
+
+  const result = await db.query(sql, values);
 
   let message = "Error in updating member";
 
   if (result.affectedRows) {
-    message = "member updated successfully";
+    message = "Member updated successfully";
   }
 
   return { message };
