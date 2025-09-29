@@ -1,6 +1,6 @@
 .head-block{
-    background-color: var(--color-theme);
-    color: var(--color-primary);
+    background-color: var(--scu-theme);
+    color: var(--scu-black);
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;  // horizontal center
@@ -13,10 +13,29 @@
 }
 
 .logo {
-    flex: 0 0 auto; /* Prevent shrinking */
+    flex: 0 0 20%; /* Prevent shrinking */
+    margin: 2%;
 }
 
 .header {
     flex: 1 1 auto; 
     text-align: center; 
+    display: felx;
+    flex-flow: column nowrap;
+    justify-items: right;
+    margin: 2%;
+}
+
+.main-header {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-header {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
