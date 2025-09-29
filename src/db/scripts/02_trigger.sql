@@ -25,6 +25,7 @@ END$$
 DELIMITER ;
 
 -- check for already existing double
+
 DELIMITER $$
 
 CREATE TRIGGER check_duplicate_doubles
@@ -46,21 +47,24 @@ END$$
 DELIMITER ;
 
 -- check for game not against oneself
---doubles
+-- doubles
+
 DELIMITER $$
 
 CREATE TRIGGER check_double_game_is_not_self_game
-BEFORE INSERT ON games_doubles
+BEFORE INSERT ON games_double
 FOR EACH ROW
 BEGIN
-    IF NEW.doubles_id_a = NEW.doubles_id_b THEN
+    IF NEW.player_a = NEW.player_b THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'Same playing pair not allowed';
     END IF;
 END$$
 
 DELIMITER ;
+
 -- singles
+
 DELIMITER $$
 
 CREATE TRIGGER check_single_game_is_not_self_game
