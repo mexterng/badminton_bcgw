@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="499.99985"
+   viewBox="0 0 132.29167 132.29163"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="icons.svg"
+   xml:space="preserve"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.3514415"
+     inkscape:cx="29.87695"
+     inkscape:cy="482.29933"
+     inkscape:current-layer="layer1"><inkscape:page
+       x="0"
+       y="-1.2362733e-13"
+       width="132.29167"
+       height="132.29163"
+       id="page6"
+       margin="0"
+       bleed="0" /></sodipodi:namedview><defs
+     id="defs1" /><g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-142.29162,-4.3939435e-5)"><g
+       id="g33"
+       transform="matrix(0.9374997,0,0,0.9374997,-672.6641,-24.603281)"
+       inkscape:export-filename="..\src\web\scu-webservice\public\icon_personal-alt.svg"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><path
+         d="m 939.842,26.243555 c -19.49097,0 -35.27778,15.78681 -35.27778,35.27778 0,19.49097 15.78681,35.27778 35.27778,35.27778 19.49097,0 35.27777,-15.78681 35.27777,-35.27778 0,-19.49097 -15.7868,-35.27778 -35.27777,-35.27778 z"
+         fill="#000000"
+         id="path1-5"
+         style="stroke-width:8.81944" /><path
+         d="m 869.28644,149.71578 c 0,-23.45972 47.00764,-35.27777 70.55556,-35.27777 23.54791,0 70.5556,11.81805 70.5556,35.27777 v 17.63889 H 869.28644 Z"
+         fill="#000000"
+         id="path2"
+         style="stroke-width:8.81944" /></g></g></svg>
