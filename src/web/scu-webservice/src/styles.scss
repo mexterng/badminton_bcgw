@@ -3,25 +3,33 @@
 
 
 // Define color variables
-$color-primary: #fafafa;  
-$color-theme: #BD2525;
-$color-accent-positive: #FF5959;
-$color-accent-negative:  #601010;
-$color-text: #120303;
+$background-primary: #fafafa;  
+$scu-theme: #e3311a;
+$scu-black: #210f04;
+$theme-control-blue-negative:  #7c898b;
+$theme-control-blue-positive:  #a5ccd1;
+$theme-control-grey-negative:  #848586;
+$theme-control-grey-positive:  #baa989;
+$color-male-blue: #476c9b;
+$color-female-pink: #e2b4bd;
 
 // Export as CSS variables for runtime use
 :root {
-    --color-primary: #{$color-primary};
-    --color-accent-positive: #{$color-accent-positive};
-    --color-accent-negative: #{$color-accent-negative};
-    --color-theme: #{$color-theme};
-    --color-text: #{$color-text};
+    --background-primary: #{$background-primary};
+    --scu-theme: #{$scu-theme};
+    --scu-black: #{$scu-black};
+    --theme-control-blue-negative: #{$theme-control-blue-negative};
+    --theme-control-blue-positive: #{$theme-control-blue-positive};
+    --theme-control-grey-negative: #{$theme-control-grey-negative};
+    --theme-control-grey-positive: #{$theme-control-grey-positive};
+    --color-male-blue: #{$color-male-blue};
+    --color-female-pink: #{$color-female-pink};
 }
 
 // Global styles (apply background + text colors)
 body {
-  background-color: var(--color-primary);
+  background-color: var(--background-primary);
   margin:0;
-  color: var(--color-text);
+  color: var(--cscu-black);
   font-family: 'SUSE Mono', monospace;
 }

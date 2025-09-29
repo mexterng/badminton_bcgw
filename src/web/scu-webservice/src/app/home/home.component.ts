@@ -9,7 +9,7 @@ import { HeaderComponent } from '../subcomponents/header/header.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  title = 'SCU - Pyramidranking';
+  title = 'Menü';
 
   constructor(private router: Router) {}
 
