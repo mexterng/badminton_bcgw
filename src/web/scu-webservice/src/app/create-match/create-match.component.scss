@@ -14,3 +14,13 @@ app-header{
     overflow: auto;          /* falls Inhalt größer ist → Scrollbar */
     background-color: var(--color-primary);
 }
+
+app-footer {
+    position: fixed;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+    width: 80vw;      // ensures border is visible
+    height: 7vh;      // responsive height
+    z-index: 10;      // stays above other content
+}

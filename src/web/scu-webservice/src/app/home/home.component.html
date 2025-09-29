@@ -1,14 +1,26 @@
 <div class="home-side">
     <app-header [heading]="title"/>
-    <div class="content" (click)="onDirectionClick('member')">
-        <div class="direction">
-            <p>Mitglieder</p>
+    <div class="content">
+        <div class="direction" (click)="onDirectionClick('member')">
+            <div class="icon"></div>
+            <div class="text">
+                <div class="header">Spieler*innen</div>
+                <div class="description">Spieler*innen anschauen und verwalten</div>
+            </div>
         </div>
         <div class="direction" (click)="onDirectionClick('create-match')">
-            <p>Neues<br>Spiel</p>
+             <div class="icon"></div>
+            <div class="text">
+                <div class="header">Spiele</div>
+                <div class="description">Spiele anschauen und verwalten</div>
+            </div>
         </div>
         <div class="direction" (click)="onDirectionClick('pyramide')">
-            <p>Pyramide</p>
+            <div class="icon"></div>
+            <div class="text">
+                <div class="header">Pyramide</div>
+                <div class="description">Pyramide, Rangliste etc.</div>
+            </div>
         </div>
     </div>
 </div>

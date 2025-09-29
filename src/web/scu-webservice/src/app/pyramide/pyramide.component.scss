@@ -3,3 +3,8 @@
     flex-direction: column;  /* Stapelt Kinder vertikal */
     height: 100vh;           /* gesamte Browserhöhe */
 }
+
+app-header{
+    flex: 0 0 5%;
+    width: 100%;
+}
