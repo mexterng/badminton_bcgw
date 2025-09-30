@@ -9,5 +9,5 @@ import { FooterComponent } from '../subcomponents/footer/footer.component';
   styleUrl: './member.component.scss'
 })
 export class MemberComponent {
-  title = 'Mitglieder';
+  title = 'Spieler/innen';
 }

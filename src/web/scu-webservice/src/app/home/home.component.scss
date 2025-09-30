@@ -14,9 +14,7 @@ app-header{
     flex: 1;                 /* nimmt den restlichen Platz (95%) */
     background-color: var(--background-primary);
     // relations 
-    margin-top: 4vh;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    margin: 0 10vw 0 10vw;
     // content
     display: flex;
     flex-flow:column nowrap;
@@ -28,7 +26,7 @@ app-header{
     background-color: var(--theme-control-blue-negative);
     border: 10px solid var(--theme-control-blue-postitive);
     border-radius: 10px;
-    height: 13vh;           /* Breite abhängig von der Viewport-Breite */
+    min-height: 13vh;           /* Breite abhängig von der Viewport-Breite */
     width: 80vw;
     display: flex;
     flex-flow: row nowrap;     
@@ -43,8 +41,10 @@ app-header{
 }
 
 .icon {
-    flex: 0 0 20%; 
-    margin: 2%;
+    flex: 0 0 15%; 
+    margin: 3%;
+    height: 50%;
+    fill: var(--background-primary);
 }
 
 .text {

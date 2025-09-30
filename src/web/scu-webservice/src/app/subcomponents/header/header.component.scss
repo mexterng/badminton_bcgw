@@ -14,16 +14,21 @@
 
 .logo {
     flex: 0 0 20%; /* Prevent shrinking */
-    margin: 2%;
+    margin: 2% 0% 2% 2%;
+}
+
+.icon {
+    flex: 0 0 20%; 
+    height: 4rem;
+    fill: var(--scu-black);
 }
 
 .header {
     flex: 1 1 auto; 
     text-align: center; 
-    display: felx;
+    display: flex;
     flex-flow: column nowrap;
-    justify-items: right;
-    margin: 2%;
+    margin: 2% 2% 2% 0%;
 }
 
 .main-header {
