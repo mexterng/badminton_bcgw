@@ -4,18 +4,7 @@
     height: 100vh;           /* gesamte Browserhöhe */
 }
 
-app-header{
-    flex: 0 0 5%;
-    width: 100%;
-}
-
 .content {
-    // self positioning / styling
-    flex: 1;                 /* nimmt den restlichen Platz (95%) */
-    background-color: var(--background-primary);
-    // relations 
-    margin: 0 10vw 0 10vw;
-    // content
     display: flex;
     flex-flow:column nowrap;
     align-items: center;
