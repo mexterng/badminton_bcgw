@@ -30,6 +30,33 @@ $color-female-pink: #e2b4bd;
 body {
   background-color: var(--background-primary);
   margin:0;
-  color: var(--cscu-black);
+  color: var(--scu-black);
   font-family: 'SUSE Mono', monospace;
+}
+
+app-header{
+    flex: 0 0 5%;
+    width: 100%;
+}
+
+.content {
+    flex: 1;                 /* nimmt den restlichen Platz (95%) */
+    overflow-x: auto;          /* falls Inhalt größer ist → Scrollbar */
+    background-color: var(--background-primary);
+    margin: 10vw 10vw 30vw 10vw;
+    overflow-y: scroll;
+}
+
+.content > :first-child {
+  margin-top: 0 !important;
+}
+
+app-footer {
+    position: fixed;
+    left: 50%;
+    bottom: 5vh;
+    transform: translateX(-50%);
+    width: 80vw;      // ensures border is visible
+    height: 7vh;      // responsive height
+    z-index: 10;      // stays above other content
 }

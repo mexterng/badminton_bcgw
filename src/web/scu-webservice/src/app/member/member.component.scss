@@ -3,25 +3,3 @@
     flex-direction: column;  /* Stapelt Kinder vertikal */
     height: 100vh;           /* gesamte Browserhöhe */
 }
-
-app-header{
-    flex: 0 0 5%;
-    width: 100%;
-}
-
-.content {
-    flex: 1;                 /* nimmt den restlichen Platz (95%) */
-    overflow: auto;          /* falls Inhalt größer ist → Scrollbar */
-    background-color: var(--color-primary);
-    overflow-y: scroll;
-}
-
-app-footer {
-    position: fixed;
-    left: 50%;
-    bottom: 2%;
-    transform: translateX(-50%);
-    width: 80vw;      // ensures border is visible
-    height: 7vh;      // responsive height
-    z-index: 10;      // stays above other content
-}
