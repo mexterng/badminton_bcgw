@@ -1,0 +1,55 @@
+.content {
+    display: flex;
+    flex-flow:column nowrap;
+    align-items: center;
+}
+
+.direction {
+    // self positioning / layout
+    background-color: var(--theme-control-blue-negative);
+    border: 10px solid var(--theme-control-blue-postitive);
+    border-radius: 10px;
+    min-height: 13vh;           /* Breite abhängig von der Viewport-Breite */
+    width: 80vw;
+    display: flex;
+    flex-flow: row nowrap;     
+    // relations
+    margin-top: 7vh;
+    // content
+    color: var(--background-primary);
+    display: flex;       
+    align-items: center;  
+    padding-bottom: 4%;    
+    padding-top: 2%;     
+}
+
+.icon {
+    flex: 0 0 20%; 
+    margin: 3%;
+    height: 50%;
+    fill: var(--background-primary);
+}
+
+.text {
+    flex: 1 1 auto; 
+    display: flex;
+    flex-flow: column nowrap;
+    justify-items: left;
+    align-items: baseline;
+    margin: 2%;
+}
+
+.header {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 2%;
+    padding: 0;
+}
+
+.description {
+    font-size: 1.0em;
+    font-weight: bold;
+    margin-top: 2%;
+    padding: 0;
+}
+

@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+// Define color variables
+$background-primary: #fafafa;  
+$scu-theme: #e3311a;
+$scu-black: #210f04;
+$theme-control-blue-negative:  #7c898b;
+$theme-control-blue-positive:  #a5ccd1;
+$theme-control-grey-negative:  #848586;
+$theme-control-grey-positive:  #baa989;
+$color-male-blue: #476c9b;
+$color-female-pink: #e2b4bd;
+
+// Export as CSS variables for runtime use
+:root {
+    --background-primary: #{$background-primary};
+    --scu-theme: #{$scu-theme};
+    --scu-black: #{$scu-black};
+    --theme-control-blue-negative: #{$theme-control-blue-negative};
+    --theme-control-blue-positive: #{$theme-control-blue-positive};
+    --theme-control-grey-negative: #{$theme-control-grey-negative};
+    --theme-control-grey-positive: #{$theme-control-grey-positive};
+    --color-male-blue: #{$color-male-blue};
+    --color-female-pink: #{$color-female-pink};
+}
+
+// Global styles (apply background + text colors)
+body {
+  background-color: var(--background-primary);
+  margin:0;
+  color: var(--scu-black);
+  font-family: 'SUSE Mono', monospace;
+}
+
+app-header{
+    flex: 0 0 5%;
+    width: 100%;
+}
+
+.side{
+    display: flex;
+    flex-direction: column;  
+    height: 100vh;           
+}
+
+.content {
+    height: 95%;
+    flex: 1;                 /* nimmt den restlichen Platz (95%) */
+    overflow-x: auto;          /* falls Inhalt größer ist → Scrollbar */
+    background-color: var(--background-primary);
+    margin: 10vw 10vw 30vw 10vw;
+    overflow-y: scroll;
+}
+
+.content > :first-child {
+  margin-top: 0 !important;
+}
+
+app-footer {
+    position: fixed;
+    left: 50%;
+    bottom: 5vh;
+    transform: translateX(-50%);
+    width: 80vw;      // ensures border is visible
+    height: 7vh;      // responsive height
+    z-index: 10;      // stays above other content
+}

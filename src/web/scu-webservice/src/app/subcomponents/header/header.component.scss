@@ -1,0 +1,45 @@
+.head-block{
+    background-color: var(--scu-theme);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;  // horizontal center
+    align-items: center;      // vertical center
+    height: 100%;             // ensure it has height
+    width: 100%;              // ensure it has width
+    padding: 0;
+    border:0;
+    margin: 0;
+}
+
+.logo {
+    flex: 0 0 20%; /* Prevent shrinking */
+    margin: 2% 0% 2% 2%;
+}
+
+.icon {
+    flex: 0 0 20%; 
+    height: 4rem;
+    fill: var(--scu-black);
+}
+
+.header {
+    flex: 1 1 auto; 
+    text-align: center; 
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 2% 2% 2% 0%;
+}
+
+.main-header {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-header {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="248.47mm"
+   viewBox="0 0 210 248.47"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="scu_badminton_logo_neu-sw.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showguides="true"
+     inkscape:zoom="0.5"
+     inkscape:cx="575"
+     inkscape:cy="429"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path4"
+       style="fill:#e3311a;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1"
+       d="M 90.293713 190.00804 C 85.323919 190.01404 80.353408 190.04424 75.382479 190.09744 C 75.382504 195.02436 75.382454 199.95102 75.382479 204.87793 L 75.382479 218.66314 C 75.382479 229.31236 81.064493 239.15247 90.286995 244.47707 C 99.509488 249.80169 110.87146 249.80168 120.09396 244.47707 C 129.31647 239.15246 134.99796 229.31236 134.99796 218.66314 L 134.83363 204.87793 C 134.88843 200.11524 134.94313 195.35313 134.99796 190.59043 C 120.10665 190.18402 105.20308 189.98962 90.293713 190.00804 z M 80.480876 204.77561 L 129.89956 204.77561 C 131.25061 204.77561 132.33869 205.8637 132.33869 207.21474 L 132.33869 218.68691 C 132.33869 228.38605 127.16403 237.34804 118.76433 242.19762 C 110.36464 247.04719 100.01582 247.04719 91.616113 242.19762 C 83.216415 237.34804 78.042265 228.38605 78.042265 218.68691 L 78.042265 207.21474 C 78.042265 205.8637 79.12984 204.77561 80.480876 204.77561 z " />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1"
+       d="m 0,32.300529 81.256377,141.343191 -6.213701,2.50168 -9.154751,-3.10685 6.882644,14.70205 c 3.659393,-2.79605 11.823378,-5.03765 14.509515,-5.52115 L 28.753032,53.035821 l 23.89507,9.41174 10.4244,8.212233 -3.96455,-15.533609 z"
+       id="path2" />
+    <path
+       style="fill:#e3311a;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1"
+       d="M 104.75926,0 62.495388,49.126113 95.584107,180.96447 c 9.853533,-0.86741 19.050623,-0.0248 19.416543,0.009 l 3.71648,-14.49671 -8.35891,5.36237 L 96.145918,170.97788 80.211194,41.775756 105.18971,13.78222 l 32.60535,40.061914 6.26727,13.769111 4.19475,-16.362617 z"
+       id="path1" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1"
+       d="m 209.99999,32.300529 -26.20416,10.119583 7.09818,2.585215 -51.82867,132.664803 -13.84882,-4.53975 37.68332,-112.189692 10.4735,-14.496083 -22.48131,8.68158 -30.27074,126.648155 c 0.18743,0.0305 11.46635,1.876 16.83196,5.96626 z"
+       id="path3" />
+  </g>
+</svg>

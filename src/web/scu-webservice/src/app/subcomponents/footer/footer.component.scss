@@ -1,0 +1,23 @@
+.footer-block{
+    width: calc(100% - 4px);
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--background-primary);
+    border: 2px solid var(--theme-control-blue-negative);
+    border-radius: 10px;
+}
+
+.element{
+    max-width: 30%;
+    height: 80%;
+}
+
+.icon {
+    flex: 0 0 20%; 
+    margin: 10%;
+    height: 80%;
+    fill: var(--scu-black);
+}
