@@ -1,9 +1,3 @@
-.home-side {
-    display: flex;
-    flex-direction: column;  /* Stapelt Kinder vertikal */
-    height: 100vh;           /* gesamte Browserhöhe */
-}
-
 .content {
     display: flex;
     flex-flow:column nowrap;
