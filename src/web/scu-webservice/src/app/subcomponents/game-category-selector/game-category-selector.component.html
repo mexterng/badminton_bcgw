@@ -1,0 +1,44 @@
+<!-- Main wrapper card for the selector component -->
+<mat-card class="game-category-card">
+  <mat-card-title>Spielkategorie wählen</mat-card-title>
+  <mat-card-content class="game-category-form-container">
+    <form class="game-category-form">
+
+      <!-- Age class selection -->
+      <mat-card class="selection-card">
+        <mat-card-subtitle>Altersklasse</mat-card-subtitle>
+        <mat-button-toggle-group
+          [(ngModel)]="ageClass"
+          [hideSingleSelectionIndicator]="true"
+          name="ageClass"
+          appearance="standard"
+          (change)="onAgeClassChange($event.value)"
+          vertical
+          aria-label="Altersklasse">
+          
+          <mat-button-toggle value="erwachsene">Erwachsen</mat-button-toggle>
+          <mat-button-toggle value="jugendliche">Jugend</mat-button-toggle>
+          <mat-button-toggle value="schueler">Schüler</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card>
+
+      <!-- Play type selection -->
+      <mat-card class="selection-card">
+        <mat-card-subtitle>Spielart</mat-card-subtitle>
+        <mat-button-toggle-group
+          [(ngModel)]="playType"
+          [hideSingleSelectionIndicator]="true"
+          name="playType"
+          appearance="standard"
+          (change)="onPlayTypeChange($event.value)"
+          vertical
+          aria-label="Spielart">
+          
+          <mat-button-toggle value="einzel">Einzel</mat-button-toggle>
+          <mat-button-toggle value="doppel">Doppel/Mixed</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card>
+
+    </form>
+  </mat-card-content>
+</mat-card>
