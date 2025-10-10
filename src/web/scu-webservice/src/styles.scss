@@ -43,7 +43,7 @@ app-header{
     flex: 1;                 /* nimmt den restlichen Platz (95%) */
     overflow-x: auto;          /* falls Inhalt größer ist → Scrollbar */
     background-color: var(--background-primary);
-    margin: 10vw 10vw 30vw 10vw;
+    margin: 10vw 10vw 17vh 10vw;
     overflow-y: scroll;
 }
 
@@ -59,4 +59,98 @@ app-footer {
     width: 80vw;      // ensures border is visible
     height: 7vh;      // responsive height
     z-index: 10;      // stays above other content
+}
+
+
+/* Global styles for all mat-button-toggle components */
+
+.mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.mat-mdc-form-field {
+  padding: 0 !important;
+}
+
+.mat-button-toggle-group {
+  border: none !important;
+}
+
+.mat-button-toggle-group .mat-button-toggle:first-child {
+  border: 2px solid var(--theme-control-grey-negative) !important;
+  border-bottom: 1px solid var(--theme-control-grey-negative) !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+
+.mat-button-toggle-group .mat-button-toggle {
+  border: 2px solid var(--theme-control-grey-negative) !important;
+  border-top: 1px solid var(--theme-control-grey-negative) !important;
+  border-bottom: 1px solid var(--theme-control-grey-negative) !important;
+  border-radius: 0 !important;
+}
+
+.mat-button-toggle-group .mat-button-toggle:last-child {
+  border: 2px solid var(--theme-control-grey-negative) !important;
+  border-top: 1px solid var(--theme-control-grey-negative) !important;
+  border-radius: 0 0 4px 4px !important;
+}
+
+.mat-button-toggle-group .mat-button-toggle.mat-button-toggle-checked {
+  background-color: var(--theme-control-grey-negative);
+}
+
+.mat-button-toggle-label-content {
+  line-height: 40px !important;
+  padding: 0 16px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+/* Style individual toggle buttons */
+.mat-button-toggle {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.mat-button-toggle .mat-button-toggle-button {
+  background-color: transparent;
+}
+
+.mat-button-toggle .mat-button-toggle-label-content {
+  line-height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover state */
+.mat-button-toggle:hover:not(.mat-button-toggle-checked) {
+  background-color: #f5f5f5;
+}
+
+/* Selected state with background color */
+.mat-button-toggle.mat-button-toggle-checked {
+  background-color: var(--theme-control-grey-negative) !important;
+  border-color: var(--theme-control-grey-negative) !important;
+}
+
+.mat-button-toggle.mat-button-toggle-checked .mat-button-toggle-button {
+  background-color: transparent;
+}
+
+.mat-button-toggle.mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: #000 !important;
+  font-weight: 500 !important;
+}
+
+/* Ensure checkmark is hidden */
+.mat-button-toggle-checkmark {
+  display: none !important;
+}
+
+.mat-button-toggle-checked .mat-button-toggle-checkmark {
+  display: none !important;
 }
