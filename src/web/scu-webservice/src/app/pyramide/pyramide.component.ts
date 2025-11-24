@@ -34,7 +34,6 @@ export class PyramideComponent {
     this.http.get<any[]>(endpoint).subscribe({
       next: data => {
         this.data = data; // update results
-        console.log(data);
       },
       error: err => {
         console.error('Error fetching pyramid data:', err);

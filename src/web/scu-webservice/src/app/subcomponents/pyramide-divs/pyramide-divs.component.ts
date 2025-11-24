@@ -115,6 +115,9 @@ export class PyramideDivsComponent implements OnChanges {
     const {width: containerWidth, height: containerHeight} = this.getContainerSize('.pyramid-container');
     const {width: pyramidWidthZoom, height: pyramidHeightZoom} = this.getPyramideSizeZoom();
 
+    this.offsetX = Math.min(Math.max(this.offsetX, -pyramidWidthZoom + this.rectWidth * this.zoom), pyramidWidthZoom + (containerWidth - pyramidWidthZoom)/2 - this.rectWidth * this.zoom);
+    this.offsetY = Math.min(Math.max(this.offsetY, -pyramidHeightZoom + this.rectHeight * this.zoom), containerHeight - this.rectHeight * this.zoom);
+
     this.lastMouseX = event.clientX;
     this.lastMouseY = event.clientY;
   }
@@ -150,7 +153,7 @@ export class PyramideDivsComponent implements OnChanges {
     if (reset) {
       const {height: pyramidHeightZoom} = this.getPyramideSizeZoom();
       this.offsetX = 0;
-      this.offsetY = pyramidHeightZoom / 2;
+      this.offsetY = (containerHeight - pyramidHeightZoom) / 2;
     }
   }
 
@@ -163,12 +166,8 @@ export class PyramideDivsComponent implements OnChanges {
   }
 
   private getPyramideSizeZoom(){
-    console.log('zoom: ' + this.zoom);
-    console.log('rectHeight: ' + this.rectHeight * this.zoom);
-    console.log('spacing: ' + this.spacing * this.zoom);
     const width = this.levelsArr.length * this.rectWidth * this.zoom + (this.levelsArr.length - 1) * this.spacing * this.zoom;
-    const height = this.levelsArr.length * this.rectHeight * this.zoom + (this.levelsArr.length - 1) * this.spacing * 2 * this.zoom;
-    console.log('height: ' + height);
+    const height = this.levelsArr.length * this.rectHeight * this.zoom + (this.levelsArr.length - 1) * this.spacing * this.zoom;
     return {width: width, height: height};
   }
 }
