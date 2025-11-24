@@ -1,9 +1,7 @@
 <div class="side">
     <app-header [heading]="title"/>
     <div class="content">
-        <p>pyramide works!</p>
         <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
-
         <!--COMPONENT CAN BE DELETED IF NOT USED<app-pyramide-canvas [data]="data"></app-pyramide-canvas>-->
         <app-pyramide-divs [data]="data"></app-pyramide-divs>
     </div>
