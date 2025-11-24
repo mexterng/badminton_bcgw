@@ -16,9 +16,9 @@
           vertical
           aria-label="Altersklasse">
           
-          <mat-button-toggle value="erwachsene">Erwachsen</mat-button-toggle>
-          <mat-button-toggle value="jugendliche">Jugend</mat-button-toggle>
-          <mat-button-toggle value="schueler">Schüler</mat-button-toggle>
+          <mat-button-toggle *ngFor="let option of ageOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-button-toggle>
         </mat-button-toggle-group>
       </mat-card>
 
@@ -34,8 +34,9 @@
           vertical
           aria-label="Spielart">
           
-          <mat-button-toggle value="einzel">Einzel</mat-button-toggle>
-          <mat-button-toggle value="doppel">Doppel/Mixed</mat-button-toggle>
+          <mat-button-toggle *ngFor="let option of playOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-button-toggle>
         </mat-button-toggle-group>
       </mat-card>
 

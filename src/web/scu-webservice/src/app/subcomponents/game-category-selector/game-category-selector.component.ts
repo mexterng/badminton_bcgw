@@ -7,6 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {ChangeDetectionStrategy} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-game-category-selector',
@@ -27,8 +29,52 @@ import {ChangeDetectionStrategy} from '@angular/core';
 })
 export class GameCategorySelectorComponent {
   @Output() selectionChanged = new EventEmitter<any>();
-  ageClass = 'erwachsene';
-  playType = 'einzel';
+  
+  ageClass = '';
+  playType = 'single';
+
+  ageOptions: any[] = [];
+
+  playOptions = [
+    { value: 'single', label: 'Einzel' },
+    { value: 'doubles', label: 'Doppel/Mixed' }
+  ];
+
+  constructor(private http: HttpClient) {}
+
+  async ngOnInit() {
+    const allDivisions: any[] = [];
+    let page = 1;
+    let keepGoing = true;
+
+    while (keepGoing) {
+      try {
+        const response: any = await firstValueFrom(
+          this.http.get(`/api/age_division?page=${page}`)
+        );
+
+        if (response.data && response.data.length > 0) {
+          allDivisions.push(...response.data);
+          page++;
+        } else {
+          keepGoing = false;
+        }
+      } catch (err) {
+        console.error("Fehler beim Laden der Altersklassen:", err);
+        keepGoing = false;
+      }
+    }
+
+    this.ageOptions = allDivisions.map(d => ({
+      value: d.age_division_id,
+      label: d.description
+    }));
+
+    if (this.ageOptions.length > 0) {
+      this.ageClass = this.ageOptions[0].value;
+      this.emitSelection();
+    }
+  }
 
   onAgeClassChange(value: string) {
     this.ageClass = value;
@@ -41,6 +87,11 @@ export class GameCategorySelectorComponent {
   }
 
   private emitSelection() {
+    this.selectionChanged.emit({ ageClass: this.ageClass, playType: this.playType });
+  }
+
+  onSelectionChange(type: 'ageClass' | 'playType', value: string) {
+    this[type] = value;
     this.selectionChanged.emit({ ageClass: this.ageClass, playType: this.playType });
   }
 }
