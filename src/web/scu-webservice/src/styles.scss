@@ -39,7 +39,14 @@ app-header{
     width: 100%;
 }
 
+.side{
+    display: flex;
+    flex-direction: column;  
+    height: 100vh;           
+}
+
 .content {
+    height: 95%;
     flex: 1;                 /* nimmt den restlichen Platz (95%) */
     overflow-x: auto;          /* falls Inhalt größer ist → Scrollbar */
     background-color: var(--background-primary);
