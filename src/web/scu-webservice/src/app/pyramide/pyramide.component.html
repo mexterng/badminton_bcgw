@@ -2,7 +2,10 @@
     <app-header [heading]="title"/>
     <div class="content">
         <p>pyramide works!</p>
-        <app-game-category-selector></app-game-category-selector>
+        <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
+
+        <app-pyramide-canvas [data]="data"></app-pyramide-canvas>
+
     </div>
     <app-footer/>
 </div>
