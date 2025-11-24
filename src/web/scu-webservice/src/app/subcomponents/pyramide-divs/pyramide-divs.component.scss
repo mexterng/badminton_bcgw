@@ -46,3 +46,8 @@
   0% { transform: rotate(0deg);}
   100% { transform: rotate(360deg);}
 }
+
+.non-clickable {
+  pointer-events: none;
+  opacity: 0.6;
+}
