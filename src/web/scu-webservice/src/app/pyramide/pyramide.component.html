@@ -3,7 +3,7 @@
     <div class="content">
         <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
         <!--COMPONENT CAN BE DELETED IF NOT USED<app-pyramide-canvas [data]="data"></app-pyramide-canvas>-->
-        <app-pyramide-divs [data]="data"></app-pyramide-divs>
+        <app-pyramide-divs [data]="data" [loading]="loading"></app-pyramide-divs>
     </div>
     <app-footer/>
 </div>

@@ -17,6 +17,7 @@ import { FooterComponent } from '../subcomponents/footer/footer.component';
 export class PyramideComponent {
   title = 'Pyramide';
   data: any[] = [];
+  loading = false;
 
   constructor(private http: HttpClient) {}
 
@@ -30,14 +31,18 @@ export class PyramideComponent {
         ? `/api/pyramides/single/${event.ageClass}`
         : `/api/pyramides/doubles/${event.ageClass}`;
 
+    this.loading = true;
+
     // fetch data from API
     this.http.get<any[]>(endpoint).subscribe({
       next: data => {
         this.data = data; // update results
+        this.loading = false;
       },
       error: err => {
         console.error('Error fetching pyramid data:', err);
         this.data = []; // reset results on error
+        this.loading = false;
       }
     });
   }

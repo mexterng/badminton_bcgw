@@ -17,6 +17,7 @@ interface Member {
 })
 export class PyramideDivsComponent implements OnChanges {
   @Input() data: Member[] = [];
+  @Input() loading = false;
   levelsArr: Member[][] = [];
 
   offsetX = 0;
