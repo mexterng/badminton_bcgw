@@ -1,0 +1,20 @@
+<div class="pyramid-container"
+    (mousedown)="onDragStart($event)"
+    (mousemove)="onDragMove($event)"
+    (mouseup)="onDragEnd($event)"
+    (mouseleave)="onDragEnd($event)">
+<div *ngFor="let level of levelsArr; let i = index"
+        class="level"
+        [style.top.px]="getLevelY(i)"
+        [style.left.px]="getLevelX(i)">
+    <button *ngFor="let m of level"
+            class="member"
+            [style.width.px]="rectWidth * zoom"
+            [style.height.px]="rectHeight * zoom"
+            [style.fontSize.px]="12 * zoom"
+            [style.backgroundColor]="getColor(m.gender)"
+            (click)="onMemberClick(m)">
+    {{m.display_name}}
+    </button>
+</div>
+</div>
