@@ -14,7 +14,7 @@
             [style.fontSize.px]="12 * zoom"
             [style.backgroundColor]="getColor(m.gender)"
             (click)="onMemberClick(m)">
-    {{m.display_name}}
+    <ng-container *ngIf="m.rank">{{m.rank}}. </ng-container>{{m.display_name}}
     </button>
 </div>
 </div>

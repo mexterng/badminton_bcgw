@@ -5,6 +5,7 @@ interface Member {
   member_id: number;
   display_name: string;
   gender?: 'm' | 'w';
+  rank?: number;
 }
 
 @Component({
@@ -58,8 +59,9 @@ export class PyramideDivsComponent implements OnChanges {
     const levels: Member[][] = [];
     let start = 0;
     let size = 1;
+    let rankCounter = 1;
     while (start < this.data.length) {
-      const level = this.data.slice(start, start + size).map(i => ({...i}));
+      const level = this.data.slice(start, start + size).map(i => ({...i, rank: rankCounter ++}));
       levels.push(level);
       start += size;
       size++;
@@ -67,7 +69,7 @@ export class PyramideDivsComponent implements OnChanges {
     // letzte Ebene ggf. auffüllen
     const last = levels[levels.length - 1];
     if (last && last.length < levels.length) {
-      while (last.length < levels.length) last.push({ member_id: 0, display_name: '', gender: undefined });
+      while (last.length < levels.length) last.push({ member_id: 0, display_name: '', gender: undefined , rank: undefined});
     }
     return levels;
   }
