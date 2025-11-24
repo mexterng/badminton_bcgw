@@ -4,8 +4,8 @@
         <p>pyramide works!</p>
         <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
 
-        <app-pyramide-canvas [data]="data"></app-pyramide-canvas>
-
+        <!--COMPONENT CAN BE DELETED IF NOT USED<app-pyramide-canvas [data]="data"></app-pyramide-canvas>-->
+        <app-pyramide-divs [data]="data"></app-pyramide-divs>
     </div>
     <app-footer/>
 </div>

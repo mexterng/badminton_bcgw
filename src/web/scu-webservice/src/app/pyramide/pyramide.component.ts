@@ -4,12 +4,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 import { GameCategorySelectorComponent } from '../subcomponents/game-category-selector/game-category-selector.component';
 import { PyramideCanvasComponent } from '../subcomponents/pyramide-canvas/pyramide-canvas.component';
+import { PyramideDivsComponent } from '../subcomponents/pyramide-divs/pyramide-divs.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 
 @Component({
   selector: 'app-pyramide',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, PyramideCanvasComponent],
+  imports: [CommonModule, HttpClientModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, PyramideCanvasComponent, PyramideDivsComponent],
   templateUrl: './pyramide.component.html',
   styleUrls: ['./pyramide.component.scss']
 })
