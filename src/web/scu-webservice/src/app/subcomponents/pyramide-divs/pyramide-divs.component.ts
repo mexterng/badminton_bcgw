@@ -30,7 +30,7 @@ export class PyramideDivsComponent implements OnChanges {
 
   rectWidth = 80;  // Basisbreite ohne Zoom
   rectHeight = 30; // Höhe fix für einzeiligen Text
-  spacing = 10;
+  spacing = 5;
   baseFontSize = 12;
 
   private measureTextWidth(text: string): number {

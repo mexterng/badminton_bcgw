@@ -14,7 +14,8 @@
 <div *ngFor="let level of levelsArr; let i = index"
         class="level"
         [style.top.px]="getLevelY(i)"
-        [style.left.px]="getLevelX(i)">
+        [style.left.px]="getLevelX(i)"
+        [style.gap.px]="spacing * zoom">
     <button *ngFor="let m of level"
             class="member"
             [style.width.px]="rectWidth * zoom"
