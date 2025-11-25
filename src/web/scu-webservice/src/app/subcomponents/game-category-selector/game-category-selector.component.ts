@@ -72,9 +72,6 @@ export class GameCategorySelectorComponent {
     const isSameAgeClass = type === 'ageClass' ? this.ageClass === value : true;
     const isSamePlayType = type === 'playType' ? this.playType === value : true;
     const isSame = isSameAgeClass && isSamePlayType;
-    console.log("isSameAgeClass: " + isSameAgeClass);
-    console.log("isSamePlayType: " + isSamePlayType);
-    console.log("isSame: " + isSame);
     this[type] = value;
     this.selectionChanged.emit({ ageClass: this.ageClass, playType: this.playType, same: isSame, sameAgeClass: isSameAgeClass, isSamePlayType: isSamePlayType });
   }
