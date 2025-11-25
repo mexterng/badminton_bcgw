@@ -5,10 +5,15 @@ const age_division = require('../services/age_division');
 
 /* GET age_division. */
 // GET http://localhost:3000/age_division?page=xy
+// GET http://localhost:3000/age_division?all=true
 router.get('/', async function(req, res, next) {
   try {
-    const page = parseInt(req.query.page, 10) || 1;
-    res.json(await age_division.getMultiple(page));
+    if (req.query.all === 'true') {
+      res.json(await age_division.getMultiple(1, true));
+    } else {
+      const page = parseInt(req.query.page, 10) || 1;
+      res.json(await age_division.getMultiple(page));
+    }
   } catch (err) {
     console.error(`Error while getting age division `, err.message);
     next(err);
