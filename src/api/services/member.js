@@ -2,14 +2,20 @@ const db = require("./db");
 const helper = require("../helper");
 const config = require("../config");
 
-async function getMultiple(page = 1) {
-  const offset = Number(helper.getOffset(page, config.listPerPage));
-  const limit = Number(config.listPerPage);
-  const rows = await db.query(
-    `SELECT * FROM member LIMIT ${offset},${limit}`
-  );
+async function getMultiple(page = 1, getAll = false) {
+  let rows;
+  if (getAll) {
+      rows = await db.query(
+        'SELECT * FROM member'
+      );
+  } else {
+    const offset = Number(helper.getOffset(page, config.listPerPage));
+    rows = await db.query(
+      `SELECT * FROM member LIMIT ${offset},${config.listPerPage}`
+    );
+  }
   const data = helper.emptyOrRows(rows);
-  const meta = { page };
+  const meta = {page, getAll};
 
   return {
     data,
