@@ -1,0 +1,67 @@
+:host {
+  display: block; /* Host selbst block */
+}
+
+.member-selector-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.selector-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex: 0 0 max-content;  /* Label nimmt nur so viel wie nötig */
+  width: max-content;      /* wichtig: gleiche Breite über Flexbox wird im Parent durch align-items automatisch ausgerichtet */
+  margin-right: 1rem;
+}
+
+.dropdown {
+  flex: 1;                 /* Dropdown nimmt Restbreite */
+  position: relative;
+
+  .dropdown-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .dropdown-arrow {
+    font-size: 0.7rem;
+    position: absolute;
+    right: 1rem;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    z-index: 1;
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: 1px solid #ccc;
+
+      &:hover {
+        background-color: #cbcbcb;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
