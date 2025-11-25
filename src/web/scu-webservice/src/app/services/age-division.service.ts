@@ -20,20 +20,13 @@ export class AgeDivisionService {
     }
 
     const allDivisions: any[] = [];
-    let page = 1;
-    let keepGoing = true;
 
-    while (keepGoing) {
-      const response: any = await firstValueFrom(
-        this.http.get(`/api/age_division?page=${page}`)
-      );
+    const response: any = await firstValueFrom(
+      this.http.get('/api/age_division?all=true')
+    );
 
-      if (response.data?.length > 0) {
-        allDivisions.push(...response.data);
-        page++;
-      } else {
-        keepGoing = false;
-      }
+    if (response.data?.length > 0) {
+      allDivisions.push(...response.data);
     }
 
     this.cache = allDivisions;
