@@ -1,7 +1,8 @@
 <div class="createMatch-side">
     <app-header [heading]="title"/>
     <div class="content">
-        <p>match works!</p>
+        <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
+        <div style="height:2px; background-color:var(--theme-control-grey-negative); margin: 1rem 0;"></div>
     </div>
     <app-footer/>
 </div>
