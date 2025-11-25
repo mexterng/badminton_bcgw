@@ -16,18 +16,18 @@ export interface Member {
 export class MemberSelectorComponent {
   @Input() data: Member[] = [];
   @Input() label: string = '';
+  @Input() selectedMember?: Member;
   @Output() selectionChanged = new EventEmitter<Member>();
 
   membersWithEmpty: Member[] = [];
-  selectedMember?: Member;
   dropdownOpen = false;
-
+  
   constructor(private elRef: ElementRef) {}
-
+  
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
-
+  
   ngOnChanges() {
     this.membersWithEmpty = this.getMembersWithEmpty();
   }
