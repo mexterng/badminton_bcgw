@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../subcomponents/header/header.component';
@@ -19,11 +19,18 @@ export class PyramideComponent {
   data: any[] = [];
   loading = false;
 
+  @ViewChild(PyramideDivsComponent) pyramideDivs!: PyramideDivsComponent;
+
   constructor(private http: HttpClient) {}
 
   // handle selection from child component
-  onSelectionChanged(event: { ageClass: string | null; playType: string | null }) {
+  onSelectionChanged(event: { ageClass: string | null; playType: string | null; same: boolean }) {
     if (!event.ageClass || !event.playType) return;
+
+    if (event.same) {
+      this.pyramideDivs.adjustZoomAndOffsets(true);
+      return;
+    }
 
     // choose API endpoint based on play type
     const endpoint =

@@ -8,15 +8,16 @@
       <mat-card class="selection-card">
         <mat-card-subtitle>Altersklasse</mat-card-subtitle>
         <mat-button-toggle-group
-          [(ngModel)]="ageClass"
           [hideSingleSelectionIndicator]="true"
           name="ageClass"
           appearance="standard"
-          (change)="onAgeClassChange($event.value)"
           vertical
           aria-label="Altersklasse">
           
-          <mat-button-toggle *ngFor="let option of ageOptions" [value]="option.value">
+          <mat-button-toggle *ngFor="let option of ageOptions"
+                            [value]="option.value"
+                            [checked]="ageClass === option.value"
+                            (click)="onToggleClick('ageClass', option.value)">
             {{ option.label }}
           </mat-button-toggle>
         </mat-button-toggle-group>
@@ -26,15 +27,16 @@
       <mat-card class="selection-card">
         <mat-card-subtitle>Spielart</mat-card-subtitle>
         <mat-button-toggle-group
-          [(ngModel)]="playType"
           [hideSingleSelectionIndicator]="true"
           name="playType"
           appearance="standard"
-          (change)="onPlayTypeChange($event.value)"
           vertical
           aria-label="Spielart">
           
-          <mat-button-toggle *ngFor="let option of playOptions" [value]="option.value">
+          <mat-button-toggle *ngFor="let option of playOptions"
+                            [value]="option.value"
+                            [checked]="playType === option.value"
+                            (click)="onToggleClick('playType', option.value)">
             {{ option.label }}
           </mat-button-toggle>
         </mat-button-toggle-group>

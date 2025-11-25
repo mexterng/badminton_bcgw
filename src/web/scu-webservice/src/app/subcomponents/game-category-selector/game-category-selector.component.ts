@@ -90,8 +90,9 @@ export class GameCategorySelectorComponent {
     this.selectionChanged.emit({ ageClass: this.ageClass, playType: this.playType });
   }
 
-  onSelectionChange(type: 'ageClass' | 'playType', value: string) {
+  onToggleClick(type: 'ageClass' | 'playType', value: string) {
+    const isSame = this[type] === value;
     this[type] = value;
-    this.selectionChanged.emit({ ageClass: this.ageClass, playType: this.playType });
+    this.selectionChanged.emit({ ageClass: this.ageClass, playType: this.playType, same: isSame });
   }
 }
