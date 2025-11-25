@@ -7,8 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {ChangeDetectionStrategy} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { AgeDivisionService } from '../../services/age-division.service';
 
 @Component({
   selector: 'app-game-category-selector',
@@ -40,30 +39,9 @@ export class GameCategorySelectorComponent {
     { value: 'doubles', label: 'Doppel/Mixed' }
   ];
 
-  constructor(private http: HttpClient) {}
-
+  constructor(private ageService: AgeDivisionService) {}
   async ngOnInit() {
-    const allDivisions: any[] = [];
-    let page = 1;
-    let keepGoing = true;
-
-    while (keepGoing) {
-      try {
-        const response: any = await firstValueFrom(
-          this.http.get(`/api/age_division?page=${page}`)
-        );
-
-        if (response.data && response.data.length > 0) {
-          allDivisions.push(...response.data);
-          page++;
-        } else {
-          keepGoing = false;
-        }
-      } catch (err) {
-        console.error("Fehler beim Laden der Altersklassen:", err);
-        keepGoing = false;
-      }
-    }
+    const allDivisions = await this.ageService.getAgeDivisions();
 
     this.ageOptions = allDivisions.map(d => ({
       value: d.age_division_id,
