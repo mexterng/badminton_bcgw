@@ -5,12 +5,32 @@ const member = require('../services/member');
 
 /* GET members. */
 // GET http://localhost:3000/member?page=xy
+// GET http://localhost:3000/member?all=true
 router.get('/', async function(req, res, next) {
   try {
-    const page = parseInt(req.query.page, 10) || 1;
-    res.json(await member.getMultiple(page));
+    if (req.query.all === 'true') {
+      res.json(await member.getMultiple(1, true));
+    } else {
+      const page = parseInt(req.query.page, 10) || 1;
+      res.json(await member.getMultiple(page));
+    }
   } catch (err) {
-    console.error(`Error while getting members `, err.message);
+    console.error(`Error while getting members`, err.message);
+    next(err);
+  }
+});
+
+/* GET members by ageDivision */
+router.get('/age_division/:ageDivision', async function(req, res, next) {
+  try {
+    if (req.query.all === 'true') {
+      res.json(await member.getMultipleByAgeDivision(req.params.ageDivision, 1, true));
+    } else {
+      const page = parseInt(req.query.page, 10) || 1;
+      res.json(await member.getMultipleByAgeDivision(req.params.ageDivision, page));
+    }
+  } catch (err) {
+    console.error(`Error while getting members of ageDivision ${req.params.ageDivision}`, err.message);
     next(err);
   }
 });

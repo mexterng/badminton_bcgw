@@ -2,14 +2,41 @@ const db = require("./db");
 const helper = require("../helper");
 const config = require("../config");
 
-async function getMultiple(page = 1) {
-  const offset = Number(helper.getOffset(page, config.listPerPage));
-  const limit = Number(config.listPerPage);
-  const rows = await db.query(
-    `SELECT * FROM member LIMIT ${offset},${limit}`
-  );
+async function getMultiple(page = 1, getAll = false) {
+  let rows;
+  if (getAll) {
+      rows = await db.query(
+        'SELECT * FROM member'
+      );
+  } else {
+    const offset = Number(helper.getOffset(page, config.listPerPage));
+    rows = await db.query(
+      `SELECT * FROM member LIMIT ${offset},${config.listPerPage}`
+    );
+  }
   const data = helper.emptyOrRows(rows);
-  const meta = { page };
+  const meta = {page, getAll};
+
+  return {
+    data,
+    meta,
+  };
+}
+
+async function getMultipleByAgeDivision(age_division, page = 1, getAll = false) {
+  let rows;
+  const ageDivisionValue = age_division;
+  if (getAll) {
+      const sqlQuery = "SELECT * FROM member WHERE JSON_CONTAINS(age_division_id, CAST(? AS JSON), '$')";
+      rows = await db.query(sqlQuery, [ageDivisionValue]);
+  } else {
+    const offset = Number(helper.getOffset(page, config.listPerPage));
+    const sqlQuery = `SELECT * FROM member WHERE JSON_CONTAINS(age_division_id, CAST(? AS JSON), '$') LIMIT ${offset}, ${config.listPerPage}`;
+    rows = await db.query(sqlQuery, [ageDivisionValue]);
+  }
+
+  const data = helper.emptyOrRows(rows);
+  const meta = {page, getAll};
 
   return {
     data,
@@ -97,6 +124,7 @@ async function getSingle(id) {
 
 module.exports = {
   getMultiple,
+  getMultipleByAgeDivision,
   getSingle,
   create,
   update,

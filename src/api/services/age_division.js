@@ -2,13 +2,20 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 
-async function getMultiple(page = 1){
-  const offset = helper.getOffset(page, config.listPerPage);
-  const rows = await db.query(
-    `SELECT * FROM age_division LIMIT ${offset},${config.listPerPage}`
-  );
+async function getMultiple(page = 1, getAll = false){
+  let rows;
+  if (getAll) {
+    rows = await db.query(
+      'SELECT * FROM age_division'
+    );
+  } else {
+    const offset = helper.getOffset(page, config.listPerPage);
+    rows = await db.query(
+      `SELECT * FROM age_division LIMIT ${offset},${config.listPerPage}`
+    );
+  }
   const data = helper.emptyOrRows(rows);
-  const meta = {page};
+  const meta = {page, getAll};
 
   return {
     data,
