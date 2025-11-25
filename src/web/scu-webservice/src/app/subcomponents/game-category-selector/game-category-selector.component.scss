@@ -1,9 +1,11 @@
 .game-category-card {
   max-width: 100%;
 }
+mat-card-subtitle {
+  margin: 0.5rem 0 !important;
+}
 
 .selection-card {
-  margin-bottom: 1rem;
   width: fit-content;
 }
 

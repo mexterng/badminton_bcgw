@@ -2,6 +2,7 @@
     <app-header [heading]="title"/>
     <div class="content">
         <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
+        <div style="height:2px; background-color:var(--theme-control-grey-negative); margin: 1rem 0;"></div>
         <!--COMPONENT CAN BE DELETED IF NOT USED<app-pyramide-canvas [data]="data"></app-pyramide-canvas>-->
         <app-pyramide-divs [data]="data" [loading]="loading"></app-pyramide-divs>
     </div>
