@@ -26,10 +26,12 @@ export class CreateMatchComponent {
     console.log('Ausgewähltes Mitglied:', member);
   }
 
-  onSelectionChanged(event: { ageClass: string | null; playType: string | null; same: boolean }) {
+  onSelectionChanged(event: { ageClass: string | null; playType: string | null; same: boolean; sameAgeClass: boolean ; samePlayType: boolean }) {
     if (!event.ageClass || !event.playType) return;
 
     if (event.same) return;
+
+    if(event.sameAgeClass) return;
 
     // choose API endpoint based on play type
     const endpoint = `/api/member/age_division/${event.ageClass}?all=true`;
