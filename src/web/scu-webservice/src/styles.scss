@@ -161,3 +161,9 @@ app-footer {
 .mat-button-toggle-checked .mat-button-toggle-checkmark {
   display: none !important;
 }
+
+.horizontal-seperator {
+  height:2px; 
+  background-color:var(--theme-control-grey-negative); 
+  margin: 1rem 0;
+}
