@@ -23,6 +23,27 @@ async function getMultiple(page = 1, getAll = false) {
   };
 }
 
+async function getMultipleByAgeDivision(age_division, page = 1, getAll = false) {
+  let rows;
+  const ageDivisionValue = age_division;
+  if (getAll) {
+      const sqlQuery = "SELECT * FROM member WHERE JSON_CONTAINS(age_division_id, CAST(? AS JSON), '$')";
+      rows = await db.query(sqlQuery, [ageDivisionValue]);
+  } else {
+    const offset = Number(helper.getOffset(page, config.listPerPage));
+    const sqlQuery = `SELECT * FROM member WHERE JSON_CONTAINS(age_division_id, CAST(? AS JSON), '$') LIMIT ${offset}, ${config.listPerPage}`;
+    rows = await db.query(sqlQuery, [ageDivisionValue]);
+  }
+
+  const data = helper.emptyOrRows(rows);
+  const meta = {page, getAll};
+
+  return {
+    data,
+    meta,
+  };
+}
+
 async function create(member) {
 
   let allowedColumns = [
@@ -103,6 +124,7 @@ async function getSingle(id) {
 
 module.exports = {
   getMultiple,
+  getMultipleByAgeDivision,
   getSingle,
   create,
   update,
