@@ -1,0 +1,23 @@
+.pyramide-side {
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - 17svh);
+  margin: 1svw 10vw 17svh 10vw;
+  background-color: var(--background-primary);
+}
+
+.content > *:not(:last-child) {
+  flex: 0 0 auto;
+}
+
+.content > *:last-child {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}

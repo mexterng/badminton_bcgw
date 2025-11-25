@@ -1,0 +1,46 @@
+<!-- Main wrapper card for the selector component -->
+<mat-card class="game-category-card">
+  <mat-card-content class="game-category-form-container">
+    <form class="game-category-form">
+
+      <!-- Age class selection -->
+      <mat-card class="selection-card">
+        <mat-card-subtitle>Altersklasse</mat-card-subtitle>
+        <mat-button-toggle-group
+          [hideSingleSelectionIndicator]="true"
+          name="ageClass"
+          appearance="standard"
+          vertical
+          aria-label="Altersklasse">
+          
+          <mat-button-toggle *ngFor="let option of ageOptions"
+                            [value]="option.value"
+                            [checked]="ageClass === option.value"
+                            (click)="onToggleClick('ageClass', option.value)">
+            {{ option.label }}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card>
+
+      <!-- Play type selection -->
+      <mat-card class="selection-card">
+        <mat-card-subtitle>Spielart</mat-card-subtitle>
+        <mat-button-toggle-group
+          [hideSingleSelectionIndicator]="true"
+          name="playType"
+          appearance="standard"
+          vertical
+          aria-label="Spielart">
+          
+          <mat-button-toggle *ngFor="let option of playOptions"
+                            [value]="option.value"
+                            [checked]="playType === option.value"
+                            (click)="onToggleClick('playType', option.value)">
+            {{ option.label }}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card>
+
+    </form>
+  </mat-card-content>
+</mat-card>

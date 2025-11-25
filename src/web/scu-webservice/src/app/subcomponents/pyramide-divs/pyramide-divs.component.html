@@ -1,0 +1,30 @@
+<div class="pyramid-container"
+    (mousedown)="onDragStart($event)"
+    (mousemove)="onDragMove($event)"
+    (mouseup)="onDragEnd($event)"
+    (mouseleave)="onDragEnd($event)">
+    <div *ngIf="loading" class="loading-overlay">
+    <span class="spinner"></span>
+</div>
+<div class="pyramid-container"
+    (mousedown)="onDragStart($event)"
+    (mousemove)="onDragMove($event)"
+    (mouseup)="onDragEnd($event)"
+    (mouseleave)="onDragEnd($event)">
+<div *ngFor="let level of levelsArr; let i = index"
+        class="level"
+        [style.top.px]="getLevelY(i)"
+        [style.left.px]="getLevelX(i)"
+        [style.gap.px]="spacing * zoom">
+    <button *ngFor="let m of level"
+            class="member"
+            [style.width.px]="rectWidth * zoom"
+            [style.height.px]="rectHeight * zoom"
+            [style.fontSize.px]="12 * zoom"
+            [style.backgroundColor]="getColor(m.gender)"
+            [class.non-clickable]="m.display_name === ''"
+            (click)="onMemberClick(m)">
+    <ng-container *ngIf="m.rank">{{m.rank}}. </ng-container>{{m.display_name}}
+    </button>
+</div>
+</div>

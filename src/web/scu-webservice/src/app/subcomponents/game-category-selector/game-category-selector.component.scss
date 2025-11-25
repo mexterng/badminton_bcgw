@@ -1,0 +1,25 @@
+.game-category-card {
+  max-width: 100%;
+}
+mat-card-subtitle {
+  margin: 0.5rem 0 !important;
+}
+
+.selection-card {
+  width: fit-content;
+}
+
+.radio-option {
+  display: block;
+  margin: 0.25rem 0;
+}
+
+.game-category-form-container {
+  width: 100%;
+}
+
+.game-category-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
