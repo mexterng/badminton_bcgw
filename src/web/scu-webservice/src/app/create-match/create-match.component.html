@@ -4,8 +4,8 @@
         <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
         <div class="horizontal-seperator"></div>
         <div class="selector-group">
-            <app-member-selector id="player1-selector" [label]="'Spieler/in 1'" [data]="members" (selectionChanged)="onMemberSelected($event)"></app-member-selector>
-            <app-member-selector id="player2-selector" [label]="'Spieler/in 2'" [data]="members" (selectionChanged)="onMemberSelected($event)"></app-member-selector>
+            <app-member-selector id="player1-selector" [label]="'Spieler/in 1'" [data]="filteredMembers" (selectionChanged)="onMemberSelected($event, 'player1-selector')"></app-member-selector>
+            <app-member-selector id="player2-selector" [label]="'Spieler/in 2'" [data]="filteredMembers" (selectionChanged)="onMemberSelected($event, 'player2-selector')"></app-member-selector>
         </div>
     </div>
     <app-footer/>

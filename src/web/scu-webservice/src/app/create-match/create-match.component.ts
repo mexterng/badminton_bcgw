@@ -16,14 +16,22 @@ import { FooterComponent } from '../subcomponents/footer/footer.component';
 export class CreateMatchComponent {
   title="Neues Spiel";
   loading = false;
-  members: Member[] = [];
+  allMembers: Member[] = [];
+  filteredMembers: Member[] = [];
+  selectedMembers: { [key: string]: Member } = {};
 
   @ViewChild(MemberSelectorComponent) memberSelector!: MemberSelectorComponent;
   
   constructor(private http: HttpClient) {}
 
-  onMemberSelected(member: Member) {
-    console.log('Ausgewähltes Mitglied:', member);
+  onMemberSelected(member: Member, id: string) {
+    this.selectedMembers[id] = member;
+    this.filteredMembers = this.allMembers.filter(m => {
+      const isSelected = Object.values(this.selectedMembers)
+        .some(sel => sel.member_id === m.member_id);
+      return !isSelected;
+    });
+    console.log('Ausgewähltes Mitglied für ID: ' + id, member);
   }
 
   onSelectionChanged(event: { ageClass: string | null; playType: string | null; same: boolean; sameAgeClass: boolean ; samePlayType: boolean }) {
@@ -41,13 +49,14 @@ export class CreateMatchComponent {
     // fetch data from API
     this.http.get<{data: any[]; meta: any}>(endpoint).subscribe({
       next: res => {
-        console.log(res.data);
-        this.members = res.data;
+        this.allMembers = res.data;
+        this.filteredMembers = this.allMembers;
         this.loading = false;
       },
       error: err => {
         console.error('Error fetching pyramid data:', err);
-        this.members = []; // reset results on error
+        this.allMembers = []; // reset results on error
+        this.filteredMembers = [];
         this.loading = false;
       }
     });
