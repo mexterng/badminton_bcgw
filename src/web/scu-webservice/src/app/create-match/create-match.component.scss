@@ -10,7 +10,19 @@ app-member-selector {
 }
 
 .selector-group {
-    gap: 0.5rem;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+
+    > * { // default
+        margin-bottom: 0.5rem;
+    }
+
+    > *:nth-child(2n) { // every second element
+        margin-bottom: 2rem;
+    }
+
+    > *:last-child { // last element
+        margin-bottom: 0;
+    }
 }
