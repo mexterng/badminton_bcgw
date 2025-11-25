@@ -39,6 +39,8 @@
     background-color: white;
     width: 100%;
     z-index: 1;
+    overflow: scroll;
+    max-height: 100px;
 
     .dropdown-item {
       display: flex;
