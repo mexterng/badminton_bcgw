@@ -4,12 +4,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 import { GameCategorySelectorComponent } from '../subcomponents/game-category-selector/game-category-selector.component';
 import { MemberSelectorComponent, Member } from '../subcomponents/member-selector/member-selector.component';
+import { SetInputComponent } from '../subcomponents/set-input/set-input.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 
 @Component({
   selector: 'app-create-match',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, MemberSelectorComponent],
+  imports: [CommonModule, HttpClientModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, MemberSelectorComponent, SetInputComponent],
   templateUrl: './create-match.component.html',
   styleUrl: './create-match.component.scss'
 })

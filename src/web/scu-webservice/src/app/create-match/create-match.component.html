@@ -3,14 +3,25 @@
     <div class="content">
         <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
         <div class="horizontal-seperator"></div>
-        <div class="selector-group">
-            <app-member-selector
-                *ngFor="let key of memberKeys; let i = index"
-                [label]="memberLabels[i]"
-                [data]="filteredMembers"
-                [selectedMember]="selectedMembers[key]"
-                (selectionChanged)="onMemberSelected($event, key)">
-            </app-member-selector>
+        <div class="scroll-wrapper">
+            <div class="selector-group">
+                <app-member-selector
+                    *ngFor="let key of memberKeys; let i = index"
+                    [label]="memberLabels[i]"
+                    [data]="filteredMembers"
+                    [selectedMember]="selectedMembers[key]"
+                    (selectionChanged)="onMemberSelected($event, key)">
+                </app-member-selector>
+            </div>
+            <div id="set-group">
+                <app-set-input id="set1" [label]="'Satz 1'"></app-set-input>
+                <app-set-input id="set2" [label]="'Satz 2'"></app-set-input>
+                <app-set-input id="set3" [label]="'Satz 3'"></app-set-input>
+            </div>
+            <div id="control-buttons">
+                <button id="submit">Speichern</button>
+                <button id="cancel">Abbrechen</button>
+            </div>
         </div>
     </div>
     <app-footer/>
