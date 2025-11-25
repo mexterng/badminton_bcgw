@@ -3,3 +3,14 @@
     flex-direction: column;  /* Stapelt Kinder vertikal */
     height: 100vh;           /* gesamte Browserhöhe */
 }
+
+app-member-selector {
+    display: block;
+    width: 100%;
+}
+
+.selector-group {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}

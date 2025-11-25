@@ -11,7 +11,7 @@
     <div *ngIf="dropdownOpen" class="dropdown-content">
       <div class="dropdown-item" *ngFor="let member of membersWithEmpty" (click)="onSelect(member)">
         <img src="/icon_player.svg" class="icon">
-        {{ member.displayName }}
+        {{ member.display_name }}
       </div>
     </div>
   </div>

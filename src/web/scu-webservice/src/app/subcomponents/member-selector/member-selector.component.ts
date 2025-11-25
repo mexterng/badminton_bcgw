@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, ElementRef, HostListener } from
 import { CommonModule } from '@angular/common';
 
 export interface Member {
-  id: number;
-  displayName: string;
+  member_id: number;
+  display_name: string;
 }
 
 @Component({
@@ -18,6 +18,7 @@ export class MemberSelectorComponent {
   @Input() label: string = '';
   @Output() selectionChanged = new EventEmitter<Member>();
 
+  membersWithEmpty: Member[] = [];
   selectedMember?: Member;
   dropdownOpen = false;
 
@@ -27,6 +28,10 @@ export class MemberSelectorComponent {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
+  ngOnChanges() {
+    this.membersWithEmpty = this.getMembersWithEmpty();
+  }
+  
   onSelect(member: Member) {
     this.selectedMember = member;
     this.selectionChanged.emit(member);
@@ -34,11 +39,11 @@ export class MemberSelectorComponent {
   }
 
   get buttonText(): string {
-    return this.selectedMember?.displayName || 'Mitglied wählen';
+    return this.selectedMember?.display_name || 'Spieler/in wählen';
   }
 
-  get membersWithEmpty(): Member[] {
-    return [{ id: -1, displayName: 'Mitglied wählen' }, ...this.data];
+  private getMembersWithEmpty(): Member[] {
+    return [{ member_id: -1, display_name: 'Spieler/in wählen' }, ...this.data];
   }
 
   @HostListener('document:click', ['$event'])
