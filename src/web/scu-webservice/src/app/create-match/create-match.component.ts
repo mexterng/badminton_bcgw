@@ -22,6 +22,7 @@ export class CreateMatchComponent {
   memberKeys: string[] = [];
   memberLabels: string[] = [];
   selectedMembers: { [key: string]: Member } = {};
+  setValues: Record<string, {value1: number, value2: number, winner_label: string}> = {};
 
   @ViewChild(MemberSelectorComponent) memberSelector!: MemberSelectorComponent;
   
@@ -78,5 +79,15 @@ export class CreateMatchComponent {
         }
       });
     }
+  }
+
+  onSetChanged(event: {value1: number, value2: number}, setId: string) {
+    let winner_label = '';
+    if (event.value1 > event.value2) {
+      winner_label = '1';
+    } else if (event.value2 > event.value1) {
+      winner_label = '2';
+    }
+    this.setValues[setId] = { ...event, winner_label };
   }
 }

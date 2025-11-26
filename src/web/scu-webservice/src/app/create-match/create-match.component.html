@@ -14,9 +14,9 @@
                 </app-member-selector>
             </div>
             <div id="set-group">
-                <app-set-input id="set1" [input_label]="'Satz 1'" [active]="true"></app-set-input>
-                <app-set-input id="set2" [input_label]="'Satz 2'" [active]="true"></app-set-input>
-                <app-set-input id="set3" [input_label]="'Satz 3'" [active]="false"></app-set-input>
+                <app-set-input id="set1" [input_label]="'Satz 1'" [active]="true" [winner_label]="setValues['set1']?.winner_label || ''" (selectionChanged)="onSetChanged($event, 'set1')"></app-set-input>
+                <app-set-input id="set2" [input_label]="'Satz 2'" [active]="true" [winner_label]="setValues['set2']?.winner_label || ''" (selectionChanged)="onSetChanged($event, 'set2')"></app-set-input>
+                <app-set-input id="set3" [input_label]="'Satz 3'" [active]="false" [winner_label]="setValues['set3']?.winner_label || ''" (selectionChanged)="onSetChanged($event, 'set3')"></app-set-input>
             </div>
         </div>
         <div id="control-buttons">
