@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./set-input.component.scss']
 })
 export class SetInputComponent {
-  @Input() label: string = '';
+  @Input() input_label: string = '';
+  @Input() winner_label: string = '';
   @Input() active: boolean = true;
 }

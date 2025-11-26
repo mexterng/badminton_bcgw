@@ -18,6 +18,12 @@
   margin-right: 1rem;
 }
 
-input {
-  
+.winner-label {
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+
+.inputs {
+    display: flex;
+  flex-wrap: nowrap;
 }
