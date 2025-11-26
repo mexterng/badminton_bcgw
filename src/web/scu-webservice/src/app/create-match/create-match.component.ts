@@ -18,6 +18,7 @@ import { getDoublesDisplayName } from '../utils/doubles-utils';
 export class CreateMatchComponent {
   title="Neues Spiel";
   loading = false;
+  set3Active = false;
   singlePlayType = true;
   dummyMember = { member_id: -1, display_name: 'Spieler/in wählen' };
   allMembers: Member[] = [this.dummyMember];
@@ -85,7 +86,6 @@ export class CreateMatchComponent {
     this.refreshWinnerLables();    
 
     console.log('Ausgewähltes Mitglied für ID: ' + id, member);
-    console.log(this.selectedMembers);
   }
 
   onSelectionChanged(event: { ageClass: string | null; playType: string | null; same: boolean; sameAgeClass: boolean ; samePlayType: boolean }) {
@@ -138,6 +138,13 @@ export class CreateMatchComponent {
   onSetChanged(event: {value1: number, value2: number}, setId: string) {
     const winner_label = this.computeWinnerLabel(event.value1, event.value2);
     this.setValues[setId] = { ...event, winner_label };
+
+    // check if third set must be deactivated/activated
+    if (Object.keys(this.setValues).length > 1) {
+      const winner1 = this.setValues['set1'].value1 > this.setValues['set1'].value2;
+      const winner2 = this.setValues['set2'].value1 > this.setValues['set2'].value2;
+      this.set3Active = winner1 !== winner2;
+    }
   }
 
   // helper
