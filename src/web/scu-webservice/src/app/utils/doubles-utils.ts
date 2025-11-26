@@ -5,9 +5,8 @@ interface Member {
 }
 export type DoublesPair = { member1: Member; member2: Member };
 
-export function orderDoublesPair(pair: DoublesPair): DoublesPair {
-  const member1= pair.member1;
-  const member2= pair.member2;
+export function orderDoublesPair(member1: Member, member2: Member): DoublesPair {
+  const pair = { member1, member2}
   const flippedPair = {member2, member1};
   if (!member1.gender || !member2.gender) pair; // demo Member without gender!
   if (member1.gender === member2.gender) {
@@ -19,7 +18,7 @@ export function orderDoublesPair(pair: DoublesPair): DoublesPair {
   }
 }
 
-export function getDoublesDisplayName(pair: DoublesPair): string {
-  const orderedPair = orderDoublesPair(pair); 
+export function getDoublesDisplayName(member1: Member, member2: Member): string {
+  const orderedPair = orderDoublesPair(member1, member2); 
   return orderedPair.member1.display_name + "/" + orderedPair.member2.display_name;
 }
