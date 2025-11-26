@@ -35,11 +35,12 @@ app-member-selector {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin: 2rem 0;
+    margin-top: 2rem;
 }
 
 #control-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 2rem;
 }
