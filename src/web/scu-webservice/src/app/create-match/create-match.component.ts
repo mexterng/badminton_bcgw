@@ -148,12 +148,23 @@ export class CreateMatchComponent {
   }
 
   // helper
+  private computeWinnerGame(setData : any): number {
+    const set1 = this.computeWinnerSet(setData["set1"].a, setData["set1"].b);
+    const set2 = this.computeWinnerSet(setData["set2"].a, setData["set2"].b);
+    const set3 = this.computeWinnerSet(setData["set3"].a, setData["set3"].b);
+
+    return set1 === set2 || set1 === set3 ? 1 : 2;
+  }
+
+  private computeWinnerSet(val1: number, val2: number): number {
+    // return 1 if val1 > val2, 2 if val2 > val1, else 0
+    return val1 === val2 ? 0 : (val1 > val2 ? 1 : 2);
+  }
+
   private computeWinnerLabel(value1: number, value2: number): string {
-    if (value1 > value2) {
-      return this.selectedDisplayNames['team1'];
-    }
-    if (value2 > value1) {
-      return this.selectedDisplayNames['team2'];
+    const winner = this.computeWinnerSet(value1, value2);
+    if (winner === 1 || winner === 2) {
+      return this.selectedDisplayNames[`team${winner}`];
     }
     return '';
   }
