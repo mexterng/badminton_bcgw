@@ -179,4 +179,37 @@ export class CreateMatchComponent {
       this.setValues[setId] = { ...s, winner_label };
     });
   }
+
+  private checkInputsForValidGame(): {status: boolean, errMessage: string}{
+    if (this.singlePlayType) {
+      // check selected player
+      if (this.selectedMembers['player1'].member_id < 0) {
+        return {status: false, errMessage: 'Gewählte/r Spieler/in 1 ist nicht gültig.'};
+      }
+      if (this.selectedMembers['player2'].member_id < 0) {
+        return {status: false, errMessage: 'Gewählte/r Spieler/in 2 ist nicht gültig.'};
+      }
+    } else {
+      // check selected teams
+      if (this.selectedMembers['player1a'].member_id < 0 || this.selectedMembers['player1b'].member_id < 0) {
+        return {status: false, errMessage: 'Das Team 1 ist unvollständig.'};
+      }
+      if (this.selectedMembers['player2a'].member_id < 0 || this.selectedMembers['player2b'].member_id < 0) {
+        return {status: false, errMessage: 'Das Team 2 ist unvollständig.'};
+      }
+    }
+
+    // check set winner
+    if ((this.setValues['set1']?.value1 || 0) === (this.setValues['set1']?.value2 || 0)) {
+      return {status: false, errMessage: 'Satz 1 hat keine/n Gewinner/in.'};
+    }
+    if ((this.setValues['set2']?.value1 || 0) === (this.setValues['set2']?.value2 || 0)) {
+      return {status: false, errMessage: 'Satz 2 hat keine/n Gewinner/in.'};
+    }
+    if (this.set3Active && ((this.setValues['set3']?.value1 || 0) === (this.setValues['set3']?.value2 || 0))) {
+      return {status: false, errMessage: 'Satz 3 hat keine/n Gewinner/in.'};
+    }
+
+    return {status: true, errMessage: ''};
+  }
 }
