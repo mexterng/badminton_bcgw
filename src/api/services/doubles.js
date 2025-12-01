@@ -47,10 +47,44 @@ async function create(double) {
   return { id, message };
 }
 
+async function getOrCreateByPlayers(playerA, playerB) {
+  // check if the combination exists (order independent)
+  const sqlSelect = `
+    SELECT * FROM doubles
+    WHERE (player_a = ? AND player_b = ?) OR (player_a = ? AND player_b = ?)
+    LIMIT 1
+  `;
+  const rows = await db.query(sqlSelect, [playerA, playerB, playerB, playerA]);
+  
+  if (rows.length > 0) {
+    return {
+      id: rows[0].doubles_id,
+      player_a: rows[0].player_a,
+      player_b: rows[0].player_b,
+      message: "Double exists"
+    };
+  }
+
+  // if not found, insert new double
+  const sqlInsert = `
+    INSERT INTO doubles (player_a, player_b)
+    VALUES (?, ?)
+  `;
+  const result = await db.query(sqlInsert, [playerA, playerB]);
+  
+  return { 
+    id: result.insertId,
+    player_a: playerA,
+    player_b: playerB,
+    message: "Double created successfully" 
+  };
+}
+
 module.exports = {
   getMultiple,
   getSingle,
   create,
+  getOrCreateByPlayers,
 };
 
 
