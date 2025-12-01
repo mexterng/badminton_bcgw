@@ -147,6 +147,10 @@ export class CreateMatchComponent {
     }
   }
 
+  onCancel(): void {
+    window.history.back();
+  }
+
   // helper
   private computeWinnerGame(setData : any): number {
     const set1 = this.computeWinnerSet(setData["set1"].a, setData["set1"].b);
