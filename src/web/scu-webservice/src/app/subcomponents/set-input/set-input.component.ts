@@ -15,10 +15,36 @@ export class SetInputComponent {
   @Input() active: boolean = true;
   @Output() selectionChanged = new EventEmitter<{value1: number, value2: number}>();
 
-  value1: number = 0;
-  value2: number = 0;
+  // store as string to catch invalid input
+  value1: string = '0';
+  value2: string = '0';
 
-  onInputChange() {
-    this.selectionChanged.emit({ value1: this.value1, value2: this.value2 });
+  onInput(event: Event, key: 'value1' | 'value2'): void {
+    const elem = event.target as HTMLInputElement;
+    let value = elem.value;
+
+    // read min/max from the input element
+    const min = elem.min !== '' ? Number(elem.min) : 0;
+    const max = elem.max !== '' ? Number(elem.max) : 999999
+
+    // remove all non-digits
+    value = value.replace(/\D+/g, '');
+
+    // enforce min/max
+    let num = Number(value);
+    if (num < min) num = min;
+    if (num > max) num = max;
+
+    // update input value
+    elem.value = String(num);
+
+    // update internal state
+    this[key] = String(num);
+
+    // emit updated values
+    this.selectionChanged.emit({
+      value1: Number(this.value1),
+      value2: Number(this.value2)
+    });
   }
 }
