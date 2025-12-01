@@ -1,7 +1,35 @@
 <div class="side">
     <app-header [heading]="title"/>
     <div class="content">
-        <p>member works!</p>
+        <div id="filter-options">
+            <!-- agegroups -->
+            <div id="filter-agegroup" class="filter-option">
+                <label class="selector-label">Altersklasse:</label>
+                <mat-select placeholder="Auswählen" [(value)]="selectedAgegroup" (selectionChange)="applyFilters()">
+                <mat-option [value]="null" disabled>Auswählen</mat-option>
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let agegroup of agegroups" [value]="agegroup.value">
+                    {{ agegroup.label }}
+                </mat-option>
+                </mat-select>
+            </div>
+            <!-- gender -->
+            <div id="filter-gender" class="filter-option">
+                <label class="selector-label">Geschlecht:</label>
+                <mat-select placeholder="Auswählen" [(value)]="selectedGender" (selectionChange)="applyFilters()">
+                <mat-option [value]="null" disabled>Auswählen</mat-option>
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                    {{ gender.label }}
+                </mat-option>
+                </mat-select>
+            </div>
+            <!-- name -->
+            <div id="filter-name" class="filter-option">
+                <label class="selector-label">Name:</label>
+                <input type="text" [(ngModel)]="selectedName" (ngModelChange)="applyFilters()" placeholder="Name eingeben"/>
+            </div>
+        </div>
         <div class="horizontal-seperator"></div>
         <app-member-list [data]="members" [selectedMember]="selectedMember" [loading]="loading" (selectionChanged)="onSelectionChanged($event)"></app-member-list>
     </div>

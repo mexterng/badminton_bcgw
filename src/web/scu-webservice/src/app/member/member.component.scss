@@ -4,6 +4,11 @@
     height: 100vh;           
 }
 
+.filter-option {
+  display: flex;
+  flex-direction: row;
+}
+
 .content {
   display: flex;
   flex-direction: column;
