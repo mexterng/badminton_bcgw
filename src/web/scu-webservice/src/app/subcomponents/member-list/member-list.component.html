@@ -1,4 +1,8 @@
 <div class="member-list">
+    <div *ngIf="loading" class="loading-overlay">
+    <span class="spinner"></span>
+</div>
+<div class="member-list">
     <div 
     class="member-item" 
     *ngFor="let member of data" 

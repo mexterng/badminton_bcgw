@@ -19,6 +19,7 @@ export interface Member {
 export class MemberListComponent {
   @Input() data: Member[] = [];
   @Input() selectedMember?: Member;
+  @Input() loading = false;
   @Output() selectionChanged = new EventEmitter<Member>();
 
   onSelect(member: Member) {
