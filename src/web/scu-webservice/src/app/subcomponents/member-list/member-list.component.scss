@@ -1,0 +1,22 @@
+.member-list {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 10px;
+}
+.member-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  border-radius: 10px;
+}
+.member-item:hover {
+  background-color: #f0f0f0;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
