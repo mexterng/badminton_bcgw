@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../subcomponents/header/header.component';
@@ -20,6 +20,7 @@ export class CreateMatchComponent {
   loading = false;
   set3Active = false;
   singlePlayType = true;
+  selectedAgeClass = '';
   dummyMember = { member_id: -1, display_name: 'Spieler/in wählen' };
   allMembers: Member[] = [this.dummyMember];
   filteredMembers: Member[] = [];
@@ -32,6 +33,7 @@ export class CreateMatchComponent {
   setValues: Record<string, {value1: number, value2: number, winner_label: string}> = {};
 
   @ViewChild(MemberSelectorComponent) memberSelector!: MemberSelectorComponent;
+  @ViewChildren(SetInputComponent) setInputs!: QueryList<SetInputComponent>;
   
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {
     this.initMembers();
@@ -111,6 +113,7 @@ export class CreateMatchComponent {
       return;
     } else {
       // choose API endpoint based on play type
+      this.selectedAgeClass = event.ageClass;
       const endpoint = `/api/member/age_division/${event.ageClass}?all=true`;
 
       this.loading = true;
@@ -144,6 +147,22 @@ export class CreateMatchComponent {
       const winner1 = this.setValues['set1'].value1 > this.setValues['set1'].value2;
       const winner2 = this.setValues['set2'].value1 > this.setValues['set2'].value2;
       this.set3Active = winner1 !== winner2;
+    }
+  }
+
+  onSubmit(): void {
+    const validRes = this.checkInputsForValidGame();
+
+    if (validRes.status) {
+      // all good -> add game
+      if (this.singlePlayType) {
+        this.createSingleGame();
+      } else {
+        this.createDoublesGame(); // TODO
+      }
+    } else {
+      // show errors
+      alert(validRes.errMessage);
     }
   }
 
@@ -215,5 +234,52 @@ export class CreateMatchComponent {
     }
 
     return {status: true, errMessage: ''};
+  }
+
+  private createSingleGame() {
+    // prepare game payload
+    const setKeys = ['set1', 'set2', 'set3'];
+    const fullSetData = Object.fromEntries(
+      setKeys.map(k => [
+        k,
+        {
+          a: this.setValues[k]?.value1 || 0,
+          b: this.setValues[k]?.value2 || 0
+        }
+      ])
+    );
+    const gameWinner = this.computeWinnerGame(fullSetData);
+    const winnerMember = this.selectedMembers[`player${gameWinner}`];
+    const gamePayload: any = {
+      player_a: this.selectedMembers[`player1`].member_id,
+      player_b: this.selectedMembers[`player2`].member_id,
+      age_division: this.selectedAgeClass,
+      winner_id: winnerMember.member_id,
+      set_one: `${fullSetData['set1'].a}-${fullSetData['set1'].b}`,
+      set_two: `${fullSetData['set2'].a}-${fullSetData['set2'].b}`,
+      set_three: this.set3Active 
+        ? `${fullSetData['set3'].a}-${fullSetData['set3'].b}` 
+        : null,
+    };
+
+    // POST request to backend
+    this.loading = true;
+    this.http.post('/api/single_games', gamePayload).subscribe({
+      next: (res) => {
+        this.loading = false;
+        alert('Spiel erfolgreich gespeichert');
+        // optional: redirect to overview
+        window.location.href = '/games/create-match';
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Fehler beim Erstellen des Spiels:', err);
+        alert('Fehler beim Speichern des Spiels');
+      }
+    });
+  }
+
+  private createDoublesGame() {
+    alert("TODO: not yet implemented.");
   }
 }
