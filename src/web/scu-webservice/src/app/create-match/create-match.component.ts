@@ -7,6 +7,9 @@ import { MemberSelectorComponent, Member } from '../subcomponents/member-selecto
 import { SetInputComponent } from '../subcomponents/set-input/set-input.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 import { getDoublesDisplayName } from '../utils/doubles-utils';
+import { firstValueFrom } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-match',
@@ -158,7 +161,7 @@ export class CreateMatchComponent {
       if (this.singlePlayType) {
         this.createSingleGame();
       } else {
-        this.createDoublesGame(); // TODO
+        this.createDoublesGame();
       }
     } else {
       // show errors
@@ -236,8 +239,7 @@ export class CreateMatchComponent {
     return {status: true, errMessage: ''};
   }
 
-  private createSingleGame() {
-    // prepare game payload
+  private getFullSetData() {
     const setKeys = ['set1', 'set2', 'set3'];
     const fullSetData = Object.fromEntries(
       setKeys.map(k => [
@@ -248,6 +250,12 @@ export class CreateMatchComponent {
         }
       ])
     );
+    return fullSetData;
+  }
+
+  private createSingleGame() {
+    // prepare game payload
+    const fullSetData = this.getFullSetData();
     const gameWinner = this.computeWinnerGame(fullSetData);
     const winnerMember = this.selectedMembers[`player${gameWinner}`];
     const gamePayload: any = {
@@ -269,7 +277,7 @@ export class CreateMatchComponent {
         this.loading = false;
         alert('Spiel erfolgreich gespeichert');
         // optional: redirect to overview
-        window.location.href = '/games/create-match';
+        window.location.href = '/create-match';
       },
       error: (err) => {
         this.loading = false;
@@ -279,7 +287,54 @@ export class CreateMatchComponent {
     });
   }
 
-  private createDoublesGame() {
-    alert("TODO: not yet implemented.");
+  private async createDoublesGame() {
+    const fullSetData = this.getFullSetData();
+    const gameWinner = this.computeWinnerGame(fullSetData);
+
+    this.loading = true;
+
+    try {
+      // fetch doubles IDs
+      const double_a_id = await firstValueFrom(this.getDoublesID(this.selectedMembers['player1a'].member_id, this.selectedMembers['player1b'].member_id));
+      const double_b_id = await firstValueFrom(this.getDoublesID(this.selectedMembers['player2a'].member_id, this.selectedMembers['player2b'].member_id));
+      console.log("double_ids", double_a_id, double_b_id);
+      const winner_id = gameWinner === 1 ? double_a_id : double_b_id;
+      console.log("winner_id", winner_id);
+
+      const gamePayload: any = {
+        player_a: double_a_id,
+        player_b: double_b_id,
+        age_division: this.selectedAgeClass,
+        winner_id: winner_id,
+        set_one: `${fullSetData['set1'].a}-${fullSetData['set1'].b}`,
+        set_two: `${fullSetData['set2'].a}-${fullSetData['set2'].b}`,
+        set_three: this.set3Active 
+          ? `${fullSetData['set3'].a}-${fullSetData['set3'].b}` 
+          : null,
+      };
+
+      // POST request to backend
+      await firstValueFrom(this.http.post('/api/double_games', gamePayload));
+      this.loading = false;
+      alert('Spiel erfolgreich gespeichert');
+      window.location.href = '/create-match';
+      
+    } catch (err) {
+      this.loading = false;
+      console.error('Fehler beim Erstellen des Spiels:', err);
+      alert('Fehler beim Speichern des Spiels');
+    }
+  }
+
+  private getDoublesID(player_a_id: number, player_b_id: number): Observable<number> {
+    const url = `/api/doubles/by-players?playerA=${player_a_id}&playerB=${player_b_id}`;
+    
+    return this.http.get<{ id: number, player_a: number, player_b: number, message: string }>(url).pipe(
+      map(response => response.id),  // extract doubles_id
+      catchError(err => {
+        console.error('Error fetching doubles id:', err);
+        return throwError(() => err);
+      })
+    );
   }
 }
