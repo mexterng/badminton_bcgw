@@ -153,7 +153,10 @@ export class CreateMatchComponent {
     const set2 = this.computeWinnerSet(setData["set2"].a, setData["set2"].b);
     const set3 = this.computeWinnerSet(setData["set3"].a, setData["set3"].b);
 
-    return set1 === set2 || set1 === set3 ? 1 : 2;
+    const player1Wins = (set1 === 1 ? 1 : 0) + (set2 === 1 ? 1 : 0) + (set3 === 1 ? 1 : 0);
+    const player2Wins = (set1 === 2 ? 1 : 0) + (set2 === 2 ? 1 : 0) + (set3 === 2 ? 1 : 0);
+
+    return player1Wins === 2 ? 1 : 2 ;
   }
 
   private computeWinnerSet(val1: number, val2: number): number {
