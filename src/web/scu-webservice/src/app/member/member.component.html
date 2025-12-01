@@ -2,6 +2,8 @@
     <app-header [heading]="title"/>
     <div class="content">
         <p>member works!</p>
+        <div class="horizontal-seperator"></div>
+        <app-member-list [data]="members" [selectedMember]="selectedMember" [loading]="loading" (selectionChanged)="onSelectionChanged($event)"></app-member-list>
     </div>
     <app-footer/>
 </div>

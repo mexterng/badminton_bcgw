@@ -3,3 +3,20 @@
     flex-direction: column;  
     height: 100vh;           
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - 17svh);
+  background-color: var(--background-primary);
+}
+
+.content > *:not(app-member-list) {
+  flex: 0 0 auto;
+}
+
+.content > app-member-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
