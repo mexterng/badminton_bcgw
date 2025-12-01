@@ -1,0 +1,11 @@
+<div class="set-input-row" [class.inactive]="!active">
+  <label class="input-label">{{ input_label }}:</label>
+  <div class="inputs">
+      <input [disabled]="!active" type="number" min="0" max="30" [value]="active ? '0' : ''" (input)="onInput($event, 'value1')">
+      :
+      <input [disabled]="!active" type="number" min="0" max="30" [value]="active ? '0' : ''" (input)="onInput($event, 'value2')">
+  </div>
+  <label class="winner-label">
+      {{ winner_label ? '(' + winner_label + ')' : '' }}
+  </label>
+</div>

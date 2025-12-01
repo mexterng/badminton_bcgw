@@ -1,5 +1,46 @@
+.scroll-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 10px;
+}
 .createMatch-side {
     display: flex;
     flex-direction: column;  /* Stapelt Kinder vertikal */
     height: 100vh;           /* gesamte Browserhöhe */
+}
+
+app-member-selector {
+    display: block;
+    width: 100%;
+}
+
+.selector-group {
+    display: flex;
+    flex-direction: column;
+
+    > * { // default
+        margin-bottom: 0.5rem;
+    }
+
+    > *:nth-child(2n) { // every second element
+        margin-bottom: 2rem;
+    }
+
+    > *:last-child { // last element
+        margin-bottom: 0;
+    }
+}
+
+#set-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+#control-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2rem;
 }

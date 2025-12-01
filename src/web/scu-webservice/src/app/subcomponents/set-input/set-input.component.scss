@@ -1,0 +1,29 @@
+.set-input-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &.inactive {
+    label {
+      color: #aaa; // ausgegrauter Text
+    }
+  }
+}
+
+.input-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex: 0 0 max-content;  /* Label nimmt nur so viel wie nötig */
+  width: max-content;      /* wichtig: gleiche Breite über Flexbox wird im Parent durch align-items automatisch ausgerichtet */
+  margin-right: 1rem;
+}
+
+.winner-label {
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+
+.inputs {
+    display: flex;
+  flex-wrap: nowrap;
+}

@@ -1,0 +1,55 @@
+import { Component, Input, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+export interface Member {
+  member_id: number;
+  display_name: string;
+}
+
+@Component({
+  selector: 'app-member-selector',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './member-selector.component.html',
+  styleUrls: ['./member-selector.component.scss']
+})
+export class MemberSelectorComponent {
+  @Input() data: Member[] = [];
+  @Input() label: string = '';
+  @Input() selectedMember?: Member;
+  @Output() selectionChanged = new EventEmitter<Member>();
+
+  membersWithEmpty: Member[] = [];
+  dropdownOpen = false;
+  
+  constructor(private elRef: ElementRef) {}
+  
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+  
+  ngOnChanges() {
+    this.membersWithEmpty = this.getMembersWithEmpty();
+  }
+  
+  onSelect(member: Member) {
+    this.selectedMember = member;
+    this.selectionChanged.emit(member);
+    this.dropdownOpen = false;
+  }
+
+  get buttonText(): string {
+    return this.selectedMember?.display_name || 'Spieler/in wählen';
+  }
+
+  private getMembersWithEmpty(): Member[] {
+    return [{ member_id: -1, display_name: 'Spieler/in wählen' }, ...this.data];
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if (!this.elRef.nativeElement.contains(event.target)) {
+      this.dropdownOpen = false;
+    }
+  }
+}

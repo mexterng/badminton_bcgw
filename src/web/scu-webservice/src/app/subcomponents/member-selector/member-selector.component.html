@@ -1,0 +1,18 @@
+<div class="member-selector-row">
+  <label class="selector-label">{{ label }}:</label>
+
+  <div class="dropdown">
+    <button class="dropdown-btn" (click)="toggleDropdown()">
+      <img src="/icon_player.svg" class="icon">
+      {{ buttonText }}
+      <span class="dropdown-arrow">▼</span>
+    </button>
+
+    <div *ngIf="dropdownOpen" class="dropdown-content">
+      <div class="dropdown-item" *ngFor="let member of membersWithEmpty" (click)="onSelect(member)">
+        <img src="/icon_player.svg" class="icon">
+        {{ member.display_name }}
+      </div>
+    </div>
+  </div>
+</div>
