@@ -1,11 +1,11 @@
 <!-- Main wrapper card for the selector component -->
-<mat-card class="game-category-card">
-  <mat-card-content class="game-category-form-container">
+<div class="game-category-card">
+  <div class="game-category-form-container">
     <form class="game-category-form">
 
       <!-- Age class selection -->
-      <mat-card class="selection-card">
-        <mat-card-subtitle>Altersklasse</mat-card-subtitle>
+      <div class="selection-card">
+        <div class="card-subtitle">Altersklasse</div>
         <mat-button-toggle-group
           [hideSingleSelectionIndicator]="true"
           name="ageClass"
@@ -20,11 +20,11 @@
             {{ option.label }}
           </mat-button-toggle>
         </mat-button-toggle-group>
-      </mat-card>
+      </div>
 
       <!-- Play type selection -->
-      <mat-card class="selection-card">
-        <mat-card-subtitle>Spielart</mat-card-subtitle>
+      <div class="selection-card">
+        <div class="card-subtitle">Spielart</div>
         <mat-button-toggle-group
           [hideSingleSelectionIndicator]="true"
           name="playType"
@@ -39,8 +39,8 @@
             {{ option.label }}
           </mat-button-toggle>
         </mat-button-toggle-group>
-      </mat-card>
+      </div>
 
     </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -1,7 +1,46 @@
 <div class="side">
     <app-header [heading]="title"/>
     <div class="content">
-        <p>member works!</p>
+        <div id="filter-options">
+            <!-- agegroups -->
+            <div id="filter-agegroup" class="filter-option">
+                <mat-select placeholder="Altersklasse filtern" [(value)]="selectedAgegroup" (selectionChange)="applyFilters()">
+                <mat-option [value]="null">-</mat-option>
+                <mat-option *ngFor="let agegroup of agegroups" [value]="agegroup.value">
+                    {{ agegroup.label }}
+                </mat-option>
+                </mat-select>
+            </div>
+            <!-- gender -->
+            <div id="filter-gender" class="filter-option">
+                <mat-select placeholder="Geschlecht filtern" [(value)]="selectedGender" (selectionChange)="applyFilters()">
+                <mat-option [value]="null">-</mat-option>
+                <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                    {{ gender.label }}
+                </mat-option>
+                </mat-select>
+            </div>
+            <!-- name -->
+            <div id="filter-name" class="filter-option">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Name suchen</mat-label>
+
+                    <input matInput type="text"
+                            [(ngModel)]="selectedName"
+                            (ngModelChange)="applyFilters()">
+
+                    @if (selectedName) {
+                        <button matSuffix mat-icon-button aria-label="Clear"
+                                (click)="selectedName = ''; applyFilters()">
+                        <mat-icon>close</mat-icon>
+                        </button>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="horizontal-seperator"></div>
+        <app-member-list [data]="members" [selectedMember]="selectedMember" [loading]="loading" (selectionChanged)="onSelectionChanged($event)"></app-member-list>
+        <a id="addMemberBtn" mat-flat-button href="./create-member">+ Spieler/in hinzufügen</a>
     </div>
     <app-footer/>
 </div>

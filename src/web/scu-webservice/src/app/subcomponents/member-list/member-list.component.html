@@ -1,0 +1,15 @@
+<div>
+    <div *ngIf="loading" class="loading-overlay">
+    <span class="spinner"></span>
+</div>
+<div class="member-list">
+    <div 
+    class="member-item" 
+    *ngFor="let member of data" 
+    [class.selected]="member.member_id === selectedMember?.member_id"
+    (click)="onSelect(member)">
+    <img src="/icon_player.svg" class="icon">
+    {{ member.display_name }}
+    </div>
+</div>
+</div>

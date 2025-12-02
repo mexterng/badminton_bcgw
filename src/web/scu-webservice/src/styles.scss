@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 
 
@@ -24,6 +26,10 @@ $color-female-pink: #e2b4bd;
     --theme-control-grey-positive: #{$theme-control-grey-positive};
     --color-male-blue: #{$color-male-blue};
     --color-female-pink: #{$color-female-pink};
+    @include mat.button-overrides((
+      filled-container-color: #00458f,
+      filled-label-text-color: #ffffff,
+    ));
 }
 
 // Global styles (apply background + text colors)
@@ -31,7 +37,7 @@ body {
   background-color: var(--background-primary);
   margin:0;
   color: var(--scu-black);
-  font-family: 'SUSE Mono', monospace;
+  font-family: 'Roboto', sans-serif;
 }
 
 app-header{
@@ -163,8 +169,45 @@ app-footer {
   display: none !important;
 }
 
+mat-form-field {
+  width: 100%;
+}
+.mat-mdc-select-placeholder {
+  padding: 0 16px;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
 .horizontal-seperator {
   height:2px; 
   background-color:var(--theme-control-grey-negative); 
   margin: 1rem 0;
+}
+
+/* Icons */
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
 }
