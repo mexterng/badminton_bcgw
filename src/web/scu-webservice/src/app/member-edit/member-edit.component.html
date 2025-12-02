@@ -1,0 +1,23 @@
+<div class="side">
+  <app-header [heading]="title" />
+  <div class="content">
+    <p>Personendaten</p>
+    <app-member-form
+      #memberFormComp
+      [memberData]="loadedMember"
+      (save)="onSave($event)"
+      (cancel)="onCancel()">
+    </app-member-form>
+
+    <div class="button-row">
+      <button mat-flat-button color="primary" (click)="memberFormComp.emitSave()"
+        [disabled]="memberFormComp.memberForm.invalid">
+        Spieler/in aktualisieren
+      </button>
+      <button mat-stroked-button color="warn" (click)="memberFormComp.emitCancel()">
+        Abbrechen
+      </button>
+    </div>
+  </div>
+  <app-footer />
+</div>
