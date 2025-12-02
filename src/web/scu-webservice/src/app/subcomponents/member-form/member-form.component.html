@@ -26,9 +26,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Altersklasse</mat-label>
+      <mat-label>Altersklasse(n)</mat-label>
       <mat-select multiple formControlName="ageGroup">
-        <mat-option *ngFor="let a of ageGroups" [value]="a.value">
+        <mat-option *ngFor="let a of agegroups" [value]="a.value">
           {{ a.label }}
         </mat-option>
       </mat-select>
