@@ -1,3 +1,44 @@
-<div class="meber-form">
-    <p>Form!</p>
-</div>
+<form [formGroup]="memberForm" class="form-container">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Anzeigename</mat-label>
+      <input matInput formControlName="displayName" maxlength="15">
+      <mat-hint align="end">{{ memberForm.get('displayName')?.value?.length || 0 }}/15</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Vorname</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Nachname</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Geschlecht</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option *ngFor="let g of genders" [value]="g.value">
+        {{ g.label }}
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Altersklasse</mat-label>
+      <mat-select multiple formControlName="ageGroup">
+        <mat-option *ngFor="let a of ageGroups" [value]="a.value">
+          {{ a.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <div class="button-row">
+    <button mat-flat-button color="primary" (click)="onSave()" [disabled]="memberForm.invalid">
+      Spieler/in speichern
+    </button>
+    <button mat-stroked-button color="warn" (click)="onCancel()">
+      Abbrechen
+    </button>
+  </div>
+</form>
