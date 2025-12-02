@@ -87,4 +87,13 @@ export class MemberFormComponent implements OnChanges {
     this.memberForm.reset();
     this.cancel.emit();
   }
+
+  setDuplicateDisplayNameError() {
+    const ctrl = this.memberForm.get('displayName');
+    if (!ctrl) return;
+
+    // set custom error
+    ctrl.setErrors({ duplicate: true });
+    ctrl.markAsTouched();
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 import { MemberFormComponent } from '../subcomponents/member-form/member-form.component';
@@ -23,6 +23,7 @@ interface Member {
 
 
 export class MemberCreateComponent {
+  @ViewChild('memberFormComp') memberFormComp!: MemberFormComponent;
   constructor(private http: HttpClient){}
   title="Spieler/in hinzufügen";
   
@@ -37,6 +38,11 @@ export class MemberCreateComponent {
         window.location.href = '/member';
       },
       error: (err) => {
+        if (err?.error?.message?.includes("member.display_name")) {
+          this.memberFormComp.setDuplicateDisplayNameError();
+          return;
+        }
+        
         console.error('Fehler beim Erstellen des/der Spieler/in:', err);
         alert('Fehler beim Erstellen des/der Spieler/in');
       }

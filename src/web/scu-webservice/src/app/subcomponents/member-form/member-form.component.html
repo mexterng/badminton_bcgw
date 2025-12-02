@@ -4,6 +4,10 @@
       <mat-label>Anzeigename</mat-label>
       <input matInput formControlName="displayName" maxlength="15">
       <mat-hint align="end">{{ memberForm.get('displayName')?.value?.length || 0 }}/15</mat-hint>
+
+      <mat-error *ngIf="memberForm.get('displayName')?.hasError('duplicate')">
+        Dieser Anzeigename ist bereits vergeben.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
