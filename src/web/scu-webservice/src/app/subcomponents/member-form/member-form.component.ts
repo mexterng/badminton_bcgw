@@ -29,7 +29,7 @@ export class MemberFormComponent implements OnChanges {
   @ViewChild('displayNameField', { read: ElementRef })
   displayNameField!: ElementRef;
 
-  @Input() memberData?: Partial<Member>;  // Partial
+  @Input() memberData: Partial<Member> | null | undefined;
   @Output() save = new EventEmitter<Member>();
   @Output() cancel = new EventEmitter<void>();
 

@@ -23,7 +23,7 @@ export class MemberListComponent {
   @Output() selectionChanged = new EventEmitter<Member>();
 
   onSelect(member: Member) {
-    console.log('Clicked', member);
+    window.location.href = `/member/${member.member_id}`
     this.selectedMember = member;
     this.selectionChanged.emit(member);
   }
