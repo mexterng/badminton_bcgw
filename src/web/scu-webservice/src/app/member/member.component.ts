@@ -3,8 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 import { MemberListComponent, Member } from '../subcomponents/member-list/member-list.component';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 import { AgeDivisionService } from '../services/age-division.service';
 
@@ -14,7 +18,7 @@ interface AgeDivision {
 }
 @Component({
   selector: 'app-member',
-  imports: [HeaderComponent, MemberListComponent, FooterComponent, MatSelectModule, FormsModule, CommonModule],
+  imports: [HeaderComponent, MemberListComponent, FooterComponent, MatSelectModule, FormsModule, CommonModule, MatIconModule, MatInputModule, MatFormFieldModule, MatButtonModule],
   templateUrl: './member.component.html',
   styleUrl: './member.component.scss'
 })

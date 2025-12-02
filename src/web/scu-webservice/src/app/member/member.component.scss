@@ -4,9 +4,23 @@
     height: 100vh;           
 }
 
+#filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .filter-option {
   display: flex;
   flex-direction: row;
+}
+
+#filter-gender {
+  margin-top: 1rem;
+}
+
+.selector-label {
+  margin-right: 0.5rem;
 }
 
 .content {

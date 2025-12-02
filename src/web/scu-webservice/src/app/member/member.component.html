@@ -4,10 +4,8 @@
         <div id="filter-options">
             <!-- agegroups -->
             <div id="filter-agegroup" class="filter-option">
-                <label class="selector-label">Altersklasse:</label>
-                <mat-select placeholder="Auswählen" [(value)]="selectedAgegroup" (selectionChange)="applyFilters()">
-                <mat-option [value]="null" disabled>Auswählen</mat-option>
-                <mat-option>-</mat-option>
+                <mat-select placeholder="Altersklasse filtern" [(value)]="selectedAgegroup" (selectionChange)="applyFilters()">
+                <mat-option [value]="null">-</mat-option>
                 <mat-option *ngFor="let agegroup of agegroups" [value]="agegroup.value">
                     {{ agegroup.label }}
                 </mat-option>
@@ -15,10 +13,8 @@
             </div>
             <!-- gender -->
             <div id="filter-gender" class="filter-option">
-                <label class="selector-label">Geschlecht:</label>
-                <mat-select placeholder="Auswählen" [(value)]="selectedGender" (selectionChange)="applyFilters()">
-                <mat-option [value]="null" disabled>Auswählen</mat-option>
-                <mat-option>-</mat-option>
+                <mat-select placeholder="Geschlecht filtern" [(value)]="selectedGender" (selectionChange)="applyFilters()">
+                <mat-option [value]="null">-</mat-option>
                 <mat-option *ngFor="let gender of genders" [value]="gender.value">
                     {{ gender.label }}
                 </mat-option>
@@ -26,8 +22,20 @@
             </div>
             <!-- name -->
             <div id="filter-name" class="filter-option">
-                <label class="selector-label">Name:</label>
-                <input type="text" [(ngModel)]="selectedName" (ngModelChange)="applyFilters()" placeholder="Name eingeben"/>
+                <mat-form-field class="example-form-field">
+                    <mat-label>Name suchen</mat-label>
+
+                    <input matInput type="text"
+                            [(ngModel)]="selectedName"
+                            (ngModelChange)="applyFilters()">
+
+                    @if (selectedName) {
+                        <button matSuffix mat-icon-button aria-label="Clear"
+                                (click)="selectedName = ''; applyFilters()">
+                        <mat-icon>close</mat-icon>
+                        </button>
+                    }
+                </mat-form-field>
             </div>
         </div>
         <div class="horizontal-seperator"></div>
