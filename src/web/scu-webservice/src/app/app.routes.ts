@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { PyramideComponent } from "./pyramide/pyramide.component";
 import { MemberComponent } from './member/member.component';
 import { CreateMatchComponent } from './create-match/create-match.component';
+import { MemberCreateComponent } from './member-create/member-create.component';
 
 //https://angular.dev/guide/routing/define-routes
 //!! first wins strategy, so order matters
@@ -27,6 +28,10 @@ export const routes: Routes = [
     {
         path: 'create-match',
         component: CreateMatchComponent
+    },
+    {
+        path: 'create-member',
+        component: MemberCreateComponent
     },
     {
         path: '**',
