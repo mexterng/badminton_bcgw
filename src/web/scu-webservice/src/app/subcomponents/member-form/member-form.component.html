@@ -1,0 +1,41 @@
+<form [formGroup]="memberForm" class="form-container">
+  <div class="scroll-wrapper">
+    <mat-form-field appearance="outline" class="form-field" #displayNameField>
+      <mat-label>Anzeigename</mat-label>
+      <input matInput formControlName="displayName" maxlength="15">
+      <mat-hint align="end">{{ memberForm.get('displayName')?.value?.length || 0 }}/15</mat-hint>
+
+      <mat-error *ngIf="memberForm.get('displayName')?.hasError('duplicate')">
+        Dieser Anzeigename ist bereits vergeben.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Vorname</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Nachname</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Geschlecht</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option *ngFor="let g of genders" [value]="g.value">
+        {{ g.label }}
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Altersklasse(n)</mat-label>
+      <mat-select multiple formControlName="ageGroup">
+        <mat-option *ngFor="let a of agegroups" [value]="a.value">
+          {{ a.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>
