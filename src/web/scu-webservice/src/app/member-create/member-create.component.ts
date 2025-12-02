@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../subcomponents/header/header.component';
+import { MemberFormComponent } from '../subcomponents/member-form/member-form.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 
 @Component({
   selector: 'app-member-create',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, MemberFormComponent, FooterComponent],
   templateUrl: './member-create.component.html',
   styleUrl: './member-create.component.scss'
 })
