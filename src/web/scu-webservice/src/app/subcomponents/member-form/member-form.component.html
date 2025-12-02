@@ -1,6 +1,6 @@
 <form [formGroup]="memberForm" class="form-container">
   <div class="scroll-wrapper">
-    <mat-form-field appearance="outline" class="form-field">
+    <mat-form-field appearance="outline" class="form-field" #displayNameField>
       <mat-label>Anzeigename</mat-label>
       <input matInput formControlName="displayName" maxlength="15">
       <mat-hint align="end">{{ memberForm.get('displayName')?.value?.length || 0 }}/15</mat-hint>

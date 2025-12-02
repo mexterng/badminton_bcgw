@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +26,9 @@ interface Member {
   styleUrls: ['./member-form.component.scss']
 })
 export class MemberFormComponent implements OnChanges {
+  @ViewChild('displayNameField', { read: ElementRef })
+  displayNameField!: ElementRef;
+
   @Input() memberData?: Partial<Member>;  // Partial
   @Output() save = new EventEmitter<Member>();
   @Output() cancel = new EventEmitter<void>();
@@ -95,5 +97,26 @@ export class MemberFormComponent implements OnChanges {
     // set custom error
     ctrl.setErrors({ duplicate: true });
     ctrl.markAsTouched();
+    this.scrollToDisplayNameField();
   }
+
+  private scrollToDisplayNameField() {
+    if (!this.displayNameField) return;
+
+    const fieldEl: HTMLElement = this.displayNameField.nativeElement;
+    const container = fieldEl.closest('.scroll-wrapper') as HTMLElement | null;
+
+    if (!container) return;
+
+    // compute relative offset inside the scroll-container
+    const fieldRect = fieldEl.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const offset = fieldRect.top - containerRect.top + container.scrollTop - 20;
+
+    container.scrollTo({
+      top: offset,
+      behavior: 'smooth'
+    });
+  }
+
 }
