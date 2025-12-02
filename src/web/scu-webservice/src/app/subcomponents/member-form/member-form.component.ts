@@ -12,11 +12,11 @@ interface AgeDivision {
   description: string;
 }
 interface Member {
-  displayName: string | null;
-  firstName: string | null;
-  lastName: string | null;
+  display_name: string | null;
+  first_name: string | null;
+  last_name: string | null;
   gender: string | null;
-  ageGroup: string[] | null;
+  age_division_id: string[] | null;
 }
 
 @Component({
@@ -55,11 +55,11 @@ export class MemberFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['memberData'] && this.memberData) {
       this.memberForm.patchValue({
-        displayName: this.memberData.displayName ?? '',
-        firstName: this.memberData.firstName ?? '',
-        lastName: this.memberData.lastName ?? '',
+        displayName: this.memberData.display_name ?? '',
+        firstName: this.memberData.first_name ?? '',
+        lastName: this.memberData.last_name ?? '',
         gender: this.memberData.gender ?? '',
-        ageGroup: this.memberData.ageGroup ?? []
+        ageGroup: this.memberData.age_division_id ?? []
       });
     }
   }
@@ -74,11 +74,11 @@ export class MemberFormComponent implements OnChanges {
       const formValue = this.memberForm.value;
       // Optional auf null zurückwandeln, falls leer
       this.save.emit({
-        displayName: formValue.displayName || null,
-        firstName: formValue.firstName || null,
-        lastName: formValue.lastName || null,
+        display_name: formValue.displayName || null,
+        first_name: formValue.firstName || null,
+        last_name: formValue.lastName || null,
         gender: formValue.gender || null,
-        ageGroup: formValue.ageGroup ?? null
+        age_division_id: formValue.ageGroup ?? null
       });
     }
   }
