@@ -40,6 +40,7 @@
         </div>
         <div class="horizontal-seperator"></div>
         <app-member-list [data]="members" [selectedMember]="selectedMember" [loading]="loading" (selectionChanged)="onSelectionChanged($event)"></app-member-list>
+        <a id="addMemberBtn" mat-flat-button href="./create-member">+ Spieler/in hinzufügen</a>
     </div>
     <app-footer/>
 </div>
