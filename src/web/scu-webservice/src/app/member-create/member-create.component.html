@@ -1,8 +1,18 @@
 <div class="side">
-    <app-header [heading]="title"/>
-    <div class="content">
-        <p>member create works!</p>
-        <app-member-form></app-member-form>
+  <app-header [heading]="title" />
+  <div class="content">
+    <p>member create works!</p>
+    <app-member-form #memberFormComp (save)="onSave($event)" (cancel)="onCancel()" />
+
+    <div class="button-row">
+      <button mat-flat-button color="primary" (click)="memberFormComp.emitSave()"
+        [disabled]="memberFormComp.memberForm.invalid">
+        Spieler/in speichern
+      </button>
+      <button mat-stroked-button color="warn" (click)="memberFormComp.emitCancel()">
+        Abbrechen
+      </button>
     </div>
-    <app-footer/>
+  </div>
+  <app-footer />
 </div>

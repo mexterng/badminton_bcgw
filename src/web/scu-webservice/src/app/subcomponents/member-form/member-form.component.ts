@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { AgeDivisionService } from '../../services/age-division.service';
 
@@ -12,21 +11,32 @@ interface AgeDivision {
   age_division_id: string;
   description: string;
 }
+interface Member {
+  displayName: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  gender: string | null;
+  ageGroup: string[] | null;
+}
 
 @Component({
   selector: 'app-member-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './member-form.component.html',
-   styleUrls: ['./member-form.component.scss']
+  styleUrls: ['./member-form.component.scss']
 })
-export class MemberFormComponent {
+export class MemberFormComponent implements OnChanges {
+  @Input() memberData?: Partial<Member>;  // Partial
+  @Output() save = new EventEmitter<Member>();
+  @Output() cancel = new EventEmitter<void>();
+
   memberForm = new FormGroup({
     displayName: new FormControl('', [Validators.required, Validators.maxLength(15)]),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
-    ageGroup: new FormControl('', Validators.required),
+    ageGroup: new FormControl<string[]>([], Validators.required)
   });
 
   genders = [
@@ -42,20 +52,39 @@ export class MemberFormComponent {
     await this.loadAgeGroups();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['memberData'] && this.memberData) {
+      this.memberForm.patchValue({
+        displayName: this.memberData.displayName ?? '',
+        firstName: this.memberData.firstName ?? '',
+        lastName: this.memberData.lastName ?? '',
+        gender: this.memberData.gender ?? '',
+        ageGroup: this.memberData.ageGroup ?? []
+      });
+    }
+  }
+
   private async loadAgeGroups() {
     const allDivisions: AgeDivision[] = await this.ageService.getAgeDivisions();
-    this.agegroups = allDivisions.map(d => ({
-      value: d.age_division_id,
-      label: d.description
-    }));
+    this.agegroups = allDivisions.map(d => ({ value: d.age_division_id, label: d.description }));
   }
 
-  onSave(): void {
-    console.log('Benutzer speichern:', this.memberForm.value);
+  emitSave() {
+    if (this.memberForm.valid) {
+      const formValue = this.memberForm.value;
+      // Optional auf null zurückwandeln, falls leer
+      this.save.emit({
+        displayName: formValue.displayName || null,
+        firstName: formValue.firstName || null,
+        lastName: formValue.lastName || null,
+        gender: formValue.gender || null,
+        ageGroup: formValue.ageGroup ?? null
+      });
+    }
   }
 
-  onCancel(): void {
+  emitCancel() {
     this.memberForm.reset();
-    console.log('Abgebrochen');
+    this.cancel.emit();
   }
 }
