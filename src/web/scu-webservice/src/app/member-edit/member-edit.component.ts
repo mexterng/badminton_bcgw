@@ -52,7 +52,7 @@ export class MemberEditComponent {
     this.http.patch(`/api/member/${this.memberId}`, payload).subscribe({
       next: () => {
         alert('Spieler/in erfolgreich aktualisiert');
-        window.location.href = '/member';
+        window.location.href = `/member/${this.memberId}`;
       },
       error: (err) => {
         if (err?.error?.message?.includes("member.display_name")) {

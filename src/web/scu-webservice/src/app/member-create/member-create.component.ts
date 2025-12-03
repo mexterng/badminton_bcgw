@@ -12,6 +12,10 @@ interface Member {
   gender: string | null;
   age_division_id: string[] | null;
 }
+interface MemberCreateResponse {
+  id: string;
+  message: string;
+}
 
 @Component({
   selector: 'app-member-create',
@@ -31,11 +35,11 @@ export class MemberCreateComponent {
     console.log('Speichern:', member);
     // API-Aufruf
     // POST request to backend
-    this.http.post('/api/member', member).subscribe({
+    this.http.post<MemberCreateResponse>('/api/member', member).subscribe({
       next: (res) => {
         alert('Spieler/in erfolgreich hinzugefügt');
         // optional: redirect to overview
-        window.location.href = '/member';
+        window.location.href = `/member/${res.id}`;
       },
       error: (err) => {
         if (err?.error?.message?.includes("member.display_name")) {
