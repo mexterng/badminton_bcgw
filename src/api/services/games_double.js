@@ -1,6 +1,6 @@
 const db = require("./db");
 const helper = require("../helper");
-const games = require("./games");
+const games = require("./games_helper");
 
 const games_table = "games_double";
 const pyramid_table = "pyramid_double";
