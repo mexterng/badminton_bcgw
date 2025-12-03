@@ -86,7 +86,6 @@ export class MemberFormComponent implements OnChanges {
   }
 
   emitCancel() {
-    this.memberForm.reset();
     this.cancel.emit();
   }
 
