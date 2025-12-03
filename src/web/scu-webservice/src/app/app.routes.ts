@@ -5,6 +5,7 @@ import { MemberComponent } from './member/member.component';
 import { CreateMatchComponent } from './create-match/create-match.component';
 import { MemberCreateComponent } from './member-create/member-create.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
+import { MemberSingleComponent } from './member-single/member-single.component';
 
 //https://angular.dev/guide/routing/define-routes
 //!! first wins strategy, so order matters
@@ -36,6 +37,10 @@ export const routes: Routes = [
     },
     {
         path: 'member/:id',
+        component: MemberSingleComponent
+    },
+    {
+        path: 'member/:id/edit',
         component: MemberEditComponent
     },
     {
