@@ -30,3 +30,25 @@
   margin-top: 16px;
   padding: 0 15px;
 }
+
+#personData {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  width: 100%;
+}
+
+#personData th,
+#personData td {
+  text-align: left;
+  padding: 4px;
+}
+
+#personData th {
+  white-space: nowrap;
+  padding-right: 1rem;
+}
+#personData td {
+  border: 1px solid #000;
+  width: 100%;
+  border-radius: 4px;
+}

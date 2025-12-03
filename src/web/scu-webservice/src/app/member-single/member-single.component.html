@@ -2,6 +2,28 @@
   <app-header [heading]="title" />
   <div class="content">
     <p>Personendaten</p>
+    <table id="personData">
+      <tr>
+        <th>Anzeigename</th>
+        <td>{{ member?.display_name }}</td>
+      </tr>
+      <tr>
+        <th>Vorname</th>
+        <td>{{ member?.first_name }}</td>
+      </tr>
+      <tr>
+        <th>Nachname</th>
+        <td>{{ member?.last_name }}</td>
+      </tr>
+      <tr>
+        <th>Geschlecht</th>
+        <td>{{ member?.gender }}</td>
+      </tr>
+      <tr>
+        <th>Altersklasse(n)</th>
+        <td>{{ member?.age_division_str?.join(', ') }}</td>
+      </tr>
+    </table>
   </div>
   <app-footer />
 </div>
