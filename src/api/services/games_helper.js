@@ -1,6 +1,7 @@
 const db = require("./db");
 const helper = require("../helper");
 const pyramides = require("./pyramides")
+const config = require("../config");
 
 async function getPlacement(table, id, age_division, connection = null){
     const sqlQuery = `
@@ -44,6 +45,23 @@ async function getSingle(id, gamesTable) {
   );
   const data = helper.emptyOrRows(rows);
   return data[0] || null;
+}
+
+async function getGamesOfAgeDivision(age_division, gamesTable, page = 1, getAll = false) {
+  let sqlQuery = `SELECT * FROM ${gamesTable} WHERE age_division = ?`
+  if (getAll) {
+      const offset = Number(helper.getOffset(page, config.listPerPage));
+      sqlQuery += ` LIMIT ${offset},${config.listPerPage}`;
+      page = -1;
+  }
+  const rows = await db.query(sqlQuery, [age_division]);
+  const data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+  return {
+    data,
+    meta,
+  };
 }
 
 async function create(game, gamesTable, pyramidTable) {
@@ -217,6 +235,7 @@ module.exports = {
   getPlacement,
   getMultiple,
   getSingle,
+  getGamesOfAgeDivision,
   create,
   update,
   remove,

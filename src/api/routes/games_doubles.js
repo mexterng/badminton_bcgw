@@ -65,4 +65,14 @@ router.get('/member/:id', async function(req, res, next) {
   }
 });
 
+/*GET games by age_division */
+router.get('/age_division/:id', async function(req, res, next) {
+  try {
+    res.json(await games_double.getGamesOfAgeDivision(req.params.id, 1, true));
+  } catch (err) {
+    console.error(`Error while getting game`, err.message);
+    next(err);
+  }
+});
+
 module.exports = router;

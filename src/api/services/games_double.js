@@ -61,6 +61,10 @@ async function getGamesOfMember(member_id) {
   });
 }
 
+async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
+  return await games.getGamesOfAgeDivision(age_division, games_table, page, getAll);
+}
+
 async function create(singleGame) {
   return await games.create(singleGame, games_table, pyramid_table);
 }
@@ -77,6 +81,7 @@ module.exports = {
   getMultiple,
   getSingle,
   getGamesOfMember,
+  getGamesOfAgeDivision,
   create,
   update,
   remove,
