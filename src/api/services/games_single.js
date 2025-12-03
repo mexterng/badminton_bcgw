@@ -27,8 +27,10 @@ async function getGamesOfMember(member_id) {
   const data = helper.emptyOrRows(rows);
   return data.map(row => {
     const host = (member_id === row.tA_pA_id || member_id === row.tA_pB_id);
-    // build opponent_display_name
-    const opponent_display_name = host ? row.player_a_display_name : row.player_b_display_name;
+    // build host_display_name and opponent_display_name
+    const { host_display_name, opponent_display_name } = host ? 
+                { host_display_name: row.player_a_display_name, opponent_display_name: row.player_b_display_name } : 
+                { host_display_name: row.player_b_display_name, opponent_display_name: row.player_a_display_name };
 
     // compute result
     function compareSet(setStr) {
@@ -59,6 +61,7 @@ async function getGamesOfMember(member_id) {
         age_divison: row.age_divison,
         timestamp: row.timestamp,
         valid: row.valid,
+        host_display_name: host_display_name,
         opponent_display_name: opponent_display_name,
         result: result,
         play_type_db: 'games_single'
