@@ -23,48 +23,28 @@ async function getGamesOfMember(member_id) {
     LEFT JOIN member mB ON g.player_b = mB.member_id
     WHERE g.player_a = ? OR g.player_b = ?
   `;
+
   const rows = await db.query(sqlSelect, [member_id, member_id]);
   const data = helper.emptyOrRows(rows);
+
   return data.map(row => {
-    const host = (member_id === row.tA_pA_id || member_id === row.tA_pB_id);
-    // build host_display_name and opponent_display_name
-    const { host_display_name, opponent_display_name } = host ? 
-                { host_display_name: row.player_a_display_name, opponent_display_name: row.player_b_display_name } : 
-                { host_display_name: row.player_b_display_name, opponent_display_name: row.player_a_display_name };
+    const host = (member_id === row.player_a);
 
-    // compute result
-    function compareSet(setStr) {
-      if (!setStr) return [0, 0];
-
-      const parts = setStr.split("-").map(Number);
-      if (parts.length !== 2 || parts.some(isNaN)) return [0, 0];
-
-      const [scoreA, scoreB] = parts;
-
-      if (scoreA > scoreB) return [1, 0];
-      if (scoreB > scoreA) return [0, 1];
-      return [0, 0]; // Unentschieden
-    }
-    let points_A = 0;
-    let points_B = 0;
-    [ row.set_one, row.set_two, row.set_three ].forEach(set => {
-      const [pA, pB] = compareSet(set);
-      points_A += pA;
-      points_B += pB;
-    });
-
-    const result = host ? `${points_A}:${points_B}` : `${points_B}:${points_A}`
-
+    const names = games.buildDisplayNames(
+      host,
+      row.player_a_display_name,
+      row.player_b_display_name
+    );
 
     return {
-        game_id: row.game_id,
-        age_divison: row.age_divison,
-        timestamp: row.timestamp,
-        valid: row.valid,
-        host_display_name: host_display_name,
-        opponent_display_name: opponent_display_name,
-        result: result,
-        play_type_db: 'games_single'
+      game_id: row.game_id,
+      age_divison: row.age_divison,
+      timestamp: row.timestamp,
+      valid: row.valid,
+      host_display_name: names.host_display_name,
+      opponent_display_name: names.opponent_display_name,
+      result: games.computeResult(row, host),
+      play_type_db: "games_single"
     };
   });
 }

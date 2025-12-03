@@ -177,6 +177,42 @@ async function remove(id, gamesTable) {
   return { message };
 }
 
+// helper
+// compare one set string "21-14"
+function compareSet(setStr) {
+  if (!setStr) return [0, 0];
+
+  const parts = setStr.split("-").map(Number);
+  if (parts.length !== 2 || parts.some(isNaN)) return [0, 0];
+
+  const [scoreA, scoreB] = parts;
+
+  if (scoreA > scoreB) return [1, 0];
+  if (scoreB > scoreA) return [0, 1];
+  return [0, 0]; // equal
+}
+
+// compute total result of sets and flip when needed
+function computeResult(row, host) {
+  let pointsA = 0;
+  let pointsB = 0;
+
+  [row.set_one, row.set_two, row.set_three].forEach(set => {
+    const [pA, pB] = compareSet(set);
+    pointsA += pA;
+    pointsB += pB;
+  });
+
+  return host ? `${pointsA}:${pointsB}` : `${pointsB}:${pointsA}`;
+}
+
+// build host/opponent display names for single AND double
+function buildDisplayNames(host, aName, bName) {
+  return host
+    ? { host_display_name: aName, opponent_display_name: bName }
+    : { host_display_name: bName, opponent_display_name: aName };
+}
+
 module.exports = {
   getPlacement,
   getMultiple,
@@ -184,4 +220,6 @@ module.exports = {
   create,
   update,
   remove,
+  computeResult,
+  buildDisplayNames
 }
