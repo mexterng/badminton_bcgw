@@ -13,7 +13,7 @@ async function getSingle(id) {
   return await games.getSingle(id, games_table);
 }
 
-async function getGamesOfDouble(member_id) {
+async function getGamesOfMember(member_id) {
   const sqlSelect = `
     SELECT g.*,
           dA.player_a AS tA_pA_id,
@@ -76,7 +76,7 @@ async function remove(id) {
 module.exports = {
   getMultiple,
   getSingle,
-  getGamesOfDouble,
+  getGamesOfMember,
   create,
   update,
   remove,

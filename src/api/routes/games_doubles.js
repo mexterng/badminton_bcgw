@@ -58,7 +58,7 @@ router.patch('/:id', async function(req, res, next) {
 /*GET games by member_id */
 router.get('/member/:id', async function(req, res, next) {
   try {
-    res.json(await games_double.getGamesOfDouble(parseInt(req.params.id, 10)));
+    res.json(await games_double.getGamesOfMember(parseInt(req.params.id, 10)));
   } catch (err) {
     console.error(`Error while getting game`, err.message);
     next(err);
