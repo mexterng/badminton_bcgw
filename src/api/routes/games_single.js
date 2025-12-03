@@ -55,6 +55,15 @@ router.patch('/:id', async function(req, res, next) {
   }
 });
 
+/*GET games by member_id */
+router.get('/member/:id', async function(req, res, next) {
+  try {
+    res.json(await game_singles.getGamesOfMember(req.params.id));
+  } catch (err) {
+    console.error(`Error while getting game`, err.message);
+    next(err);
+  }
+});
 
 
 module.exports = router;

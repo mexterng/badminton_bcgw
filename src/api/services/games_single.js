@@ -1,3 +1,5 @@
+const db = require("./db");
+const helper = require("../helper");
 const games = require("./games");
 
 const games_table = "games_single";
@@ -9,6 +11,21 @@ async function getMultiple(page = 1) {
 
 async function getSingle(id) {
   return await games.getSingle(id, games_table);
+}
+
+async function getGamesOfMember(member_id) {
+  const sqlSelect = `
+    SELECT g.*, 
+          mA.display_name AS player_a_display_name,
+          mB.display_name AS player_b_display_name
+    FROM games_single g
+    LEFT JOIN member mA ON g.player_a = mA.member_id
+    LEFT JOIN member mB ON g.player_b = mB.member_id
+    WHERE g.player_a = ? OR g.player_b = ?
+  `;
+  const rows = await db.query(sqlSelect, [member_id, member_id]);
+  const data = helper.emptyOrRows(rows);
+  return data || null;
 }
 
 async function create(singleGame) {
@@ -26,6 +43,7 @@ async function remove(id) {
 module.exports = {
   getMultiple,
   getSingle,
+  getGamesOfMember,
   create,
   update,
   remove,
