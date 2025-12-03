@@ -1,6 +1,7 @@
 const db = require("./db");
 const helper = require("../helper");
 const pyramides = require("./pyramides")
+const config = require("../config");
 
 async function getPlacement(table, id, age_division, connection = null){
     const sqlQuery = `
@@ -44,6 +45,23 @@ async function getSingle(id, gamesTable) {
   );
   const data = helper.emptyOrRows(rows);
   return data[0] || null;
+}
+
+async function getGamesOfAgeDivision(age_division, gamesTable, page = 1, getAll = false) {
+  let sqlQuery = `SELECT * FROM ${gamesTable} WHERE age_division = ?`
+  if (getAll) {
+      const offset = Number(helper.getOffset(page, config.listPerPage));
+      sqlQuery += ` LIMIT ${offset},${config.listPerPage}`;
+      page = -1;
+  }
+  const rows = await db.query(sqlQuery, [age_division]);
+  const data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+  return {
+    data,
+    meta,
+  };
 }
 
 async function create(game, gamesTable, pyramidTable) {
@@ -177,11 +195,50 @@ async function remove(id, gamesTable) {
   return { message };
 }
 
+// helper
+// compare one set string "21-14"
+function compareSet(setStr) {
+  if (!setStr) return [0, 0];
+
+  const parts = setStr.split("-").map(Number);
+  if (parts.length !== 2 || parts.some(isNaN)) return [0, 0];
+
+  const [scoreA, scoreB] = parts;
+
+  if (scoreA > scoreB) return [1, 0];
+  if (scoreB > scoreA) return [0, 1];
+  return [0, 0]; // equal
+}
+
+// compute total result of sets and flip when needed
+function computeResult(row, host) {
+  let pointsA = 0;
+  let pointsB = 0;
+
+  [row.set_one, row.set_two, row.set_three].forEach(set => {
+    const [pA, pB] = compareSet(set);
+    pointsA += pA;
+    pointsB += pB;
+  });
+
+  return host ? `${pointsA}:${pointsB}` : `${pointsB}:${pointsA}`;
+}
+
+// build host/opponent display names for single AND double
+function buildDisplayNames(host, aName, bName) {
+  return host
+    ? { host_display_name: aName, opponent_display_name: bName }
+    : { host_display_name: bName, opponent_display_name: aName };
+}
+
 module.exports = {
   getPlacement,
   getMultiple,
   getSingle,
+  getGamesOfAgeDivision,
   create,
   update,
   remove,
+  computeResult,
+  buildDisplayNames
 }

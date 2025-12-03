@@ -1,4 +1,6 @@
-const games = require("./games");
+const db = require("./db");
+const helper = require("../helper");
+const games = require("./games_helper");
 
 const games_table = "games_single";
 const pyramid_table = "pyramid_single";
@@ -9,6 +11,46 @@ async function getMultiple(page = 1) {
 
 async function getSingle(id) {
   return await games.getSingle(id, games_table);
+}
+
+async function getGamesOfMember(member_id) {
+  const sqlSelect = `
+    SELECT g.*, 
+          mA.display_name AS player_a_display_name,
+          mB.display_name AS player_b_display_name
+    FROM games_single g
+    LEFT JOIN member mA ON g.player_a = mA.member_id
+    LEFT JOIN member mB ON g.player_b = mB.member_id
+    WHERE g.player_a = ? OR g.player_b = ?
+  `;
+
+  const rows = await db.query(sqlSelect, [member_id, member_id]);
+  const data = helper.emptyOrRows(rows);
+
+  return data.map(row => {
+    const host = (member_id === row.player_a);
+
+    const names = games.buildDisplayNames(
+      host,
+      row.player_a_display_name,
+      row.player_b_display_name
+    );
+
+    return {
+      game_id: row.game_id,
+      age_divison: row.age_divison,
+      timestamp: row.timestamp,
+      valid: row.valid,
+      host_display_name: names.host_display_name,
+      opponent_display_name: names.opponent_display_name,
+      result: games.computeResult(row, host),
+      play_type_db: "games_single"
+    };
+  });
+}
+
+async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
+  return await games.getGamesOfAgeDivision(age_division, games_table, page, getAll);
 }
 
 async function create(singleGame) {
@@ -26,6 +68,8 @@ async function remove(id) {
 module.exports = {
   getMultiple,
   getSingle,
+  getGamesOfMember,
+  getGamesOfAgeDivision,
   create,
   update,
   remove,
