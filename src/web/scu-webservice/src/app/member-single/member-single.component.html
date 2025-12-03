@@ -1,7 +1,13 @@
 <div class="side">
   <app-header [heading]="title" />
   <div class="content">
-    <p>Personendaten</p>
+    <div class="header-row">
+      <p>Personendaten</p>
+      <button mat-flat-button color="primary" (click)="editMember()">
+        <span class="material-icons">edit</span>
+        Bearbeiten
+      </button>
+    </div>
     <table id="personData">
       <tr>
         <th>Anzeigename</th>

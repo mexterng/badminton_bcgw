@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from '../subcomponents/header/header.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 import { AgeDivisionService } from '../services/age-division.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Member {
   display_name: string | null;
@@ -17,9 +19,9 @@ interface Member {
 @Component({
   selector: 'app-member-single',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, MatButtonModule, MatIconModule],
   templateUrl: './member-single.component.html',
-  styleUrl: './member-single.component.scss'
+  styleUrls: ['./member-single.component.scss']
 })
 
 
@@ -59,6 +61,11 @@ export class MemberSingleComponent {
       },
       error: () => alert('Fehler beim Laden')
     });
+  }
+
+  editMember(): void {
+    if (!this.memberId) return;
+    window.location.href = `/member/${this.memberId}/edit`;
   }
 
   private getGenderLong(g: string | null): string {

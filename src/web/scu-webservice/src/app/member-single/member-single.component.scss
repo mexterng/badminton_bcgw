@@ -31,6 +31,17 @@
   padding: 0 15px;
 }
 
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.material-icons {
+  font-size: 1rem;
+  padding-right: 0.3em;
+}
+
 #personData {
   border-collapse: separate;
   border-spacing: 0 0.5rem;
