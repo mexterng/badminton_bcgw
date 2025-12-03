@@ -25,7 +25,45 @@ async function getGamesOfMember(member_id) {
   `;
   const rows = await db.query(sqlSelect, [member_id, member_id]);
   const data = helper.emptyOrRows(rows);
-  return data || null;
+  return data.map(row => {
+    const host = (member_id === row.tA_pA_id || member_id === row.tA_pB_id);
+    // build opponent_display_name
+    const opponent_display_name = host ? row.player_a_display_name : row.player_b_display_name;
+
+    // compute result
+    function compareSet(setStr) {
+      if (!setStr) return [0, 0];
+
+      const parts = setStr.split("-").map(Number);
+      if (parts.length !== 2 || parts.some(isNaN)) return [0, 0];
+
+      const [scoreA, scoreB] = parts;
+
+      if (scoreA > scoreB) return [1, 0];
+      if (scoreB > scoreA) return [0, 1];
+      return [0, 0]; // Unentschieden
+    }
+    let points_A = 0;
+    let points_B = 0;
+    [ row.set_one, row.set_two, row.set_three ].forEach(set => {
+      const [pA, pB] = compareSet(set);
+      points_A += pA;
+      points_B += pB;
+    });
+
+    const result = host ? `${points_A}:${points_B}` : `${points_B}:${points_A}`
+
+
+    return {
+        game_id: row.game_id,
+        age_divison: row.age_divison,
+        timestamp: row.timestamp,
+        valid: row.valid,
+        opponent_display_name: opponent_display_name,
+        result: result,
+        play_type_db: 'games_single'
+    };
+  });
 }
 
 async function create(singleGame) {
