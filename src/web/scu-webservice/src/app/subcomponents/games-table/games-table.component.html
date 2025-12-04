@@ -5,7 +5,12 @@
         {{ getHeaderLabel(col) }}
       </th>
       <td mat-cell *matCellDef="let row">
-        {{ row[col] }}
+        <ng-container *ngIf="col === 'timestamp_date'; else normalCell">
+          {{ row.timestamp_date | date:'dd.MM.yyyy' }}
+        </ng-container>
+        <ng-template #normalCell>
+          {{ row[col] }}
+        </ng-template>
       </td>
     </ng-container>
 

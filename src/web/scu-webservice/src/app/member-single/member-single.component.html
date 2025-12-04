@@ -32,7 +32,7 @@
     </table>
     <div class="horizontal-seperator"></div>
     <p>Spielhistorie</p>
-    <app-games-table [games]="gamesData" [displayedColumns]="['timestamp', 'game_id', 'opponent_display_name', 'result']">
+    <app-games-table [games]="gamesData" [displayedColumns]="['timestamp_date', 'game_id', 'opponent_display_name', 'result']" [columnLabels]="{opponent_display_name: 'Gegner'}">
     </app-games-table>
   </div>
   <app-footer />

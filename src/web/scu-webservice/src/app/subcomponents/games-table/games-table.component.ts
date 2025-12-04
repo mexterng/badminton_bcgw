@@ -9,6 +9,7 @@ import { CustomMatPaginatorIntl } from './custom-paginator-intl';
 export interface Game {
   game_id: number;
   timestamp: string;
+  timestamp_date?: Date;
   valid: number;
   host_display_name: string;
   opponent_display_name: string;
@@ -30,7 +31,8 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
   @Input() columnLabels: Record<string, string> = {}
   private defaultColumnLabels: Record<string, string> = {
     game_id: 'Spielnummer',
-    timestamp: 'Datum',
+    timestamp: 'Datum (ISO)',
+    timestamp_date: 'Datum',
     valid: 'Gültig',
     result: 'Ergebnis'
   };
@@ -42,7 +44,10 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['games']) {
-      this.dataSource.data = this.games;
+      this.dataSource.data = this.games.map(game => ({
+        ...game,
+        timestamp_date: new Date(game.timestamp)
+      }));
     }
     if (changes['columnLabels']) {
       this.defaultColumnLabels = { ...this.defaultColumnLabels, ...this.columnLabels };
