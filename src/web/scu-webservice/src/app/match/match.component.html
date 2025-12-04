@@ -1,0 +1,11 @@
+<div class="match-side">
+    <app-header [heading]="title"/>
+    <div class="content">
+        <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
+        <div class="horizontal-seperator"></div>
+        <div class="scroll-wrapper">
+        </div>
+        <a id="addMatchBtn" mat-flat-button href="./create-match">+ Spiel hinzufügen</a>
+    </div>
+    <app-footer/>
+</div>
