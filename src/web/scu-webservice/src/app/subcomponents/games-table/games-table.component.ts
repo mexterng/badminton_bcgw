@@ -27,6 +27,13 @@ export interface Game {
 export class GamesTableComponent implements AfterViewInit, OnChanges {
   @Input() games: Game[] = [];
   @Input() displayedColumns: string[] = [];
+  @Input() columnLabels: Record<string, string> = {}
+  private defaultColumnLabels: Record<string, string> = {
+    game_id: 'Spielnummer',
+    timestamp: 'Datum',
+    valid: 'Gültig',
+    result: 'Ergebnis'
+  };
 
   dataSource = new MatTableDataSource<Game>();
 
@@ -37,11 +44,18 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
     if (changes['games']) {
       this.dataSource.data = this.games;
     }
+    if (changes['columnLabels']) {
+      this.defaultColumnLabels = { ...this.defaultColumnLabels, ...this.columnLabels };
+    }
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getHeaderLabel(col: string): string {
+    return this.defaultColumnLabels[col] ?? col;
   }
 }
 
