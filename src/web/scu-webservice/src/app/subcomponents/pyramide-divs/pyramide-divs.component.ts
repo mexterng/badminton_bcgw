@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 interface Member {
   member_id: number;
@@ -32,6 +33,8 @@ export class PyramideDivsComponent implements OnChanges {
   rectHeight = 30; // Höhe fix für einzeiligen Text
   spacing = 5;
   baseFontSize = 12;
+
+  constructor(private router: Router) {}
 
   private measureTextWidth(text: string): number {
     // Temporärer Canvas für Textmessung
@@ -99,7 +102,7 @@ export class PyramideDivsComponent implements OnChanges {
 
 
   onMemberClick(m: Member) {
-    console.log('Clicked', m);
+    this.router.navigate(['/member', m.member_id]);
   }
 
   // Drag & Drop
