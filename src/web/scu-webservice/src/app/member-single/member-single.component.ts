@@ -51,6 +51,10 @@ export class MemberSingleComponent {
     this.memberId = this.route.snapshot.paramMap.get('id');
     if (!this.memberId) return;
 
+    this.loadMemberInfos();
+  }
+
+  private loadMemberInfos() {
     this.http.get<Partial<Member>>(`/api/member/${this.memberId}`).subscribe({
       next: data => {
         this.member = { ...this.member, ...data };
