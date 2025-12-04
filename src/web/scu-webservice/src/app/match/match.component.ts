@@ -6,11 +6,12 @@ import { GameCategorySelectorComponent } from '../subcomponents/game-category-se
 import { GamesTableComponent, Game } from '../subcomponents/games-table/games-table.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-match',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, MatButtonModule, GamesTableComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, MatButtonModule, GamesTableComponent, RouterModule],
   templateUrl: './match.component.html',
   styleUrl: './match.component.scss'
 })

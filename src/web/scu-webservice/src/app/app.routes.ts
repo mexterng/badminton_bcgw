@@ -33,7 +33,7 @@ export const routes: Routes = [
         component: MatchComponent
     },
     {
-        path: 'create-match',
+        path: 'match/create',
         component: CreateMatchComponent
     },
     {
