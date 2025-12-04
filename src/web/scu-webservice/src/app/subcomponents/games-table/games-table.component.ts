@@ -30,7 +30,7 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
   @Input() displayedColumns: string[] = [];
   @Input() columnLabels: Record<string, string> = {}
   private defaultColumnLabels: Record<string, string> = {
-    game_id: 'Spielnummer',
+    game_id: 'Nr.',
     timestamp: 'Datum (ISO)',
     timestamp_date: 'Datum',
     valid: 'Gültig',
