@@ -68,6 +68,7 @@ async function getGamesOfMember(member_id) {
 async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
   let sqlQuery = `
     SELECT g.*,
+          ad.description AS age_division_description,
           mAa.display_name AS tA_pA_display_name,
           mAb.display_name AS tA_pB_display_name,
           mBa.display_name AS tB_pA_display_name,
@@ -75,6 +76,7 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
     FROM games_double g
     INNER JOIN doubles dA ON g.player_a = dA.doubles_id
     INNER JOIN doubles dB ON g.player_b = dB.doubles_id
+    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
     LEFT JOIN member mAa ON dA.player_a = mAa.member_id
     LEFT JOIN member mAb ON dA.player_b = mAb.member_id
     LEFT JOIN member mBa ON dB.player_a = mBa.member_id
@@ -101,6 +103,7 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
     return {
       game_id: row.game_id,
       age_division: row.age_division,
+      age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,

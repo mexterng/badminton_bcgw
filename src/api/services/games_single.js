@@ -42,6 +42,7 @@ async function getGamesOfMember(member_id) {
     return {
       game_id: row.game_id,
       age_division: row.age_division,
+      age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,
