@@ -8,6 +8,8 @@ import { CustomMatPaginatorIntl } from './custom-paginator-intl';
 
 export interface Game {
   game_id: number;
+  age_division: number;
+  age_division_initial: string;
   timestamp: string;
   timestamp_date?: Date;
   valid: number;
@@ -31,6 +33,8 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
   @Input() columnLabels: Record<string, string> = {}
   private defaultColumnLabels: Record<string, string> = {
     game_id: 'Nr.',
+    age_division: "AK (ID)",
+    age_division_initial: "AK",
     timestamp: 'Datum (ISO)',
     timestamp_date: 'Datum',
     valid: 'Gültig',

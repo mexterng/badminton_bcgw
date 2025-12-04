@@ -17,9 +17,11 @@ async function getSingle(id) {
 async function getGamesOfMember(member_id) {
   const sqlSelect = `
     SELECT g.*, 
+          ad.description AS age_division_description,
           mA.display_name AS player_a_display_name,
           mB.display_name AS player_b_display_name
     FROM games_single g
+    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
     LEFT JOIN member mA ON g.player_a = mA.member_id
     LEFT JOIN member mB ON g.player_b = mB.member_id
     WHERE g.player_a = ? OR g.player_b = ?
@@ -39,7 +41,7 @@ async function getGamesOfMember(member_id) {
 
     return {
       game_id: row.game_id,
-      age_divison: row.age_divison,
+      age_division: row.age_division,
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,
@@ -53,9 +55,11 @@ async function getGamesOfMember(member_id) {
 async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
   let sqlQuery = `
     SELECT g.*, 
+          ad.description AS age_division_description,
           mA.display_name AS player_a_display_name,
           mB.display_name AS player_b_display_name
     FROM games_single g
+    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
     LEFT JOIN member mA ON g.player_a = mA.member_id
     LEFT JOIN member mB ON g.player_b = mB.member_id
     WHERE g.age_division = ?
@@ -80,7 +84,8 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
 
     return {
       game_id: row.game_id,
-      age_divison: row.age_divison,
+      age_division: row.age_division,
+      age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,

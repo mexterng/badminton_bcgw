@@ -17,6 +17,7 @@ async function getSingle(id) {
 async function getGamesOfMember(member_id) {
   const sqlSelect = `
     SELECT g.*,
+          ad.description AS age_division_description,
           dA.player_a AS tA_pA_id,
           dA.player_b AS tA_pB_id,
           dB.player_a AS tB_pA_id,
@@ -28,6 +29,7 @@ async function getGamesOfMember(member_id) {
     FROM games_double g
     INNER JOIN doubles dA ON g.player_a = dA.doubles_id
     INNER JOIN doubles dB ON g.player_b = dB.doubles_id
+    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
     LEFT JOIN member mAa ON dA.player_a = mAa.member_id
     LEFT JOIN member mAb ON dA.player_b = mAb.member_id
     LEFT JOIN member mBa ON dB.player_a = mBa.member_id
@@ -51,7 +53,8 @@ async function getGamesOfMember(member_id) {
 
     return {
       game_id: row.game_id,
-      age_divison: row.age_divison,
+      age_division: row.age_division,
+      age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,
@@ -97,7 +100,7 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
 
     return {
       game_id: row.game_id,
-      age_divison: row.age_divison,
+      age_division: row.age_division,
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,
