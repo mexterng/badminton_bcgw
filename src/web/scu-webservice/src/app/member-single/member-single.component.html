@@ -9,27 +9,32 @@
       </button>
     </div>
     <table id="personData">
-      <tr>
-        <th>Anzeigename</th>
-        <td>{{ member?.display_name }}</td>
-      </tr>
-      <tr>
-        <th>Vorname</th>
-        <td>{{ member?.first_name }}</td>
-      </tr>
-      <tr>
-        <th>Nachname</th>
-        <td>{{ member?.last_name }}</td>
-      </tr>
-      <tr>
-        <th>Geschlecht</th>
-        <td>{{ member?.gender }}</td>
-      </tr>
-      <tr>
-        <th>Altersklasse(n)</th>
-        <td>{{ member?.age_division_str?.join(', ') }}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <th>Anzeigename</th>
+          <td>{{ member?.display_name }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Vorname</th>
+          <td>{{ member?.first_name }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Nachname</th>
+          <td>{{ member?.last_name }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Geschlecht</th>
+          <td>{{ member?.gender }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Altersklasse(n)</th>
+          <td>{{ member?.age_division_str?.join(', ') }}</td>
+        </tr>
+      </tbody>
     </table>
+    <a id="readMoreMemberToggle" (click)="toggleReadMoreMember()">
+      {{ readMoreMemberVisible ? 'weniger anzeigen' : 'mehr anzeigen' }}
+    </a>
     <div class="horizontal-seperator"></div>
     <p>Spielhistorie</p>
     <app-games-table [games]="gamesData" [displayedColumns]="['timestamp_date', 'game_id', 'opponent_display_name', 'result']" [columnLabels]="{opponent_display_name: 'Gegner'}">

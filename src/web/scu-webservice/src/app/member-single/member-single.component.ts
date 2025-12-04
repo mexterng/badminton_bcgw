@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from '../subcomponents/header/header.component';
@@ -20,7 +21,7 @@ interface Member {
 @Component({
   selector: 'app-member-single',
   standalone: true,
-  imports: [HeaderComponent, GamesTableComponent, FooterComponent, MatButtonModule, MatIconModule],
+  imports: [HeaderComponent, GamesTableComponent, FooterComponent, MatButtonModule, MatIconModule, CommonModule],
   templateUrl: './member-single.component.html',
   styleUrls: ['./member-single.component.scss']
 })
@@ -45,7 +46,8 @@ export class MemberSingleComponent implements OnInit {
     age_division_id: [],
   };
 
-  gamesData: Game[] = [] //[{"game_id":6,"timestamp":"2025-09-29T13:39:47.000Z","valid":1,"host_display_name":"SmashKing","opponent_display_name":"AceMan","result":"2:0","play_type_db":"games_single"},{"game_id":8,"timestamp":"2025-09-29T13:39:47.000Z","valid":1,"host_display_name":"SmashKing","opponent_display_name":"NetNinja","result":"1:2","play_type_db":"games_single"},{"game_id":16,"timestamp":"2025-12-01T12:30:26.000Z","valid":1,"host_display_name":"SmashKing","opponent_display_name":"NetNinja","result":"2:0","play_type_db":"games_single"},{"game_id":17,"timestamp":"2025-12-01T12:38:31.000Z","valid":1,"host_display_name":"SmashKing","opponent_display_name":"NetNinja","result":"2:0","play_type_db":"games_single"},{"game_id":18,"timestamp":"2025-12-01T12:48:58.000Z","valid":1,"host_display_name":"SmashKing","opponent_display_name":"CourtQueen","result":"1:2","play_type_db":"games_single"},{"game_id":3,"timestamp":"2025-09-29T13:39:47.000Z","valid":1,"host_display_name":"SmashKing/AceMan","opponent_display_name":"DropShotDiva/ServeStar","result":"2:0","play_type_db":"games_double"},{"game_id":6,"timestamp":"2025-09-29T13:39:47.000Z","valid":1,"host_display_name":"SmashKing/AceMan","opponent_display_name":"ShuttleBelle/FleetFiona","result":"0:2","play_type_db":"games_double"},{"game_id":9,"timestamp":"2025-09-29T13:39:47.000Z","valid":1,"host_display_name":"SmashKing/AceMan","opponent_display_name":"NetNinja/CourtQueen","result":"1:2","play_type_db":"games_double"},{"game_id":13,"timestamp":"2025-09-29T13:39:47.000Z","valid":1,"host_display_name":"SmashKing/AceMan","opponent_display_name":"VolleyVic/RacketRick","result":"2:1","play_type_db":"games_double"},{"game_id":16,"timestamp":"2025-12-01T14:33:47.000Z","valid":1,"host_display_name":"SmashKing/ShuttleBelle","opponent_display_name":"NetNinja/CourtQueen","result":"2:0","play_type_db":"games_double"}];
+  gamesData: Game[] = [];
+  readMoreMemberVisible = false;
 
   ngOnInit() {
     this.memberId = this.route.snapshot.paramMap.get('id');
@@ -93,5 +95,9 @@ export class MemberSingleComponent implements OnInit {
     if (g === 'm') return 'Männlich';
     if (g === 'w') return 'Weiblich';
     return '';
+  }
+
+  toggleReadMoreMember(): void {
+    this.readMoreMemberVisible = !this.readMoreMemberVisible;
   }
 }
