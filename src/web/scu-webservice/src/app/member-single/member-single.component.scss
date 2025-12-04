@@ -1,0 +1,70 @@
+.side {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.content > *:not(app-games-table) {
+  flex: 0 0 auto;
+}
+
+.content > app-games-table {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.button-row {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 0 15px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.material-icons {
+  font-size: 1rem;
+  padding-right: 0.3em;
+}
+
+#personData {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  width: 100%;
+}
+
+#personData th,
+#personData td {
+  text-align: left;
+  padding: 4px;
+}
+
+#personData th {
+  white-space: nowrap;
+  padding-right: 1rem;
+}
+#personData td {
+  border: 1px solid #000;
+  width: 100%;
+  border-radius: 4px;
+}
+
+#readMoreMemberToggle {
+  cursor: pointer;
+  text-align: end;
+}

@@ -1,0 +1,44 @@
+<div class="side">
+  <app-header [heading]="title" />
+  <div class="content">
+    <div class="header-row">
+      <p>Personendaten</p>
+      <button mat-flat-button color="primary" (click)="editMember()">
+        <span class="material-icons">edit</span>
+        Bearbeiten
+      </button>
+    </div>
+    <table id="personData">
+      <tbody>
+        <tr>
+          <th>Anzeigename</th>
+          <td>{{ member?.display_name }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Vorname</th>
+          <td>{{ member?.first_name }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Nachname</th>
+          <td>{{ member?.last_name }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Geschlecht</th>
+          <td>{{ member?.gender }}</td>
+        </tr>
+        <tr *ngIf="readMoreMemberVisible">
+          <th>Altersklasse(n)</th>
+          <td>{{ member?.age_division_str?.join(', ') }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <a id="readMoreMemberToggle" (click)="toggleReadMoreMember()">
+      {{ readMoreMemberVisible ? 'weniger anzeigen' : 'mehr anzeigen' }}
+    </a>
+    <div class="horizontal-seperator"></div>
+    <p>Spielhistorie</p>
+    <app-games-table [games]="gamesData" [displayedColumns]="['timestamp_date', 'game_id', 'opponent_display_name', 'result']" [columnLabels]="{opponent_display_name: 'Gegner'}">
+    </app-games-table>
+  </div>
+  <app-footer />
+</div>

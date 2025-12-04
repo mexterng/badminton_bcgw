@@ -186,6 +186,25 @@ mat-form-field {
   margin: 1rem 0;
 }
 
+.mat-mdc-header-cell {
+  font-weight: bold !important;
+  padding: 0 5px !important;
+}
+.mat-sort-header-container {
+  justify-content: center;
+  padding-left: 24px;
+}
+
+.mat-mdc-cell {
+  text-align: center !important;
+  padding: 0 0.5rem !important;
+}
+
+.mat-mdc-paginator-container {
+  justify-content: center !important;
+  flex-wrap: wrap-reverse !important;
+}
+
 /* Icons */
 /* fallback */
 @font-face {
