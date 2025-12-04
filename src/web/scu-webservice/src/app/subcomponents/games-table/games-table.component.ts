@@ -38,7 +38,6 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource = new MatTableDataSource(this.games);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
