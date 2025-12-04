@@ -50,7 +50,48 @@ async function getGamesOfMember(member_id) {
 }
 
 async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
-  return await games.getGamesOfAgeDivision(age_division, games_table, page, getAll);
+  let sqlQuery = `
+    SELECT g.*, 
+          mA.display_name AS player_a_display_name,
+          mB.display_name AS player_b_display_name
+    FROM games_single g
+    LEFT JOIN member mA ON g.player_a = mA.member_id
+    LEFT JOIN member mB ON g.player_b = mB.member_id
+    WHERE g.age_division = ?
+  `;
+  if (getAll) {
+    page = -1;
+  } else {
+    const offset = Number(helper.getOffset(page, config.listPerPage));
+    sqlQuery += ` LIMIT ${offset},${config.listPerPage}`;
+  }
+  const rows = await db.query(sqlQuery, [age_division]);
+  let data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+
+  data = data.map(row => {
+    const names = games.buildDisplayNames(
+      true,
+      row.player_a_display_name,
+      row.player_b_display_name
+    );
+
+    return {
+      game_id: row.game_id,
+      age_divison: row.age_divison,
+      timestamp: row.timestamp,
+      valid: row.valid,
+      host_display_name: names.host_display_name,
+      opponent_display_name: names.opponent_display_name,
+      result: games.computeResult(row, true),
+      play_type_db: "games_single"
+    };
+  });
+  return {
+    data,
+    meta,
+  };
 }
 
 async function create(singleGame) {
