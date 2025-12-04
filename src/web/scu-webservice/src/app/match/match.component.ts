@@ -31,8 +31,8 @@ export class MatchComponent {
     // choose API endpoint based on play type
     const endpoint =
       event.playType === 'single'
-        ? `/api/single_games/age_division/${event.ageClass}`
-        : `/api/double_games/age_division/${event.ageClass}`;
+        ? `/api/single_games/age_division/${event.ageClass}?all=true`
+        : `/api/double_games/age_division/${event.ageClass}?all=true`;
 
     this.loading = true;
 
