@@ -1,6 +1,7 @@
 const db = require("./db");
 const helper = require("../helper");
 const games = require("./games_helper");
+const config = require("../config");
 
 const games_table = "games_double";
 const pyramid_table = "pyramid_double";
@@ -16,6 +17,7 @@ async function getSingle(id) {
 async function getGamesOfMember(member_id) {
   const sqlSelect = `
     SELECT g.*,
+          ad.description AS age_division_description,
           dA.player_a AS tA_pA_id,
           dA.player_b AS tA_pB_id,
           dB.player_a AS tB_pA_id,
@@ -27,6 +29,7 @@ async function getGamesOfMember(member_id) {
     FROM games_double g
     INNER JOIN doubles dA ON g.player_a = dA.doubles_id
     INNER JOIN doubles dB ON g.player_b = dB.doubles_id
+    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
     LEFT JOIN member mAa ON dA.player_a = mAa.member_id
     LEFT JOIN member mAb ON dA.player_b = mAb.member_id
     LEFT JOIN member mBa ON dB.player_a = mBa.member_id
@@ -50,7 +53,8 @@ async function getGamesOfMember(member_id) {
 
     return {
       game_id: row.game_id,
-      age_divison: row.age_divison,
+      age_division: row.age_division,
+      age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,
       host_display_name: names.host_display_name,
@@ -62,7 +66,53 @@ async function getGamesOfMember(member_id) {
 }
 
 async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
-  return await games.getGamesOfAgeDivision(age_division, games_table, page, getAll);
+  let sqlQuery = `
+    SELECT g.*,
+          mAa.display_name AS tA_pA_display_name,
+          mAb.display_name AS tA_pB_display_name,
+          mBa.display_name AS tB_pA_display_name,
+          mBb.display_name AS tB_pB_display_name
+    FROM games_double g
+    INNER JOIN doubles dA ON g.player_a = dA.doubles_id
+    INNER JOIN doubles dB ON g.player_b = dB.doubles_id
+    LEFT JOIN member mAa ON dA.player_a = mAa.member_id
+    LEFT JOIN member mAb ON dA.player_b = mAb.member_id
+    LEFT JOIN member mBa ON dB.player_a = mBa.member_id
+    LEFT JOIN member mBb ON dB.player_b = mBb.member_id
+    WHERE g.age_division = ?
+  `;
+  if (getAll) {
+    page = -1;
+  } else {
+    const offset = Number(helper.getOffset(page, config.listPerPage));
+    sqlQuery += ` LIMIT ${offset},${config.listPerPage}`;
+  }
+  const rows = await db.query(sqlQuery, [age_division]);
+  let data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+
+  data = data.map(row => {
+    const tA_display = `${row.tA_pA_display_name}/${row.tA_pB_display_name}`;
+    const tB_display = `${row.tB_pA_display_name}/${row.tB_pB_display_name}`;
+
+    const names = games.buildDisplayNames(true, tA_display, tB_display);
+
+    return {
+      game_id: row.game_id,
+      age_division: row.age_division,
+      timestamp: row.timestamp,
+      valid: row.valid,
+      host_display_name: names.host_display_name,
+      opponent_display_name: names.opponent_display_name,
+      result: games.computeResult(row, true),
+      play_type_db: "games_double"
+    };
+  });
+  return {
+    data,
+    meta,
+  };
 }
 
 async function create(singleGame) {

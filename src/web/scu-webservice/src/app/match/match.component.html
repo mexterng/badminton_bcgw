@@ -1,0 +1,10 @@
+<div class="match-side">
+    <app-header [heading]="title"/>
+    <div class="content">
+        <app-game-category-selector (selectionChanged)="onSelectionChanged($event)"></app-game-category-selector>
+        <div class="horizontal-seperator"></div>
+        <app-games-table [games]="allGames" [displayedColumns]="['timestamp_date', 'host_display_name', 'opponent_display_name', 'result']" [columnLabels]="{host_display_name: 'Heim', opponent_display_name: 'Gast'}"></app-games-table>
+        <a id="addMatchBtn" mat-flat-button [routerLink]="['/match', 'create']">+ Spiel hinzufügen</a>
+    </div>
+    <app-footer/>
+</div>

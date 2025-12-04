@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PyramideComponent } from "./pyramide/pyramide.component";
 import { MemberComponent } from './member/member.component';
+import { MatchComponent } from './match/match.component';
 import { CreateMatchComponent } from './create-match/create-match.component';
 import { MemberCreateComponent } from './member-create/member-create.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
@@ -28,7 +29,11 @@ export const routes: Routes = [
         component: MemberComponent
     },
     {
-        path: 'create-match',
+        path: 'match',
+        component: MatchComponent
+    },
+    {
+        path: 'match/create',
         component: CreateMatchComponent
     },
     {

@@ -68,7 +68,12 @@ router.get('/member/:id', async function(req, res, next) {
 /*GET games by age_division */
 router.get('/age_division/:id', async function(req, res, next) {
   try {
-    res.json(await game_singles.getGamesOfAgeDivision(req.params.id, 1, true));
+    if (req.query.all === 'true') {
+      res.json(await game_singles.getGamesOfAgeDivision(req.params.id, 1, true));
+    } else {
+      const page = parseInt(req.query.page, 10) || 1;
+      res.json(await game_singles.getGamesOfAgeDivision(req.params.id, page));
+    }
   } catch (err) {
     console.error(`Error while getting game`, err.message);
     next(err);

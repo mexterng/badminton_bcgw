@@ -10,6 +10,7 @@ import { getDoublesDisplayName } from '../utils/doubles-utils';
 import { firstValueFrom } from 'rxjs';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-match',
@@ -38,7 +39,7 @@ export class CreateMatchComponent {
   @ViewChild(MemberSelectorComponent) memberSelector!: MemberSelectorComponent;
   @ViewChildren(SetInputComponent) setInputs!: QueryList<SetInputComponent>;
   
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {
     this.initMembers();
   }
 
@@ -277,7 +278,7 @@ export class CreateMatchComponent {
         this.loading = false;
         alert('Spiel erfolgreich gespeichert');
         // optional: redirect to overview
-        window.location.href = '/create-match';
+        this.router.navigate(['/match', 'create']);
       },
       error: (err) => {
         this.loading = false;
@@ -317,7 +318,7 @@ export class CreateMatchComponent {
       await firstValueFrom(this.http.post('/api/double_games', gamePayload));
       this.loading = false;
       alert('Spiel erfolgreich gespeichert');
-      window.location.href = '/create-match';
+      this.router.navigate(['/match', 'create']);
       
     } catch (err) {
       this.loading = false;
