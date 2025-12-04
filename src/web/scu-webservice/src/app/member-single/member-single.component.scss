@@ -11,11 +11,11 @@
   height: 200px;
 }
 
-.content > *:not(app-member-form) {
+.content > *:not(app-games-table) {
   flex: 0 0 auto;
 }
 
-.content > app-member-form {
+.content > app-games-table {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;

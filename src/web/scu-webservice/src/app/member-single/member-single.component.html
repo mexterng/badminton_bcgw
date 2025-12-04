@@ -30,6 +30,10 @@
         <td>{{ member?.age_division_str?.join(', ') }}</td>
       </tr>
     </table>
+    <div class="horizontal-seperator"></div>
+    <p>Spielhistorie</p>
+    <app-games-table [games]="gamesData" [displayedColumns]="['timestamp', 'game_id', 'opponent_display_name', 'result']">
+    </app-games-table>
   </div>
   <app-footer />
 </div>
