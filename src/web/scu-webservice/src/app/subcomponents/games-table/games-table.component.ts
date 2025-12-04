@@ -2,8 +2,9 @@ import { Component, Input, AfterViewInit, ViewChild, OnChanges, SimpleChanges } 
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { CustomMatPaginatorIntl } from './custom-paginator-intl';
 
 export interface Game {
   game_id: number;
@@ -18,7 +19,8 @@ export interface Game {
 @Component({
   selector: 'app-games-table',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule, MatPaginatorModule],
+  providers: [{ provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl }],
   templateUrl: './games-table.component.html',
   styleUrl: './games-table.component.scss',
 })
