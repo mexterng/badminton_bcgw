@@ -1,13 +1,12 @@
 .footer-block{
-    width: calc(100% - 4px);
+    width: calc(100% - 20vw);
     height: 100%;
     display: flex;
     flex-flow: row;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--background-primary);
-    border: 2px solid var(--theme-control-blue-negative);
-    border-radius: 10px;
+    background-color: var(--scu-grey);
+    padding: 0 10vw;
 }
 
 .element{
