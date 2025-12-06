@@ -7,19 +7,23 @@
 // Define color variables
 $background-primary: #fafafa;  
 $scu-theme: #e3311a;
-$scu-black: #210f04;
+$scu-black: #0f0702;
+$scu-grey: #a0b9bf;
+$scu-blue: #2a628f;
 $theme-control-blue-negative:  #7c898b;
 $theme-control-blue-positive:  #a5ccd1;
 $theme-control-grey-negative:  #848586;
 $theme-control-grey-positive:  #baa989;
-$color-male-blue: #476c9b;
-$color-female-pink: #e2b4bd;
+$color-male-blue: #1e07b0;
+$color-female-pink: #8e07b0;
 
 // Export as CSS variables for runtime use
 :root {
     --background-primary: #{$background-primary};
     --scu-theme: #{$scu-theme};
     --scu-black: #{$scu-black};
+    --scu-grey: #{$scu-grey};
+    --scu-blue: #{$scu-blue};
     --theme-control-blue-negative: #{$theme-control-blue-negative};
     --theme-control-blue-positive: #{$theme-control-blue-positive};
     --theme-control-grey-negative: #{$theme-control-grey-negative};
