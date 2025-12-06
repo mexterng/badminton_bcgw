@@ -5,6 +5,7 @@ import { HeaderComponent } from '../subcomponents/header/header.component';
 import { GameCategorySelectorComponent } from '../subcomponents/game-category-selector/game-category-selector.component';
 import { MemberSelectorComponent, Member } from '../subcomponents/member-selector/member-selector.component';
 import { SetInputComponent } from '../subcomponents/set-input/set-input.component';
+import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 import { getDoublesDisplayName } from '../utils/doubles-utils';
 import { firstValueFrom } from 'rxjs';
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-match',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, MemberSelectorComponent, SetInputComponent],
+  imports: [CommonModule, HttpClientModule, HeaderComponent, FooterComponent, GameCategorySelectorComponent, MemberSelectorComponent, MatButtonModule, SetInputComponent],
   templateUrl: './create-match.component.html',
   styleUrl: './create-match.component.scss'
 })
