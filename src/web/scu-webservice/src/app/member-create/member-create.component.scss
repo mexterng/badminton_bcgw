@@ -1,16 +1,3 @@
-.side {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.content {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  height: 200px;
-}
-
 .content > *:not(app-member-form) {
   flex: 0 0 auto;
 }

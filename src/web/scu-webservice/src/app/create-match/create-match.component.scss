@@ -3,11 +3,6 @@
     overflow-y: auto;
     padding: 0 10px;
 }
-.createMatch-side {
-    display: flex;
-    flex-direction: column;  /* Stapelt Kinder vertikal */
-    height: 100vh;           /* gesamte Browserhöhe */
-}
 
 app-member-selector {
     display: block;

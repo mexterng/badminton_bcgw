@@ -42,6 +42,8 @@ body {
   margin:0;
   color: var(--scu-black);
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 app-header{
@@ -52,17 +54,16 @@ app-header{
 .side{
     display: flex;
     flex-direction: column;  
-    height: 100vh;           
+    height: 100svh;           
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    flex: 1;                 /* nimmt den restlichen Platz (95%) */
-    overflow-x: auto;          /* falls Inhalt größer ist → Scrollbar */
-    background-color: var(--background-primary);
-    margin: 3svh 10vw 17svh 10vw;
+    flex: 1;
     overflow: hidden;
+    background-color: var(--background-primary);
+    margin: 3svh 10vw;
 }
 
 .content > :first-child {
