@@ -1,16 +1,14 @@
 <div class="pyramid-container"
-    (mousedown)="onDragStart($event)"
-    (mousemove)="onDragMove($event)"
-    (mouseup)="onDragEnd($event)"
-    (mouseleave)="onDragEnd($event)">
+    (pointerdown)="onPointerStart($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerEnd($event)">
     <div *ngIf="loading" class="loading-overlay">
     <span class="spinner"></span>
 </div>
 <div class="pyramid-container"
-    (mousedown)="onDragStart($event)"
-    (mousemove)="onDragMove($event)"
-    (mouseup)="onDragEnd($event)"
-    (mouseleave)="onDragEnd($event)">
+    (pointerdown)="onPointerStart($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerEnd($event)">
 <div *ngFor="let level of levelsArr; let i = index"
         class="level"
         [style.top.px]="getLevelY(i)"

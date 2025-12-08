@@ -106,13 +106,17 @@ export class PyramideDivsComponent implements OnChanges {
   }
 
   // Drag & Drop
-  onDragStart(event: MouseEvent) {
+  onPointerStart(event: PointerEvent) {
     this.isDragging = true;
     this.lastMouseX = event.clientX;
     this.lastMouseY = event.clientY;
+      
+    // Capture pointer (safer on mobile)
+    (event.target as HTMLElement).setPointerCapture(event.pointerId);
   }
 
-  onDragMove(event: MouseEvent) {
+  onPointerMove(event: PointerEvent) {
+    event.preventDefault();
     if (!this.isDragging) return;
     const dx = event.clientX - this.lastMouseX;
     const dy = event.clientY - this.lastMouseY;
@@ -122,6 +126,7 @@ export class PyramideDivsComponent implements OnChanges {
     const {width: containerWidth, height: containerHeight} = this.getContainerSize('.pyramid-container');
     const {width: pyramidWidthZoom, height: pyramidHeightZoom} = this.getPyramideSizeZoom();
 
+    // Limit movement
     this.offsetX = Math.min(Math.max(this.offsetX, -pyramidWidthZoom + this.rectWidth * this.zoom), pyramidWidthZoom + (containerWidth - pyramidWidthZoom)/2 - this.rectWidth * this.zoom);
     this.offsetY = Math.min(Math.max(this.offsetY, -pyramidHeightZoom + this.rectHeight * this.zoom), containerHeight - this.rectHeight * this.zoom);
 
@@ -129,8 +134,11 @@ export class PyramideDivsComponent implements OnChanges {
     this.lastMouseY = event.clientY;
   }
 
-  onDragEnd(event: MouseEvent) {
+  onPointerEnd(event: PointerEvent) {
     this.isDragging = false;
+
+    // Release pointer
+    (event.target as HTMLElement).releasePointerCapture(event.pointerId);
   }
 
   // Zoom via Maus-Rad
