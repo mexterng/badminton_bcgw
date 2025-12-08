@@ -28,6 +28,7 @@ export class PyramideDivsComponent implements OnChanges {
   isDragging = false;
   lastMouseX = 0;
   lastMouseY = 0;
+  moved = false;
 
   rectWidth = 80;  // Basisbreite ohne Zoom
   rectHeight = 30; // Höhe fix für einzeiligen Text
@@ -102,12 +103,14 @@ export class PyramideDivsComponent implements OnChanges {
 
 
   onMemberClick(m: Member) {
+    if (this.moved) return;
     this.router.navigate(['/member', m.member_id]);
   }
 
   // Drag & Drop
   onPointerStart(event: PointerEvent) {
     this.isDragging = true;
+    this.moved = false;
     this.lastMouseX = event.clientX;
     this.lastMouseY = event.clientY;
       
@@ -120,6 +123,11 @@ export class PyramideDivsComponent implements OnChanges {
     if (!this.isDragging) return;
     const dx = event.clientX - this.lastMouseX;
     const dy = event.clientY - this.lastMouseY;
+
+    if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
+      this.moved = true;
+    }
+
     this.offsetX += dx;
     this.offsetY += dy;
 
