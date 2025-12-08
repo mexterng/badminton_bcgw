@@ -6,6 +6,9 @@
   cursor: grab;
   align-items: center;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* ältere Browser */
 }
 .level {
   position: absolute;
