@@ -59,7 +59,7 @@ export class PyramideDivsComponent implements OnChanges {
       const w = this.measureTextWidth(item.display_name);
       if (w > maxWidth) maxWidth = w;
     });
-    this.rectWidth = maxWidth;
+    this.rectWidth = maxWidth + 10;
   }
 
   private getLevels(): Member[][] {
