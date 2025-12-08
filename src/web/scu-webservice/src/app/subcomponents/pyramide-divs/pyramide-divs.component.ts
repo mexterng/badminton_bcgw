@@ -78,11 +78,11 @@ export class PyramideDivsComponent implements OnChanges {
     return levels;
   }
 
-  getColor(gender?: 'm' | 'w' | 'MX' | 'DD' | 'HD') {
-    if (gender === 'm' || gender === 'HD') return '#ADD8E6';
-    if (gender === 'w' || gender === 'DD') return '#FFB6C1';
+  getColor(gender?: 'm' | 'w' | 'd' | 'MX' | 'DD' | 'HD') {
+    if (gender === 'm' || gender === 'HD') return 'var(--color-male)';
+    if (gender === 'w' || gender === 'DD') return 'var(--color-female)';
     if (gender === undefined) return '#FAFAFA';
-    return '#D3D3D3';
+    return 'var(--color-divers)';
   }
 
   getLevelY(index: number) {
