@@ -263,7 +263,7 @@ export class CreateMatchComponent {
     const gamePayload: any = {
       player_a: this.selectedMembers[`player1`].member_id,
       player_b: this.selectedMembers[`player2`].member_id,
-      age_division: this.selectedAgeClass,
+      age_division_id: this.selectedAgeClass,
       winner_id: winnerMember.member_id,
       set_one: `${fullSetData['set1'].a}-${fullSetData['set1'].b}`,
       set_two: `${fullSetData['set2'].a}-${fullSetData['set2'].b}`,
@@ -306,7 +306,7 @@ export class CreateMatchComponent {
       const gamePayload: any = {
         player_a: double_a_id,
         player_b: double_b_id,
-        age_division: this.selectedAgeClass,
+        age_division_id: this.selectedAgeClass,
         winner_id: winner_id,
         set_one: `${fullSetData['set1'].a}-${fullSetData['set1'].b}`,
         set_two: `${fullSetData['set2'].a}-${fullSetData['set2'].b}`,

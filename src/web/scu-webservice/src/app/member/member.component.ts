@@ -85,7 +85,7 @@ export class MemberComponent implements OnInit{
 
     // Filter by age group
     if (this.selectedAgegroup && this.selectedAgegroup !== '-') {
-      filtered = filtered.filter(m => m.age_division_id.includes(parseInt(this.selectedAgegroup!, 10)));
+      filtered = filtered.filter(m => m.age_division.includes(parseInt(this.selectedAgegroup!, 10)));
     }
 
     // Filter by gender

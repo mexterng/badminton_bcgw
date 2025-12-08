@@ -23,15 +23,15 @@ async function getMultiple(page = 1, getAll = false) {
   };
 }
 
-async function getMultipleByAgeDivision(age_division, page = 1, getAll = false) {
+async function getMultipleByAgeDivision(age_division_id, page = 1, getAll = false) {
   let rows;
-  const ageDivisionValue = age_division;
+  const ageDivisionValue = age_division_id;
   if (getAll) {
-      const sqlQuery = "SELECT * FROM member WHERE JSON_CONTAINS(age_division_id, CAST(? AS JSON), '$')";
+      const sqlQuery = "SELECT * FROM member WHERE JSON_CONTAINS(age_division, CAST(? AS JSON), '$')";
       rows = await db.query(sqlQuery, [ageDivisionValue]);
   } else {
     const offset = Number(helper.getOffset(page, config.listPerPage));
-    const sqlQuery = `SELECT * FROM member WHERE JSON_CONTAINS(age_division_id, CAST(? AS JSON), '$') LIMIT ${offset}, ${config.listPerPage}`;
+    const sqlQuery = `SELECT * FROM member WHERE JSON_CONTAINS(age_division, CAST(? AS JSON), '$') LIMIT ${offset}, ${config.listPerPage}`;
     rows = await db.query(sqlQuery, [ageDivisionValue]);
   }
 
@@ -51,7 +51,7 @@ async function create(member) {
     "first_name",
     "last_name",
     "gender",
-    "age_division_id"
+    "age_division"
   ]
 
   // Build SQL dynamically
@@ -83,7 +83,7 @@ async function update(id, member) {
     "first_name",
     "last_name",
     "gender",
-    "age_division_id"
+    "age_division"
   ]
 
   // Build SQL dynamically

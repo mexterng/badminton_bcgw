@@ -11,7 +11,7 @@ interface Member {
   first_name: string | null;
   last_name: string | null;
   gender: string | null;
-  age_division_id: string[] | null;
+  age_division: string[] | null;
 }
 
 @Component({

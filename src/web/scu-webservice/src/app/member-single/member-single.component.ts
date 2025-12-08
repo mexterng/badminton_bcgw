@@ -14,7 +14,7 @@ interface Member {
   first_name: string | null;
   last_name: string | null;
   gender: string | null;
-  age_division_id: string[] | null;
+  age_division: string[] | null;
   age_division_str?: string[];
 }
 
@@ -43,7 +43,7 @@ export class MemberSingleComponent implements OnInit {
     first_name: '',
     last_name: '',
     gender: '',
-    age_division_id: [],
+    age_division: [],
   };
 
   gamesData: Game[] = [];
@@ -63,8 +63,8 @@ export class MemberSingleComponent implements OnInit {
         this.member = { ...this.member, ...data };
         this.member.gender = this.getGenderLong(this.member.gender || '');
 
-        if (data.age_division_id) {
-          this.ageService.resolveIds(data.age_division_id).then(names => {
+        if (data.age_division) {
+          this.ageService.resolveIds(data.age_division).then(names => {
             this.member.age_division_str = names;
           });
         }

@@ -1,7 +1,5 @@
 CREATE DATABASE IF NOT EXISTS scu_db;
-
 USE scu_db;
-
 
 -- game logic
 CREATE TABLE IF NOT EXISTS age_division (
@@ -15,7 +13,7 @@ CREATE TABLE IF NOT EXISTS member (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     gender ENUM('m', 'w', 'd'),
-    age_division_id JSON NOT NULL,
+    age_division JSON NOT NULL,
     overall_active BOOLEAN DEFAULT FALSE
 );
 
@@ -39,7 +37,7 @@ CREATE TABLE IF NOT EXISTS games_single (
     game_id INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
-    age_division INT DEFAULT 2, -- default erstmal auf erwachseen gesetzt muss später mittels funktion oder set des users gestzt werden
+    age_division_id INT DEFAULT 2, -- default erstmal auf erwachseen gesetzt muss später mittels funktion oder set des users gestzt werden
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     set_one varchar(5) NOT NULL,
     set_two varchar(5) NOT NULL,
@@ -48,7 +46,7 @@ CREATE TABLE IF NOT EXISTS games_single (
     valid BOOLEAN DEFAULT FALSE, -- to be set true when both players are marked as active
     FOREIGN KEY (player_a) REFERENCES member(member_id),
     FOREIGN KEY (player_b) REFERENCES member(member_id),
-    FOREIGN KEY (age_division) REFERENCES age_division(age_division_id),
+    FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id),
     FOREIGN KEY (winner_id) REFERENCES member(member_id),
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),
@@ -60,7 +58,7 @@ CREATE TABLE IF NOT EXISTS games_double (
     game_id INT AUTO_INCREMENT PRIMARY KEY,
     player_a INT NOT NULL,
     player_b INT NOT NULL,
-    age_division INT NOT NULL DEFAULT 2,
+    age_division_id INT NOT NULL DEFAULT 2,
     timestamp TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     set_one varchar(5) NOT NULL,
     set_two varchar(5) NOT NULL,
@@ -69,7 +67,7 @@ CREATE TABLE IF NOT EXISTS games_double (
     valid BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (player_a) REFERENCES doubles(doubles_id),
     FOREIGN KEY (player_b) REFERENCES doubles(doubles_id),
-    FOREIGN KEY (age_division) REFERENCES age_division(age_division_id),
+    FOREIGN KEY (age_division_id) REFERENCES age_division(age_division_id),
     FOREIGN KEY (winner_id) REFERENCES doubles(doubles_id),
     FOREIGN KEY (set_one) REFERENCES game_sets(set_id),
     FOREIGN KEY (set_two) REFERENCES game_sets(set_id),

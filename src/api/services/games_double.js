@@ -29,7 +29,7 @@ async function getGamesOfMember(member_id) {
     FROM games_double g
     INNER JOIN doubles dA ON g.player_a = dA.doubles_id
     INNER JOIN doubles dB ON g.player_b = dB.doubles_id
-    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
+    LEFT JOIN age_division ad ON g.age_division_id = ad.age_division_id
     LEFT JOIN member mAa ON dA.player_a = mAa.member_id
     LEFT JOIN member mAb ON dA.player_b = mAb.member_id
     LEFT JOIN member mBa ON dB.player_a = mBa.member_id
@@ -53,7 +53,7 @@ async function getGamesOfMember(member_id) {
 
     return {
       game_id: row.game_id,
-      age_division: row.age_division,
+      age_division_id: row.age_division_id,
       age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,
@@ -65,7 +65,7 @@ async function getGamesOfMember(member_id) {
   });
 }
 
-async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
+async function getGamesOfAgeDivision(age_division_id, page = 1, getAll = false) {
   let sqlQuery = `
     SELECT g.*,
           ad.description AS age_division_description,
@@ -76,12 +76,12 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
     FROM games_double g
     INNER JOIN doubles dA ON g.player_a = dA.doubles_id
     INNER JOIN doubles dB ON g.player_b = dB.doubles_id
-    LEFT JOIN age_division ad ON g.age_division = ad.age_division_id
+    LEFT JOIN age_division ad ON g.age_division_id = ad.age_division_id
     LEFT JOIN member mAa ON dA.player_a = mAa.member_id
     LEFT JOIN member mAb ON dA.player_b = mAb.member_id
     LEFT JOIN member mBa ON dB.player_a = mBa.member_id
     LEFT JOIN member mBb ON dB.player_b = mBb.member_id
-    WHERE g.age_division = ?
+    WHERE g.age_division_id = ?
   `;
   if (getAll) {
     page = -1;
@@ -89,7 +89,7 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
     const offset = Number(helper.getOffset(page, config.listPerPage));
     sqlQuery += ` LIMIT ${offset},${config.listPerPage}`;
   }
-  const rows = await db.query(sqlQuery, [age_division]);
+  const rows = await db.query(sqlQuery, [age_division_id]);
   let data = helper.emptyOrRows(rows);
   const meta = { page };
 
@@ -102,7 +102,7 @@ async function getGamesOfAgeDivision(age_division, page = 1, getAll = false) {
 
     return {
       game_id: row.game_id,
-      age_division: row.age_division,
+      age_division_id: row.age_division_id,
       age_division_initial: row.age_division_description?.[0] ?? '',
       timestamp: row.timestamp,
       valid: row.valid,

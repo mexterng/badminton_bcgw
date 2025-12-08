@@ -5,7 +5,7 @@ export interface Member {
   member_id: number;
   display_name: string;
   gender: string;
-  age_division_id: number[];
+  age_division: number[];
 }
 
 @Component({

@@ -36,7 +36,7 @@ async function create(player_id, placement, timestamp, age_division_id, pyramidT
     return { message: message };
 }
 
-async function getRanking(table, age_division, connection = null) {
+async function getRanking(table, age_division_id, connection = null) {
     const sqlQuery = `
         SELECT player_id
         FROM (
@@ -51,16 +51,16 @@ async function getRanking(table, age_division, connection = null) {
 
     let rows = null;
     if (connection){
-        [rows] = await connection.execute(sqlQuery, [age_division]);
+        [rows] = await connection.execute(sqlQuery, [age_division_id]);
     }
     else{
-        rows = await db.query(sqlQuery, [age_division]);
+        rows = await db.query(sqlQuery, [age_division_id]);
     }
     const data = helper.emptyOrRows(rows);
     return data.map(row => row['player_id']);
 }
 
-async function getSinglePyramide(age_division, connection = null) {
+async function getSinglePyramide(age_division_id, connection = null) {
     const sql = `
         SELECT sub.player_id, m.display_name, m.gender
         FROM (
@@ -76,9 +76,9 @@ async function getSinglePyramide(age_division, connection = null) {
 
     let rows = null;
     if (connection) {
-        [rows] = await connection.execute(sql, [age_division]);
+        [rows] = await connection.execute(sql, [age_division_id]);
     } else {
-        rows = await db.query(sql, [age_division]);
+        rows = await db.query(sql, [age_division_id]);
     }
     const data = helper.emptyOrRows(rows);
 
@@ -89,7 +89,7 @@ async function getSinglePyramide(age_division, connection = null) {
     }));
 }
 
-async function getDoublePyramide(age_division, connection = null) {
+async function getDoublePyramide(age_division_id, connection = null) {
     const sql = `
         SELECT 
             sub.player_id AS doubles_id,
@@ -115,9 +115,9 @@ async function getDoublePyramide(age_division, connection = null) {
 
     let rows;
     if (connection) {
-        [rows] = await connection.execute(sql, [age_division]);
+        [rows] = await connection.execute(sql, [age_division_id]);
     } else {
-        rows = await db.query(sql, [age_division]);
+        rows = await db.query(sql, [age_division_id]);
     }
 
     return rows.map(row => {

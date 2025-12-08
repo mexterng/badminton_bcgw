@@ -15,7 +15,7 @@ interface Member {
   first_name: string | null;
   last_name: string | null;
   gender: string | null;
-  age_division_id: string[] | null;
+  age_division: string[] | null;
 }
 
 @Component({
@@ -61,7 +61,7 @@ export class MemberFormComponent implements OnChanges {
         firstName: this.memberData.first_name ?? '',
         lastName: this.memberData.last_name ?? '',
         gender: this.memberData.gender ?? '',
-        ageGroup: this.memberData.age_division_id ?? []
+        ageGroup: this.memberData.age_division ?? []
       });
     }
   }
@@ -80,7 +80,7 @@ export class MemberFormComponent implements OnChanges {
         first_name: formValue.firstName || null,
         last_name: formValue.lastName || null,
         gender: formValue.gender || null,
-        age_division_id: formValue.ageGroup ?? null
+        age_division: formValue.ageGroup ?? null
       });
     }
   }

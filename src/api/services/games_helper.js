@@ -3,7 +3,7 @@ const helper = require("../helper");
 const pyramides = require("./pyramides")
 const config = require("../config");
 
-async function getPlacement(table, id, age_division, connection = null){
+async function getPlacement(table, id, age_division_id, connection = null){
     const sqlQuery = `
         SELECT placement 
         FROM ${table} 
@@ -14,10 +14,10 @@ async function getPlacement(table, id, age_division, connection = null){
 
     let rows = null;
     if (connection){
-        [rows] = await connection.execute(sqlQuery, [id, age_division]);
+        [rows] = await connection.execute(sqlQuery, [id, age_division_id]);
     }
     else{
-        rows = await db.query(sqlQuery, [id, age_division]);
+        rows = await db.query(sqlQuery, [id, age_division_id]);
     }
     const data = helper.emptyOrRows(rows);
     return data.length ? data[0].placement : Infinity;
@@ -55,14 +55,14 @@ async function create(game, gamesTable, pyramidTable) {
     // calculate important infos
     const loser_id = game.winner_id === game.player_a ? game.player_b : game.player_a;
 
-    const winnerOldPlacement = await getPlacement(pyramidTable, game.winner_id, game.age_division, connection);
+    const winnerOldPlacement = await getPlacement(pyramidTable, game.winner_id, game.age_division_id, connection);
 
-    const loserOldPlacement = await getPlacement(pyramidTable, loser_id, game.age_division, connection);
+    const loserOldPlacement = await getPlacement(pyramidTable, loser_id, game.age_division_id, connection);
 
     game.valid = helper.is_challenge_valid(winnerOldPlacement, loserOldPlacement);
 
     // Define allowed columns
-    const allowedColumns = ["player_a", "player_b", "age_division", "timestamp", "set_one", "set_two", "set_three", "winner_id", "valid"];
+    const allowedColumns = ["player_a", "player_b", "age_division_id", "timestamp", "set_one", "set_two", "set_three", "winner_id", "valid"];
 
     // Filter only present attributes
     const columns = allowedColumns.filter(col => game[col] !== undefined);
@@ -87,7 +87,7 @@ async function create(game, gamesTable, pyramidTable) {
       const timestamp = rows[0].timestamp;
 
       // Must be called before inserts into pyramid table in order to retrieve the old ranking.
-      const oldRanking = await pyramides.getRanking(pyramidTable, game.age_division, connection);
+      const oldRanking = await pyramides.getRanking(pyramidTable, game.age_division_id, connection);
       
       // Shift loser AND all players in between +1
       for (let idx = loserOldPlacement - 1; idx < Math.min(winnerOldPlacement - 1, oldRanking.length); idx++){
@@ -95,7 +95,7 @@ async function create(game, gamesTable, pyramidTable) {
           oldRanking[idx], // id
           idx + 2, // new placement (+1 array offset)
           timestamp,
-          game.age_division,
+          game.age_division_id,
           pyramidTable,
           connection
         );
@@ -106,7 +106,7 @@ async function create(game, gamesTable, pyramidTable) {
         game.winner_id,
         loserOldPlacement,
         timestamp,
-        game.age_division,
+        game.age_division_id,
         pyramidTable,
         connection
       );
@@ -127,7 +127,7 @@ async function update(id, game, gamesTable) {
   const allowedColumns = [
     "player_a",
     "player_b",
-    "age_division",
+    "age_division_id",
     "timestamp",
     "set_one",
     "set_two",
@@ -146,7 +146,7 @@ async function update(id, game, gamesTable) {
   values.push(id);
 
   const sql = `
-    UPDATE ´${gamesTable}
+    UPDATE ${gamesTable}
     SET ${setClause}
     WHERE game_id = ?
   `;
