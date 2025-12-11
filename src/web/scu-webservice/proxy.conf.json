@@ -1,11 +1,14 @@
 {
   "/api": {
-    "target": "http://localhost:3000",
+    "target": "http://192.168.0.17:3000",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
     "pathRewrite": {
       "^/api": ""
+    },
+    "headers": {
+      "X-User": "demo"
     }
   }
 }
