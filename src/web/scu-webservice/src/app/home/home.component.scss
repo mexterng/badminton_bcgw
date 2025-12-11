@@ -1,31 +1,30 @@
 .content {
     flex-flow:column nowrap;
     align-items: center;
+    margin: 8svh 10vw;
+    justify-content: space-between;
 }
 
 .direction {
     // self positioning / layout
     background-color: var(--theme-control-blue-negative);
-    border: 10px solid var(--theme-control-blue-postitive);
     border-radius: 10px;
-    min-height: 13vh;           /* Breite abhängig von der Viewport-Breite */
-    width: 80vw;
+    min-height: 9svh;
+    height: 20%;
+    width: calc(80vw - 4rem);
     display: flex;
-    flex-flow: row nowrap;     
-    // relations
-    margin-top: 7vh;
+    flex-flow: row nowrap;
     // content
     color: var(--background-primary);
     display: flex;       
     align-items: center;  
-    padding-bottom: 4%;    
-    padding-top: 2%;     
+    padding: 1rem 2rem;     
     cursor: pointer;
 }
 
 .icon {
     flex: 0 0 20%; 
-    margin: 3%;
+    margin-right: 2rem;
     height: 50%;
     fill: var(--background-primary);
 }
@@ -36,20 +35,17 @@
     flex-flow: column nowrap;
     justify-items: left;
     align-items: baseline;
-    margin: 2%;
 }
 
 .header {
     font-size: 1.2em;
     font-weight: bold;
-    margin-top: 2%;
     padding: 0;
 }
 
 .description {
-    font-size: 1.0em;
-    font-weight: bold;
-    margin-top: 2%;
+    font-size: 1em;
+    margin-top: 0.5em;
     padding: 0;
 }
 

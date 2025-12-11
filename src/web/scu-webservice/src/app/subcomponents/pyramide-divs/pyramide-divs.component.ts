@@ -25,9 +25,12 @@ export class PyramideDivsComponent implements OnChanges {
   offsetY = 0;
   zoom = 2;
 
+  private pointers: Map<number, PointerEvent> = new Map();
+  private lastPinchDistance: number | null = null;
   isDragging = false;
   lastMouseX = 0;
   lastMouseY = 0;
+  moved = false;
 
   rectWidth = 80;  // Basisbreite ohne Zoom
   rectHeight = 30; // Höhe fix für einzeiligen Text
@@ -56,7 +59,7 @@ export class PyramideDivsComponent implements OnChanges {
       const w = this.measureTextWidth(item.display_name);
       if (w > maxWidth) maxWidth = w;
     });
-    this.rectWidth = maxWidth;
+    this.rectWidth = maxWidth + 10;
   }
 
   private getLevels(): Member[][] {
@@ -78,11 +81,11 @@ export class PyramideDivsComponent implements OnChanges {
     return levels;
   }
 
-  getColor(gender?: 'm' | 'w' | 'MX' | 'DD' | 'HD') {
-    if (gender === 'm' || gender === 'HD') return '#ADD8E6';
-    if (gender === 'w' || gender === 'DD') return '#FFB6C1';
+  getColor(gender?: 'm' | 'w' | 'd' | 'MX' | 'DD' | 'HD') {
+    if (gender === 'm' || gender === 'HD') return 'var(--color-male)';
+    if (gender === 'w' || gender === 'DD') return 'var(--color-female)';
     if (gender === undefined) return '#FAFAFA';
-    return '#D3D3D3';
+    return 'var(--color-divers)';
   }
 
   getLevelY(index: number) {
@@ -102,35 +105,103 @@ export class PyramideDivsComponent implements OnChanges {
 
 
   onMemberClick(m: Member) {
+    if (this.moved) return;
     this.router.navigate(['/member', m.member_id]);
   }
 
   // Drag & Drop
-  onDragStart(event: MouseEvent) {
-    this.isDragging = true;
-    this.lastMouseX = event.clientX;
-    this.lastMouseY = event.clientY;
+  onPointerDown(event: PointerEvent) {
+    this.pointers.set(event.pointerId, event);
+    // One finger -> Drag
+    if (this.pointers.size === 1) {
+      this.isDragging = true;
+      this.moved = false;
+      this.lastMouseX = event.clientX;
+      this.lastMouseY = event.clientY;
+
+      (event.target as HTMLElement).setPointerCapture(event.pointerId);
+    }
+
+    // Two fingers -> start pinch
+    if (this.pointers.size === 2) {
+      this.isDragging = false; // disable drag
+      const [p1, p2] = Array.from(this.pointers.values());
+      this.lastPinchDistance = Math.hypot(
+        p2.clientX - p1.clientX,
+        p2.clientY - p1.clientY
+      );
+    }
   }
 
-  onDragMove(event: MouseEvent) {
-    if (!this.isDragging) return;
-    const dx = event.clientX - this.lastMouseX;
-    const dy = event.clientY - this.lastMouseY;
-    this.offsetX += dx;
-    this.offsetY += dy;
+  onPointerMove(event: PointerEvent) {
+    event.preventDefault();
+    if (!this.pointers.has(event.pointerId)) return;
 
-    const {width: containerWidth, height: containerHeight} = this.getContainerSize('.pyramid-container');
-    const {width: pyramidWidthZoom, height: pyramidHeightZoom} = this.getPyramideSizeZoom();
+    this.pointers.set(event.pointerId, event);
 
-    this.offsetX = Math.min(Math.max(this.offsetX, -pyramidWidthZoom + this.rectWidth * this.zoom), pyramidWidthZoom + (containerWidth - pyramidWidthZoom)/2 - this.rectWidth * this.zoom);
-    this.offsetY = Math.min(Math.max(this.offsetY, -pyramidHeightZoom + this.rectHeight * this.zoom), containerHeight - this.rectHeight * this.zoom);
+    // === Pinch Zoom ===
+    if (this.pointers.size === 2) {
+      const [p1, p2] = Array.from(this.pointers.values());
+      const dist = Math.hypot(
+        p2.clientX - p1.clientX,
+        p2.clientY - p1.clientY
+      );
 
-    this.lastMouseX = event.clientX;
-    this.lastMouseY = event.clientY;
+      if (this.lastPinchDistance) {
+        const delta = (dist - this.lastPinchDistance) / 200;
+        this.zoom = Math.min(Math.max(this.zoom + delta, 0.2), 5);
+      }
+
+      this.lastPinchDistance = dist;
+      return; // stop, no drag allowed
+    }
+
+    // === Drag ===
+    if (this.isDragging) {
+      const dx = event.clientX - this.lastMouseX;
+      const dy = event.clientY - this.lastMouseY;
+
+      if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
+        this.moved = true;
+      }
+
+      this.offsetX += dx;
+      this.offsetY += dy;
+
+      const {width: containerWidth, height: containerHeight} =
+        this.getContainerSize('.pyramid-container');
+      const {width: pyramidWidthZoom, height: pyramidHeightZoom} =
+        this.getPyramideSizeZoom();
+
+      this.offsetX = Math.min(
+        Math.max(this.offsetX, -pyramidWidthZoom + this.rectWidth * this.zoom),
+        pyramidWidthZoom +
+        (containerWidth - pyramidWidthZoom) / 2 -
+        this.rectWidth * this.zoom
+      );
+      this.offsetY = Math.min(
+        Math.max(this.offsetY, -pyramidHeightZoom + this.rectHeight * this.zoom),
+        containerHeight - this.rectHeight * this.zoom
+      );
+
+      this.lastMouseX = event.clientX;
+      this.lastMouseY = event.clientY;
+    }
   }
 
-  onDragEnd(event: MouseEvent) {
-    this.isDragging = false;
+  onPointerUp(event: PointerEvent) {
+    this.pointers.delete(event.pointerId);
+
+    if (this.pointers.size < 2) {
+      this.lastPinchDistance = null;
+    }
+
+    if (this.pointers.size === 0) {
+      this.isDragging = false;
+    }
+
+    // Release pointer
+    (event.target as HTMLElement).releasePointerCapture(event.pointerId);
   }
 
   // Zoom via Maus-Rad

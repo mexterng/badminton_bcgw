@@ -9,16 +9,28 @@
     padding: 0;
     border:0;
     margin: 0;
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* ältere Browser */
 }
 
-.logo {
-    flex: 0 0 20%; /* Prevent shrinking */
-    margin: 2% 0% 2% 2%;
+.club {
+    flex: 0 0 calc(10vw - 2%);
+    margin: 2%;
 }
 
-.icon {
-    flex: 0 0 20%; 
+.home {
+    flex: 0 0 calc(10vw - 2%);
+    margin: 2%;
+}
+
+#club-icon {
     height: 4rem;
+    fill: var(--scu-black);
+}
+
+#home-icon {
+    height: 2rem;
     fill: var(--scu-black);
 }
 

@@ -14,8 +14,9 @@ $theme-control-blue-negative:  #7c898b;
 $theme-control-blue-positive:  #a5ccd1;
 $theme-control-grey-negative:  #848586;
 $theme-control-grey-positive:  #baa989;
-$color-male-blue: #1e07b0;
-$color-female-pink: #8e07b0;
+$color-male: #add8e6;
+$color-female: #ffb6c1;
+$color-divers: #d3d3d3;
 
 // Export as CSS variables for runtime use
 :root {
@@ -28,8 +29,9 @@ $color-female-pink: #8e07b0;
     --theme-control-blue-positive: #{$theme-control-blue-positive};
     --theme-control-grey-negative: #{$theme-control-grey-negative};
     --theme-control-grey-positive: #{$theme-control-grey-positive};
-    --color-male-blue: #{$color-male-blue};
-    --color-female-pink: #{$color-female-pink};
+    --color-male: #{$color-male};
+    --color-female: #{$color-female};
+    --color-divers: #{$color-divers};
     @include mat.button-overrides((
       filled-container-color: #00458f,
       filled-label-text-color: #ffffff,
@@ -203,6 +205,7 @@ mat-form-field {
 .mat-mdc-paginator-container {
   justify-content: center !important;
   flex-wrap: wrap-reverse !important;
+  background-color: var(--background-primary);
 }
 
 /* Icons */
