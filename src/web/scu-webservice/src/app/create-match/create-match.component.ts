@@ -279,7 +279,7 @@ export class CreateMatchComponent {
         this.loading = false;
         alert('Spiel erfolgreich gespeichert');
         // optional: redirect to overview
-        this.router.navigate(['/match', 'create']);
+        this.router.navigate(['/match']);
       },
       error: (err) => {
         this.loading = false;
@@ -319,7 +319,7 @@ export class CreateMatchComponent {
       await firstValueFrom(this.http.post('/api/double_games', gamePayload));
       this.loading = false;
       alert('Spiel erfolgreich gespeichert');
-      this.router.navigate(['/match', 'create']);
+      this.router.navigate(['/match']);
       
     } catch (err) {
       this.loading = false;
