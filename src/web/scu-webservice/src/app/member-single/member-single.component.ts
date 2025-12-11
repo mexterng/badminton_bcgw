@@ -6,6 +6,7 @@ import { HeaderComponent } from '../subcomponents/header/header.component';
 import { GamesTableComponent, Game } from '../subcomponents/games-table/games-table.component';
 import { FooterComponent } from '../subcomponents/footer/footer.component';
 import { AgeDivisionService } from '../services/age-division.service';
+import { AuthService } from '../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -31,7 +32,8 @@ export class MemberSingleComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private ageService: AgeDivisionService
+    private ageService: AgeDivisionService,
+    private authService: AuthService,
   ) {}
 
   title="Spielerinformationen";
@@ -48,10 +50,14 @@ export class MemberSingleComponent implements OnInit {
 
   gamesData: Game[] = [];
   readMoreMemberVisible = false;
+  canEditMember = false;
 
   ngOnInit() {
     this.memberId = this.route.snapshot.paramMap.get('id');
     if (!this.memberId) return;
+    this.authService.username$.subscribe(username => {
+      this.canEditMember = this.authService.canEditMember();
+    });
 
     this.loadMemberInfos();
     this.loadGames();

@@ -38,6 +38,12 @@ app.use((err, req, res, next) => {
   return;
 });
 
+/* logged in user as header */
+app.get("/me", (req, res) => {
+  const user = req.headers['x-user'] || null;
+  res.json({ username: user });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

@@ -7,6 +7,7 @@ import { CreateMatchComponent } from './create-match/create-match.component';
 import { MemberCreateComponent } from './member-create/member-create.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { MemberSingleComponent } from './member-single/member-single.component';
+import { AuthGuard } from './services/auth.guard';
 
 //https://angular.dev/guide/routing/define-routes
 //!! first wins strategy, so order matters
@@ -46,7 +47,8 @@ export const routes: Routes = [
     },
     {
         path: 'member/:id/edit',
-        component: MemberEditComponent
+        component: MemberEditComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: '**',
