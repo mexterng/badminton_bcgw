@@ -149,9 +149,14 @@ export class CreateMatchComponent {
 
     // check if third set must be deactivated/activated
     if (Object.keys(this.setValues).length > 1) {
-      const winner1 = this.setValues['set1'].value1 > this.setValues['set1'].value2;
-      const winner2 = this.setValues['set2'].value1 > this.setValues['set2'].value2;
-      this.set3Active = winner1 !== winner2;
+      const set1 = this.setValues['set1'];
+      const set2 = this.setValues['set2'];
+
+      const tieExists = set1.value1 === set1.value2 || set2.value1 === set2.value2;
+      const winner1 = set1.value1 > set1.value2;
+      const winner2 = set2.value1 > set2.value2;
+
+      this.set3Active = tieExists ? false : winner1 !== winner2;
     }
   }
 
@@ -226,16 +231,27 @@ export class CreateMatchComponent {
         return {status: false, errMessage: 'Das Team 2 ist unvollständig.'};
       }
     }
-
+    const setPoints = [
+      {id: 1, a : this.setValues['set1']?.value1 || 0, b : this.setValues['set1']?.value2 || 0, active: true },
+      {id: 2, a : this.setValues['set2']?.value1 || 0, b : this.setValues['set2']?.value2 || 0, active: true },
+      {id: 3, a : this.setValues['set3']?.value1 || 0, b : this.setValues['set3']?.value2 || 0, active: this.set3Active },     
+  ]
     // check set winner
-    if ((this.setValues['set1']?.value1 || 0) === (this.setValues['set1']?.value2 || 0)) {
-      return {status: false, errMessage: 'Satz 1 hat keine/n Gewinner/in.'};
+    for (const set of setPoints) {
+      if (set.active && set.a === set.b) {
+        return {status: false, errMessage: `Satz ${set.id} hat keine/n Gewinner/in.`};
+      }
     }
-    if ((this.setValues['set2']?.value1 || 0) === (this.setValues['set2']?.value2 || 0)) {
-      return {status: false, errMessage: 'Satz 2 hat keine/n Gewinner/in.'};
-    }
-    if (this.set3Active && ((this.setValues['set3']?.value1 || 0) === (this.setValues['set3']?.value2 || 0))) {
-      return {status: false, errMessage: 'Satz 3 hat keine/n Gewinner/in.'};
+
+    for (const set of setPoints) {
+      if (!set.active) continue;
+
+      const isMaxClose = (set.a === 30 && set.b === 29) || (set.a === 29 && set.b === 30);
+      const diff = Math.abs(set.a - set.b);
+
+      if (!isMaxClose && diff <= 2) {
+        return { status: false, errMessage: `Satz ${set.id} hat nicht mindestens 2 Punkte Differenz.` };
+      }
     }
 
     return {status: true, errMessage: ''};
