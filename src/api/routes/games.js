@@ -16,7 +16,10 @@ router.get('/member/:id', async function(req, res, next) {
       games_single.getGamesOfMember(memberId),
       games_double.getGamesOfMember(memberId)
     ]);
-    res.json([...singles, ...doubles]);
+    const allGames = [...singles, ...doubles];
+    allGames.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // sort by timestamp descending
+
+    res.json(allGames);
   } catch (err) {
     console.error(`Error while getting game`, err.message);
     next(err);

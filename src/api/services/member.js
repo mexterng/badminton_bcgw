@@ -6,12 +6,12 @@ async function getMultiple(page = 1, getAll = false) {
   let rows;
   if (getAll) {
       rows = await db.query(
-        'SELECT * FROM member'
+        'SELECT * FROM member ORDER BY display_name ASC'
       );
   } else {
     const offset = Number(helper.getOffset(page, config.listPerPage));
     rows = await db.query(
-      `SELECT * FROM member LIMIT ${offset},${config.listPerPage}`
+      `SELECT * FROM member ORDER BY display_name ASC LIMIT ${offset},${config.listPerPage}`
     );
   }
   const data = helper.emptyOrRows(rows);
@@ -27,11 +27,22 @@ async function getMultipleByAgeDivision(age_division_id, page = 1, getAll = fals
   let rows;
   const ageDivisionValue = age_division_id;
   if (getAll) {
-      const sqlQuery = "SELECT * FROM member WHERE JSON_CONTAINS(age_division, CAST(? AS JSON), '$')";
+      const sqlQuery = `
+          SELECT * 
+          FROM member
+          WHERE JSON_CONTAINS(age_division, CAST(? AS JSON), '$')
+          ORDER BY display_name ASC
+      `;
       rows = await db.query(sqlQuery, [ageDivisionValue]);
   } else {
     const offset = Number(helper.getOffset(page, config.listPerPage));
-    const sqlQuery = `SELECT * FROM member WHERE JSON_CONTAINS(age_division, CAST(? AS JSON), '$') LIMIT ${offset}, ${config.listPerPage}`;
+    const sqlQuery = `
+          SELECT * 
+          FROM member 
+          WHERE JSON_CONTAINS(age_division, CAST(? AS JSON), '$')
+          ORDER BY display_name ASC 
+          LIMIT ${offset}, ${config.listPerPage}
+    `;
     rows = await db.query(sqlQuery, [ageDivisionValue]);
   }
 

@@ -25,6 +25,7 @@ async function getGamesOfMember(member_id) {
     LEFT JOIN member mA ON g.player_a = mA.member_id
     LEFT JOIN member mB ON g.player_b = mB.member_id
     WHERE g.player_a = ? OR g.player_b = ?
+    ORDER BY g.timestamp DESC
   `;
 
   const rows = await db.query(sqlSelect, [member_id, member_id]);
@@ -64,6 +65,7 @@ async function getGamesOfAgeDivision(age_division_id, page = 1, getAll = false) 
     LEFT JOIN member mA ON g.player_a = mA.member_id
     LEFT JOIN member mB ON g.player_b = mB.member_id
     WHERE g.age_division_id = ?
+    ORDER BY g.timestamp DESC
   `;
   if (getAll) {
     page = -1;
