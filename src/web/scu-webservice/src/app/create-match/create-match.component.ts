@@ -297,8 +297,14 @@ export class CreateMatchComponent {
         // optional: redirect to overview
         this.router.navigate(['/match']);
       },
-      error: (err) => {
+      error: (err: any) => {
         this.loading = false;
+        if (err.error?.message === 'DUPLICATE_GAME') {
+          alert('Hinweis: Dieses Spiel wurde bereits in den letzten 48 Stunden erfasst und kann daher nicht erneut hinzugefügt werden. Prüfe bitte die Spielübersicht.');
+          // redirect to overview
+          this.router.navigate(['/match']);
+          return;
+        }
         console.error('Fehler beim Erstellen des Spiels:', err);
         alert('Fehler beim Speichern des Spiels');
       }

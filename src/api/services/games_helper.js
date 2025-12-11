@@ -52,6 +52,9 @@ async function create(game, gamesTable, pyramidTable) {
   await connection.beginTransaction();
 
   try {
+    // check for duplicate game
+    await checkDuplicate(game, gamesTable, connection);
+
     // calculate important infos
     const loser_id = game.winner_id === game.player_a ? game.player_b : game.player_a;
 
@@ -213,6 +216,63 @@ function buildDisplayNames(host, aName, bName) {
     ? { host_display_name: aName, opponent_display_name: bName }
     : { host_display_name: bName, opponent_display_name: aName };
 }
+
+// throws error if duplicate found in last 48 h
+async function checkDuplicate(game, gamesTable, connection) {
+    // reverse set values (for swapped players)
+    const reverseSet = (setValue) => {
+        if (!setValue) return null;
+        const [a, b] = setValue.split("-").map(Number);
+        return `${b}-${a}`;
+    };
+
+    const s1 = game.set_one;
+    const s2 = game.set_two;
+    const s3 = game.set_three ?? null;
+
+    const rs1 = reverseSet(game.set_one);
+    const rs2 = reverseSet(game.set_two);
+    const rs3 = game.set_three ? reverseSet(game.set_three) : null;
+
+    const sql = `
+        SELECT game_id FROM ${gamesTable}
+        WHERE age_division_id = ?
+          AND (
+                (
+                  player_a = ? AND player_b = ?
+                  AND set_one = ?
+                  AND set_two = ?
+                  AND set_three <=> ?
+                )
+                OR
+                (
+                  player_a = ? AND player_b = ?
+                  AND set_one = ?
+                  AND set_two = ?
+                  AND set_three <=> ?
+                )
+          )
+          AND timestamp >= (NOW() - INTERVAL 48 HOUR)
+        LIMIT 1
+    `;
+
+    const [rows] = await connection.execute(sql, [
+        game.age_division_id,
+
+        // same order
+        game.player_a, game.player_b,
+        s1, s2, s3,
+
+        // reversed order
+        game.player_b, game.player_a,
+        rs1, rs2, rs3
+    ]);
+
+    if (rows.length > 0) {
+        throw new Error("DUPLICATE_GAME");
+    }
+}
+
 
 module.exports = {
   getPlacement,
