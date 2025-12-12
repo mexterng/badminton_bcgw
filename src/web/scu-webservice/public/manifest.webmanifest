@@ -1,7 +1,10 @@
 {
-  "name": "scu-webservice",
-  "short_name": "scu-webservice",
+  "name": "SCU Badminton",
+  "description": "Webbapp für die Badmintonabteilung des SC Uttenreuth zur Verwaltung interner Ranglisten",
+  "short_name": "SCU",
   "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "scope": "./",
   "start_url": "./",
   "icons": [
