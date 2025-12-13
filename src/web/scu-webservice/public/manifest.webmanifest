@@ -54,5 +54,12 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "id": "scu-rl",
+  "lang": "de",
+  "categories": [
+    "sports"
   ]
 }
