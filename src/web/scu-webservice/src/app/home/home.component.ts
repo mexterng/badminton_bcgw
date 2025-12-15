@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../subcomponents/header/header.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { HeaderComponent } from '../subcomponents/header/header.component';
 })
 export class HomeComponent {
   title = 'Menü';
+  appVersion = environment.appVersion;
 
   constructor(private router: Router) {}
 
