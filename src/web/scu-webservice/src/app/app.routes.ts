@@ -7,6 +7,7 @@ import { CreateMatchComponent } from './create-match/create-match.component';
 import { MemberCreateComponent } from './member-create/member-create.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { MemberSingleComponent } from './member-single/member-single.component';
+import { ChangelogComponent } from './changelog/changelog.component';
 import { AuthGuard } from './services/auth.guard';
 
 //https://angular.dev/guide/routing/define-routes
@@ -16,6 +17,10 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
+    },
+    {
+        path: 'changelog',
+        component: ChangelogComponent
     },
     {
         path: 'home',
