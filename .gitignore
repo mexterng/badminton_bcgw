@@ -5,3 +5,4 @@ private
 /tmp
 /out-tsc
 .env
+src/db/scripts/06_prod_data.sql

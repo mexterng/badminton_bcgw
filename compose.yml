@@ -30,6 +30,8 @@ services:
   db:
     build:
       context: ./src/db
+      args:
+        ENVIRONMENT: ${ENVIRONMENT:-development}
     container_name: scu_db
     #for testing:
     ports:
