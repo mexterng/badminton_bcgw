@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { marked } from 'marked';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeaderComponent } from '../subcomponents/header/header.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-changelog',
@@ -14,6 +15,7 @@ import { HeaderComponent } from '../subcomponents/header/header.component';
 export class ChangelogComponent implements OnInit {
   title = 'Changelog';
   html: SafeHtml = '';
+  developers = environment.developers;
 
   constructor(
     private http: HttpClient,
