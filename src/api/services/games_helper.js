@@ -47,7 +47,7 @@ async function getSingle(id, gamesTable) {
   return data[0] || null;
 }
 
-async function create(game, gamesTable, pyramidTable) {
+async function create(game, gamesTable, pyramidTable, gameValidOverride = {}) {
   const connection = await db.getConnection(); // connection for transaction
   await connection.beginTransaction();
 
@@ -62,7 +62,12 @@ async function create(game, gamesTable, pyramidTable) {
 
     const loserOldPlacement = await getPlacement(pyramidTable, loser_id, game.age_division_id, connection);
 
-    game.valid = helper.is_challenge_valid(winnerOldPlacement, loserOldPlacement);
+    // override validation if provided, otherwise calculate normally
+    if ('valid' in gameValidOverride) {
+      game.valid = gameValidOverride.valid;
+    } else { 
+      game.valid = helper.is_challenge_valid(winnerOldPlacement, loserOldPlacement);
+    }
 
     // Define allowed columns
     const allowedColumns = ["player_a", "player_b", "age_division_id", "timestamp", "set_one", "set_two", "set_three", "winner_id", "valid"];

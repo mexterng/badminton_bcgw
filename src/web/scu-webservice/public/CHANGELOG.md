@@ -2,9 +2,9 @@
 ### Neue Funktionen
 - Erste stabile Version der SCU Badminton Web-App
 - Benutzeroberfläche mit Menü für:
-  - Spieler/innen verwalten
-  - Spiele verwalten
-  - Pyramide / Rangliste
+  - Spieler/innen verwalten (Schüler, Jugendliche, Erwachsene)
+  - Spiele verwalten (Einzel und Doppel)
+  - Pyramide für Einzel
 - Basic Auth / Access List für Admin- und User-Nutzergruppe
 - PWA-Funktionalität implementiert (Installierbar auf Android & iOS)
 

@@ -121,7 +121,8 @@ async function getGamesOfAgeDivision(age_division_id, page = 1, getAll = false) 
 }
 
 async function create(singleGame) {
-  return await games.create(singleGame, games_table, pyramid_table);
+  // Temporarily override validation to collect games only, without showing in pyramid
+  return await games.create(singleGame, games_table, pyramid_table, gameValidOverride = {valid: false});
 }
 
 async function update(id, singleGame) {
