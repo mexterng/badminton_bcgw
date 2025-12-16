@@ -49,6 +49,9 @@ async function getGamesOfMember(member_id) {
       host_display_name: names.host_display_name,
       opponent_display_name: names.opponent_display_name,
       result: games.computeResult(row, host),
+      set_one: games.computeSet(row.set_one, host),
+      set_two: games.computeSet(row.set_two, host),
+      set_three: games.computeSet(row.set_three, host),
       play_type_db: "games_single"
     };
   });
@@ -94,6 +97,9 @@ async function getGamesOfAgeDivision(age_division_id, page = 1, getAll = false) 
       host_display_name: names.host_display_name,
       opponent_display_name: names.opponent_display_name,
       result: games.computeResult(row, true),
+      set_one: games.computeSet(row.set_one, true),
+      set_two: games.computeSet(row.set_two, true),
+      set_three: games.computeSet(row.set_three, true),
       play_type_db: "games_single"
     };
   });

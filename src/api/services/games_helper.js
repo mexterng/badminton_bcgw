@@ -215,6 +215,17 @@ function computeResult(row, host) {
   return host ? `${pointsA}:${pointsB}` : `${pointsB}:${pointsA}`;
 }
 
+// compute total result of set and flip when needed
+function computeSet(setStr, host) {
+  if (!setStr) return null;
+
+  const parts = setStr.split("-").map(Number);
+  if (parts.length !== 2 || parts.some(isNaN)) return null;
+  const [scoreA, scoreB] = parts;
+
+  return host ? `${scoreA}:${scoreB}` : `${scoreB}:${scoreA}`;
+}
+
 // build host/opponent display names for single AND double
 function buildDisplayNames(host, aName, bName) {
   return host
@@ -287,5 +298,6 @@ module.exports = {
   update,
   remove,
   computeResult,
+  computeSet,
   buildDisplayNames
 }

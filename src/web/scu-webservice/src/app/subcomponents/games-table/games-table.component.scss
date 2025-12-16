@@ -11,3 +11,83 @@ table {
   width: 100%;
   background-color: var(--background-primary);
 }
+
+// result popup
+.result-cell {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0.5em;
+  
+  &.active {
+    font-weight: bold;
+  }
+}
+
+.result-popup {
+  position: fixed;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  width: 12rem;
+  border: 1px solid #ddd;
+  animation: fadeIn 0.2s ease-out;
+  
+  .popup-content {
+    position: relative;
+    padding: 16px;
+    
+    h4 {
+      margin: 0 0 12px 0;
+      color: #333;
+      font-size: 16px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+    
+    .result-details {
+      div {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #555;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      
+      &:hover {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+    }
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.1);
+}
