@@ -8,7 +8,6 @@ export type DoublesPair = { member1: Member; member2: Member };
 export function orderDoublesPair(member1: Member, member2: Member): DoublesPair {
   const pair = { member1, member2}
   const flippedPair = {member1: member2, member2: member1};
-  console.log(pair, flippedPair);
   if (!member1.gender || !member2.gender) return pair; // demo Member without gender!
   if (member1.gender === member2.gender) {
     // doubles

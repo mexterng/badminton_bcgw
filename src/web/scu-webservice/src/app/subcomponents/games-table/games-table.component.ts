@@ -56,7 +56,6 @@ export class GamesTableComponent implements AfterViewInit, OnChanges {
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['games']) {
-      console.log(this.games);
       this.dataSource.data = this.games.map(game => ({
         ...game,
         timestamp_date: new Date(game.timestamp),

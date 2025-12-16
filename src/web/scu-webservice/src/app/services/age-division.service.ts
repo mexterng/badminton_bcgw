@@ -35,8 +35,6 @@ export class AgeDivisionService {
 
   async resolveIds(ids: string[]): Promise<string[]> {
     const divisions = await this.getAgeDivisions();
-    console.log("divisions", divisions);
-    console.log("ids", ids);
     const idNumbers = ids.map(id => Number(id));
     return divisions
       .filter(d => idNumbers.includes(d.age_division_id))

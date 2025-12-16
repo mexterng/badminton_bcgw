@@ -91,8 +91,6 @@ export class CreateMatchComponent {
     }
 
     this.refreshWinnerLables();    
-
-    console.log('Ausgewähltes Mitglied für ID: ' + id, member);
   }
 
   onSelectionChanged(event: { ageClass: string | null; playType: string | null; same: boolean; sameAgeClass: boolean ; samePlayType: boolean }) {
@@ -321,9 +319,7 @@ export class CreateMatchComponent {
       // fetch doubles IDs
       const double_a_id = await firstValueFrom(this.getDoublesID(this.selectedMembers['player1a'].member_id, this.selectedMembers['player1b'].member_id));
       const double_b_id = await firstValueFrom(this.getDoublesID(this.selectedMembers['player2a'].member_id, this.selectedMembers['player2b'].member_id));
-      console.log("double_ids", double_a_id, double_b_id);
       const winner_id = gameWinner === 1 ? double_a_id : double_b_id;
-      console.log("winner_id", winner_id);
 
       const gamePayload: any = {
         player_a: double_a_id,

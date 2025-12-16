@@ -32,7 +32,6 @@ export class MemberCreateComponent {
   title="Spieler/in hinzufügen";
   
   onSave(member: Member) {
-    console.log('Speichern:', member);
     // API-Aufruf
     // POST request to backend
     this.http.post<MemberCreateResponse>('/api/member', member).subscribe({
