@@ -6,7 +6,7 @@ ARG ENVIRONMENT=development
 COPY ./scripts/01_init.sql /docker-entrypoint-initdb.d/
 COPY ./scripts/02_functions.sql /docker-entrypoint-initdb.d/
 COPY ./scripts/02_trigger.sql /docker-entrypoint-initdb.d/
-COPY ./scripts/03_user_creation.sql /docker-entrypoint-initdb.d/
+COPY ./scripts/03_user_creation.sh /docker-entrypoint-initdb.d/
 COPY ./scripts/04_seed.sql /docker-entrypoint-initdb.d/
 
 # Environment-specific data scripts using existing filenames
