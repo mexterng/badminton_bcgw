@@ -97,7 +97,9 @@ export class MemberComponent implements OnInit{
     if (this.selectedName && this.selectedName.trim() !== '') {
       const nameLower = this.selectedName.toLowerCase();
       filtered = filtered.filter(m =>
-        m.display_name.toLowerCase().includes(nameLower)
+        m.display_name?.toLowerCase().includes(nameLower) ||
+        m.first_name?.toLowerCase().includes(nameLower) ||
+        m.last_name?.toLowerCase().includes(nameLower)
       );
     }
 

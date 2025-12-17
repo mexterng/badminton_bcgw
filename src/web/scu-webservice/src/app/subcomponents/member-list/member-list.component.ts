@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 export interface Member {
   member_id: number;
   display_name: string;
+  first_name: string;
+  last_name: string;
   gender: string;
   age_division: number[];
 }
