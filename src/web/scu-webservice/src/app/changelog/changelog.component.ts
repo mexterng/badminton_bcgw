@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./changelog.component.scss']
 })
 export class ChangelogComponent implements OnInit {
-  title = 'Changelog';
+  title = 'Änderungsprotokoll';
   html: SafeHtml = '';
   developers = environment.developers;
 
