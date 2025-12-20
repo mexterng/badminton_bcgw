@@ -247,7 +247,7 @@ export class CreateMatchComponent {
       const isMaxClose = (set.a === 30 && set.b === 29) || (set.a === 29 && set.b === 30);
       const diff = Math.abs(set.a - set.b);
 
-      if (!isMaxClose && diff <= 2) {
+      if (!isMaxClose && diff < 2) {
         return { status: false, errMessage: `Satz ${set.id} hat nicht mindestens 2 Punkte Differenz.` };
       }
     }
