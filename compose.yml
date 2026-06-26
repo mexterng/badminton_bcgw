@@ -1,29 +1,25 @@
 services:
-
   web:
     build:
       context: ./src/web
-    container_name: scu_app
+    container_name: ${CLUB_PREFIX}_app
     ports:
       - 8080:80
     networks:
-      app_net:
-        ipv4_address: 192.28.1.12
+      - app_net
 
   api:
     build:
       context: ./src/api
-    container_name: scu_api
-    #for testing:
+    container_name: ${CLUB_PREFIX}_api
     ports:
       - 3000:3000
     networks:
-      app_net:
-        ipv4_address: 192.28.1.14
+      - app_net
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       DB_PORT: ${DB_PORT}
-      DB_HOST: ${DB_HOST}
+      DB_HOST: db
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
 
@@ -32,14 +28,11 @@ services:
       context: ./src/db
       args:
         ENVIRONMENT: ${ENVIRONMENT:-development}
-    container_name: scu_db
-    #for testing:
+    container_name: ${CLUB_PREFIX}_db
     ports:
       - 3307:3306
-    #-----
     networks:
-      app_net:
-        ipv4_address: 192.28.1.16
+      - app_net
     volumes:
       - db_data:/var/lib/mysql
     environment:
@@ -55,6 +48,3 @@ volumes:
 networks:
   app_net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 192.28.0.0/16

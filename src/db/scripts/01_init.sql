@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS scu_db;
-USE scu_db;
+CREATE DATABASE IF NOT EXISTS bcgw_db;
+USE bcgw_db;
 
 -- game logic
 CREATE TABLE IF NOT EXISTS age_division (

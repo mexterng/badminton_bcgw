@@ -1,6 +1,6 @@
 ## 15.12.2025 - Version 1.0.0:
 ### Neue Funktionen
-- Erste stabile Version der SCU Badminton Web-App
+- Erste stabile Version der Badminton Web-App
 - Benutzeroberfläche mit Menü für:
   - Spieler/innen verwalten (Schüler, Jugendliche, Erwachsene)
   - Spiele verwalten (Einzel und Doppel)

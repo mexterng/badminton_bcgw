@@ -12,5 +12,5 @@ import { RouterOutlet } from '@angular/router';
 })
 
 export class AppComponent {
-  title = 'scu-webservice';
+  title = 'webservice';
 }

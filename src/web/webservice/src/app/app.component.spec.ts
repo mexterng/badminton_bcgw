@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'scu-webservice' title`, () => {
+  it(`should have the 'ebservice' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('scu-webservice');
+    expect(app.title).toEqual('webservice');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, scu-webservice');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, webservice');
   });
 });

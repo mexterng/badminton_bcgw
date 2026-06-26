@@ -6,10 +6,10 @@
 
 // Define color variables
 $background-primary: #fafafa;  
-$scu-theme: #e3311a;
-$scu-black: #0f0702;
-$scu-grey: #a0b9bf;
-$scu-blue: #2a628f;
+$club-theme: #e3311a;
+$club-black: #0f0702;
+$club-grey: #a0b9bf;
+$club-blue: #2a628f;
 $theme-control-blue-negative:  #7c898b;
 $theme-control-blue-positive:  #a5ccd1;
 $theme-control-grey-negative:  #848586;
@@ -21,10 +21,10 @@ $color-divers: #d3d3d3;
 // Export as CSS variables for runtime use
 :root {
     --background-primary: #{$background-primary};
-    --scu-theme: #{$scu-theme};
-    --scu-black: #{$scu-black};
-    --scu-grey: #{$scu-grey};
-    --scu-blue: #{$scu-blue};
+    --club-theme: #{$club-theme};
+    --club-black: #{$club-black};
+    --club-grey: #{$club-grey};
+    --club-blue: #{$club-blue};
     --theme-control-blue-negative: #{$theme-control-blue-negative};
     --theme-control-blue-positive: #{$theme-control-blue-positive};
     --theme-control-grey-negative: #{$theme-control-grey-negative};
@@ -42,7 +42,7 @@ $color-divers: #d3d3d3;
 body {
   background-color: var(--background-primary);
   margin:0;
-  color: var(--scu-black);
+  color: var(--club-black);
   font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;

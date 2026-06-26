@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "scu-webservice": {
+    "webservice": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/scu-webservice",
+            "outputPath": "dist/webservice",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "scu-webservice:build:production"
+              "buildTarget": "webservice:build:production"
             },
             "development": {
-              "buildTarget": "scu-webservice:build:development"
+              "buildTarget": "webservice:build:development"
             }
           },
           "defaultConfiguration": "development"

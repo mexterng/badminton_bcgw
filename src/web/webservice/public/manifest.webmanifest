@@ -1,7 +1,7 @@
 {
-  "name": "SCU Badminton",
+  "name": "BC GW Obernzell Badminton",
   "description": "Webbapp für die Badmintonabteilung des SC Uttenreuth zur Verwaltung interner Ranglisten",
-  "short_name": "SCU",
+  "short_name": "BCGW",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
@@ -81,7 +81,7 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "id": "scu-rl",
+  "id": "badminton-rl",
   "lang": "de",
   "categories": [
     "sports"

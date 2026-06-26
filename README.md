@@ -1,11 +1,11 @@
-# scu_web
+# bcgw_web
 ## build whole webapp:
 ```shell
 docker-compose up -d --build
 ```
 ## only test style changes in angular
 ```shell
-cd src/web/scu-webservice
+cd src/web/webservice
 ng serve
 ```
 
@@ -13,7 +13,7 @@ ng serve
 ```
 MYSQL_ROOT_PASSWORD=
 MYSQL_DATABASE=
-DB_PORT=3306
+DB_PORT=3307
 DB_HOST=192.28.1.16
 DB_USER=
 DB_PASSWORD=

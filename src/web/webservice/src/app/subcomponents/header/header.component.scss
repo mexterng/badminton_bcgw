@@ -1,5 +1,5 @@
 .head-block{
-    background-color: var(--scu-theme);
+    background-color: var(--club-theme);
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;  // horizontal center
@@ -26,12 +26,12 @@
 
 #club-icon {
     height: 4rem;
-    fill: var(--scu-black);
+    fill: var(--club-black);
 }
 
 #home-icon {
     height: 2rem;
-    fill: var(--scu-black);
+    fill: var(--club-black);
 }
 
 .header {
