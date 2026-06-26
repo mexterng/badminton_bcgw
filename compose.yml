@@ -30,7 +30,7 @@ services:
         ENVIRONMENT: ${ENVIRONMENT:-development}
     container_name: ${CLUB_PREFIX}_db
     ports:
-      - "${DB_HOST_PORT}:3306"
+      - "${DB_PORT}:3306"
     networks:
       - app_net
     volumes:

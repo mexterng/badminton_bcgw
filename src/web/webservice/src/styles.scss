@@ -6,7 +6,8 @@
 
 // Define color variables
 $background-primary: #fafafa;  
-$club-theme: #e3311a;
+$club-theme: #047e43;
+$club-header-font-color: #fafafa;
 $club-black: #0f0702;
 $club-grey: #a0b9bf;
 $club-blue: #2a628f;
@@ -22,6 +23,7 @@ $color-divers: #d3d3d3;
 :root {
     --background-primary: #{$background-primary};
     --club-theme: #{$club-theme};
+    --club-header-font-color: #{$club-header-font-color};
     --club-black: #{$club-black};
     --club-grey: #{$club-grey};
     --club-blue: #{$club-blue};
@@ -49,6 +51,7 @@ body {
 }
 
 app-header{
+    color: var(--club-header-font-color);
     width: 100%;
     height: 6rem;
 }

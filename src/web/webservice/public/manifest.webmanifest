@@ -1,6 +1,6 @@
 {
-  "name": "BC GW Obernzell Badminton",
-  "description": "Webbapp für die Badmintonabteilung des SC Uttenreuth zur Verwaltung interner Ranglisten",
+  "name": "BC Grün-Weiß Obernzell Badminton",
+  "description": "Webbapp für die Badmintonabteilung des BC Grün-Weiß Obernzell zur Verwaltung interner Ranglisten",
   "short_name": "BCGW",
   "display": "standalone",
   "scope": "./",

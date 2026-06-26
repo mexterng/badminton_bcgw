@@ -1,4 +1,4 @@
-## 15.12.2025 - Version 1.0.0:
+## 01.7.2026 - Version 1.0.0:
 ### Neue Funktionen
 - Erste stabile Version der Badminton Web-App
 - Benutzeroberfläche mit Menü für:
