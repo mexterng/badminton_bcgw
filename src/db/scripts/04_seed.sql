@@ -3,9 +3,9 @@ INSERT INTO roles (description) VALUES
 ('user');
 
 INSERT INTO age_division (description) VALUES 
-('Schüler'),
-('Jugendliche'),
-('Erwachsene');
+('Herren'),
+('Damen'),
+('Jugendliche/Schüler');
 
 INSERT INTO game_sets (set_id, points_a, points_b) VALUES
 ('0-0', 0, 0),

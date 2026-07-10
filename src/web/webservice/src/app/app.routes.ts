@@ -8,11 +8,16 @@ import { MemberCreateComponent } from './member-create/member-create.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { MemberSingleComponent } from './member-single/member-single.component';
 import { ChangelogComponent } from './changelog/changelog.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 //https://angular.dev/guide/routing/define-routes
 //!! first wins strategy, so order matters
 export const routes: Routes = [
+    {
+        path: 'login',
+        loadComponent: () => import('./login/login.components').then(m => m.LoginComponent)
+    },
     {   
         path: '',
         redirectTo: 'home',
@@ -20,43 +25,52 @@ export const routes: Routes = [
     },
     {
         path: 'changelog',
-        component: ChangelogComponent
+        component: ChangelogComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'pyramide',
-        component: PyramideComponent
+        component: PyramideComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'member',
-        component: MemberComponent
+        component: MemberComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'match',
-        component: MatchComponent
+        component: MatchComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'match/create',
-        component: CreateMatchComponent
+        component: CreateMatchComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'create-member',
-        component: MemberCreateComponent
+        component: MemberCreateComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'member/:id',
-        component: MemberSingleComponent
+        component: MemberSingleComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'member/:id/edit',
         component: MemberEditComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, RoleGuard],
+        data: { requiredRole: 'admin' }
     },
     {
         path: '**',
-        redirectTo: 'home'
+        redirectTo: 'login'
     }
 ];

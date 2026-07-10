@@ -1,5 +1,11 @@
 <div class="side">
     <app-header [heading]="title"/>
+    <header>
+        <div *ngIf="authService.user$ | async as user" class="auth-section">
+            <p>Angemeldet als: {{ user.username }}</p>
+            <button (click)="logout()" class="logout-btn">Abmelden</button>
+        </div>
+    </header>
     <div class="content">
         <div class="direction" (click)="onDirectionClick('member')">
             <svg class="icon" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">

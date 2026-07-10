@@ -53,15 +53,18 @@ export class MemberSingleComponent implements OnInit {
   canEditMember = false;
 
   ngOnInit() {
-    this.memberId = this.route.snapshot.paramMap.get('id');
-    if (!this.memberId) return;
-    this.authService.username$.subscribe(username => {
-      this.canEditMember = this.authService.canEditMember();
-    });
+  this.memberId = this.route.snapshot.paramMap.get('id');
+  if (!this.memberId) return;
 
-    this.loadMemberInfos();
-    this.loadGames();
-  }
+  // Berechtigung für den Bearbeiten-Button setzen
+  this.canEditMember = this.authService.hasRole('admin');
+  this.authService.user$.subscribe(user => {
+    this.canEditMember = user?.role === 'admin';
+  });
+
+  this.loadMemberInfos();
+  this.loadGames();
+}
 
   private loadMemberInfos() {
     this.http.get<Partial<Member>>(`/api/member/${this.memberId}`).subscribe({

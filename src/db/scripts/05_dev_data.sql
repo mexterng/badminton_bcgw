@@ -160,14 +160,10 @@ INSERT INTO games_double (timestamp, age_division_id, player_a, player_b, set_on
 
 -- Dummy data for users
 INSERT INTO users (first_name, last_name, username, role_id, tag) VALUES
-('Admin', 'User', 'admin_user', 1, 'Main Admin'),   -- 1
-('Player', 'One', 'player_one', 2, 'Newbie'),       -- 2
-('Player', 'Two', 'player_two', 2, 'Veteran'),      -- 3
-('Coach', 'User', 'coach_c', 2, 'Coach');           -- 4
+('Admin', '', 'admin', 1, 'Main Admin'),   -- 1
+('Spieler', '', 'user', 2, 'Normal User');    -- 2
 
 -- Dummy data for user_credentials
-INSERT INTO user_credentials (user_id, credential) VALUES
-(1, 'secure_admin_pass'),   -- 1
-(2, 'player1_pass'),        -- 2
-(3, 'player2_pass'),        -- 3
-(4, 'coach_pass');          -- 4
+INSERT INTO user_credentials (user_id, password_hash) VALUES
+(1, '$2a$12$BQjgJTqvoN/6LCUM6YSALujZxtaDziZETwy7582M.XO67jd6h97qC'),   -- 1
+(2, '$2a$12$OARkC30nr.VQtgRmQ8.xSeLq4KWX4aH1VIXZqOmmqhQOUrg2wijW.');   -- 2

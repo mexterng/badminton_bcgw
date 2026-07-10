@@ -1,35 +1,87 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  public username$ = new BehaviorSubject<string | null>(null);
+  private apiUrl = '/api';
+  private userSubject = new BehaviorSubject<any>(null);
+  private authCheckedSubject = new BehaviorSubject<boolean>(false);
 
-  public allowedUsersForMemberEdit = ['admin', 'funki'];
+  public user$ = this.userSubject.asObservable();
+  public authChecked$ = this.authCheckedSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.loadUser();
+    this.loadCurrentUser();
   }
 
-  private loadUser() {
-    this.http.get<{ username: string }>('/api/me', { withCredentials: true })
-      .subscribe({
-        next: res => this.username$.next(res.username),
-        error: () => this.username$.next(null)
-      });
+  login(username: string, password: string, rememberMe: boolean): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { username, password, rememberMe })
+      .pipe(tap((res: any) => {
+        if (res.refreshToken) {
+          localStorage.setItem('refreshToken', res.refreshToken);
+        } else {
+          localStorage.removeItem('refreshToken');
+        }
+        this.userSubject.next({ username: res.username, role: res.role });
+      }));
   }
 
-  getAuthHeaders(): HttpHeaders {
-    const user = this.username$.value;
-    return new HttpHeaders({ 'X-User': user || '' });
+  logout(refreshToken?: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/logout`, { refreshToken })
+      .pipe(tap(() => {
+        localStorage.removeItem('refreshToken');
+        this.userSubject.next(null);
+      }));
   }
 
-  canEditMember(): boolean {
-    const user = this.username$.value;
-    if (!user) return false;
-    return this.allowedUsersForMemberEdit.includes(user);
+  refreshSession(): Observable<any> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+      return throwError(() => new Error('Kein Refresh-Token vorhanden'));
+    }
+    return this.http.post(`${this.apiUrl}/refresh`, { refreshToken })
+      .pipe(tap((user: any) => {
+        this.userSubject.next(user);
+      }));
+  }
+
+  loadCurrentUser(): void {
+    this.http.get(`${this.apiUrl}/me`).subscribe({
+        next: (user) => {
+            this.userSubject.next(user);
+            this.authCheckedSubject.next(true);
+        },
+        error: (error) => {
+            if (error.status === 401) {
+                this.refreshSession().subscribe({
+                    next: () => {
+                        this.authCheckedSubject.next(true);
+                    },
+                    error: () => {
+                        this.userSubject.next(null);
+                        localStorage.removeItem('refreshToken');
+                        this.authCheckedSubject.next(true);
+                    }
+                });
+            } else {
+                this.userSubject.next(null);
+                this.authCheckedSubject.next(true);
+            }
+        }
+    });
+  }
+
+  isLoggedIn(): boolean {
+    return this.userSubject.value !== null;
+  }
+
+  getRole(): string | null {
+    return this.userSubject.value?.role || null;
+  }
+
+  hasRole(role: string): boolean {
+    return this.userSubject.value?.role === role;
   }
 }
