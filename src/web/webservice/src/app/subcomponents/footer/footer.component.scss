@@ -5,7 +5,7 @@
     flex-flow: row;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--club-grey);
+    background-color: var(--club-footer-fill);
     padding: 0 10vw;
 }
 
@@ -18,5 +18,5 @@
     flex: 0 0 20%; 
     margin: 10%;
     height: 80%;
-    fill: var(--club-black);
+    fill: var(--club-footer-color);
 }

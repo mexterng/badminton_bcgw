@@ -6,11 +6,12 @@
 
 // Define color variables
 $background-primary: #fafafa;  
-$club-theme: #047e43;
-$club-header-font-color: #fafafa;
+$club-theme: #417a52;
 $club-black: #0f0702;
-$club-grey: #a0b9bf;
-$club-blue: #2a628f;
+$club-header-font-color: #fafafa;
+$club-footer-fill: #417a52;
+$club-footer-color: #fafafa;
+$club-button-fill: #2c5739;
 $theme-control-blue-negative:  #7c898b;
 $theme-control-blue-positive:  #a5ccd1;
 $theme-control-grey-negative:  #848586;
@@ -25,8 +26,9 @@ $color-divers: #d3d3d3;
     --club-theme: #{$club-theme};
     --club-header-font-color: #{$club-header-font-color};
     --club-black: #{$club-black};
-    --club-grey: #{$club-grey};
-    --club-blue: #{$club-blue};
+    --club-footer-color: #{$club-footer-color};
+    --club-footer-fill: #{$club-footer-fill};
+    --club-button-fill: #{$club-button-fill};
     --theme-control-blue-negative: #{$theme-control-blue-negative};
     --theme-control-blue-positive: #{$theme-control-blue-positive};
     --theme-control-grey-negative: #{$theme-control-grey-negative};
@@ -35,7 +37,7 @@ $color-divers: #d3d3d3;
     --color-female: #{$color-female};
     --color-divers: #{$color-divers};
     @include mat.button-overrides((
-      filled-container-color: #00458f,
+      filled-container-color: var(--club-button-fill),
       filled-label-text-color: #ffffff,
     ));
 }
