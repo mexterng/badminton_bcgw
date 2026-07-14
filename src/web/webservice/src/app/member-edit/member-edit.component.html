@@ -10,12 +10,12 @@
     </app-member-form>
 
     <div class="button-row">
-      <button mat-flat-button color="primary" (click)="memberFormComp.emitSave()"
-        [disabled]="memberFormComp.memberForm.invalid">
-        Spieler/in aktualisieren
-      </button>
       <button mat-stroked-button color="warn" (click)="memberFormComp.emitCancel()">
         Abbrechen
+      </button>
+      <button mat-flat-button (click)="memberFormComp.emitSave()"
+        [disabled]="memberFormComp.memberForm.invalid">
+        Spieler/in aktualisieren
       </button>
     </div>
   </div>
