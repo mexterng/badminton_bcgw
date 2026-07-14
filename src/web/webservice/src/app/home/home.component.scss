@@ -80,3 +80,9 @@ header {
     grid-column: 3;
     justify-self: end;
 }
+
+@media (max-width: 768px){
+    .auth-section {
+        grid-template-columns: 0 auto 1fr;
+    }
+}
