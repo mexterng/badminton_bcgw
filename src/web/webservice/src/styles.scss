@@ -5,14 +5,15 @@
 
 
 // Define color variables
-$background-primary: #fafafa;
-$login-background: #4c9451;
-$login-font-color: #fafafa;
-$club-theme: #417a52;
 $club-black: #0f0702;
-$club-header-font-color: #fafafa;
-$club-footer-fill: #417a52;
-$club-footer-color: #fafafa;
+$club-white: #fafafa;
+$background-primary: $club-white;
+$login-background: #4c9451;
+$login-color: $club-white;
+$club-header-background: #4c9451;
+$club-header-color: $club-white;
+$club-footer-background: #4c9451;
+$club-footer-color: $club-white;
 $club-button-fill: #2c5739;
 $theme-control-blue-negative:  #7c898b;
 $theme-control-blue-positive:  #a5ccd1;
@@ -26,12 +27,12 @@ $color-divers: #d3d3d3;
 :root {
     --background-primary: #{$background-primary};
     --login-background: #{$login-background};
-    --login-font-color: #{$login-font-color};
-    --club-theme: #{$club-theme};
-    --club-header-font-color: #{$club-header-font-color};
+    --login-color: #{$login-color};
+    --club-header-background: #{$club-header-background};
+    --club-header-color: #{$club-header-color};
     --club-black: #{$club-black};
     --club-footer-color: #{$club-footer-color};
-    --club-footer-fill: #{$club-footer-fill};
+    --club-footer-background: #{$club-footer-background};
     --club-button-fill: #{$club-button-fill};
     --theme-control-blue-negative: #{$theme-control-blue-negative};
     --theme-control-blue-positive: #{$theme-control-blue-positive};
@@ -57,7 +58,7 @@ body {
 }
 
 app-header{
-    color: var(--club-header-font-color);
+    color: var(--club-header-color);
     width: 100%;
     height: 6rem;
 }
