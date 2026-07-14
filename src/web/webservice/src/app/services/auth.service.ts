@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   login(username: string, password: string, rememberMe: boolean): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password, rememberMe })
+    return this.http.post(`${this.apiUrl}/login`, { username, password, rememberMe }, {withCredentials: true})
       .pipe(tap((res: any) => {
         if (res.refreshToken) {
           localStorage.setItem('refreshToken', res.refreshToken);
@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   logout(refreshToken?: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, { refreshToken })
+    return this.http.post(`${this.apiUrl}/logout`, { refreshToken }, {withCredentials: true})
       .pipe(tap(() => {
         localStorage.removeItem('refreshToken');
         this.userSubject.next(null);
@@ -41,14 +41,14 @@ export class AuthService {
     if (!refreshToken) {
       return throwError(() => new Error('Kein Refresh-Token vorhanden'));
     }
-    return this.http.post(`${this.apiUrl}/refresh`, { refreshToken })
+    return this.http.post(`${this.apiUrl}/refresh`, { refreshToken }, {withCredentials: true})
       .pipe(tap((user: any) => {
         this.userSubject.next(user);
       }));
   }
 
   loadCurrentUser(): void {
-    this.http.get(`${this.apiUrl}/me`).subscribe({
+    this.http.get(`${this.apiUrl}/me`, {withCredentials: true}).subscribe({
         next: (user) => {
             this.userSubject.next(user);
             this.authCheckedSubject.next(true);
