@@ -5,7 +5,9 @@
 
 
 // Define color variables
-$background-primary: #fafafa;  
+$background-primary: #fafafa;
+$login-background: #4c9451;
+$login-font-color: #fafafa;
 $club-theme: #417a52;
 $club-black: #0f0702;
 $club-header-font-color: #fafafa;
@@ -23,6 +25,8 @@ $color-divers: #d3d3d3;
 // Export as CSS variables for runtime use
 :root {
     --background-primary: #{$background-primary};
+    --login-background: #{$login-background};
+    --login-font-color: #{$login-font-color};
     --club-theme: #{$club-theme};
     --club-header-font-color: #{$club-header-font-color};
     --club-black: #{$club-black};
