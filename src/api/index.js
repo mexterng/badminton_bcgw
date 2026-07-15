@@ -16,6 +16,7 @@ const gameRouter = require("./routes/games");
 const pyramideRouter = require("./routes/pyramides");
 
 require('dotenv').config();
+const frontendUrl = process.env.FRONTEND_URL;
 const mysql = require('mysql2/promise');
 
 // DB-Pool
@@ -30,7 +31,7 @@ const pool = mysql.createPool({
 });
 
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: frontendUrl,
   credentials: true
 }));
 
@@ -40,6 +41,8 @@ app.use(
     extended: true,
   })
 );
+
+app.set('trust proxy', 1);
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'fallback-secret',
