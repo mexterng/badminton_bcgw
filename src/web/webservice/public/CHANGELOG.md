@@ -1,4 +1,12 @@
-## 01.7.2026 - Version 1.0.0:
+## 15.07.2026 - Version 1.1.0:
+### Neue Funktionen
+- Umstellung der Anmeldung auf eine API-basierte Authentifizierung mit Benutzerverwaltung
+
+### Behobene Probleme
+- Spieler müssen nicht mehr mindestens einer Spielklasse zugeordnet sein.
+
+
+## 01.07.2026 - Version 1.0.0:
 ### Neue Funktionen
 - Erste stabile Version der Badminton Web-App
 - Benutzeroberfläche mit Menü für:
