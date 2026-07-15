@@ -38,7 +38,7 @@ export class MemberFormComponent implements OnChanges {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
-    ageGroup: new FormControl<string[]>([], Validators.required)
+    ageGroup: new FormControl<string[]>([])
   });
 
   genders = [
@@ -80,7 +80,7 @@ export class MemberFormComponent implements OnChanges {
         first_name: formValue.firstName || null,
         last_name: formValue.lastName || null,
         gender: formValue.gender || null,
-        age_division: formValue.ageGroup ?? null
+        age_division: formValue.ageGroup ?? []
       });
     }
   }

@@ -4,7 +4,7 @@
         <div id="filter-options">
             <!-- agegroups -->
             <div id="filter-agegroup" class="filter-option">
-                <mat-select placeholder="Altersklasse filtern" [(value)]="selectedAgegroup" (selectionChange)="applyFilters()">
+                <mat-select placeholder="Spielklasse filtern" [(value)]="selectedAgegroup" (selectionChange)="applyFilters()">
                 <mat-option [value]="null">-</mat-option>
                 <mat-option *ngFor="let agegroup of agegroups" [value]="agegroup.value">
                     {{ agegroup.label }}

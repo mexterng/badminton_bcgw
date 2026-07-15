@@ -5,13 +5,13 @@
 
       <!-- Age class selection -->
       <div class="selection-card">
-        <div class="card-subtitle">Altersklasse</div>
+        <div class="card-subtitle">Spielklasse</div>
         <mat-button-toggle-group
           [hideSingleSelectionIndicator]="true"
           name="ageClass"
           appearance="standard"
           vertical
-          aria-label="Altersklasse">
+          aria-label="Spielklasse">
           
           <mat-button-toggle *ngFor="let option of ageOptions"
                             [value]="option.value"
